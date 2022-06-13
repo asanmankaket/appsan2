@@ -8,6 +8,8 @@ import 'package:creative/views/booking/mainpage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../views/profile.dart';
+
 Future checkLogin(String username, String password, context) async {
   EasyLoading.show(status: 'loading...');
 
@@ -123,6 +125,35 @@ Future<dynamic> getProfile() async {
     if (req.statusCode == 200) {
       var data = jsonDecode(req.body);
       return data;
+    } else {
+      return null;
+    }
+  });
+}
+
+Future<dynamic> sendDataProfile1(
+    String title, String name, String surname, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse(
+      'http://206.189.92.71:3200/api/mentor/p2/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+  return await http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({
+      "title": title,
+      "fname": name,
+      "lname": surname,
+    }),
+  )
+      .then((req) async {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('สำเร็จ');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Profile()),
+          (Route<dynamic> route) => false);
     } else {
       return null;
     }
