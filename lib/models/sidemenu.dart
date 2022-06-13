@@ -1,17 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_appcare/views/profile.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:creative/views/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/config.dart';
-import '../views/login.dart';
+import '../views/bcome/_login.dart';
 import 'package:http/http.dart' as http;
 
 class SideMenu extends StatefulWidget {
-  SideMenu({
+  const SideMenu({
     Key? key,
     this.routeName,
   }) : super(key: key);

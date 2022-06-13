@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_appcare/models/profilemenu.dart';
+import 'package:creative/models/profilemenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'Login.dart';
-
+import 'bcome/_login.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key, required this.data}) : super(key: key);
@@ -62,7 +59,7 @@ class _ProfileState extends State<Profile> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              backgroundColor:  Colors.purple,
+              backgroundColor: Colors.purple,
               primary: const Color.fromARGB(255, 255, 255, 255),
               textStyle: const TextStyle(fontSize: 20),
             ),
