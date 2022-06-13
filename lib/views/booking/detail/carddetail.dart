@@ -1,6 +1,5 @@
 import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
-import 'package:creative/views/booking/mainpage.dart';
 import 'package:intl/intl.dart';
 // import 'Map.dart';
 import '../booking.dart';
@@ -39,16 +38,20 @@ class _CarddetailState extends State<Carddetail> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
+              Text(
+                '${widget.data['title']} ${widget.data['fname']} ${widget.data['lname']}',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: const Text(
                     'เวลานัด',
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -102,10 +105,6 @@ class _CarddetailState extends State<Carddetail> {
               const SizedBox(
                 height: 10,
               ),
-              // Text(
-              //   'ชื่อ ${widget.data['fname']} ${widget.data['lname']}',
-              //   style: TextStyle(fontSize: 18),
-              // ),
               const Padding(
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
@@ -185,9 +184,7 @@ class _CarddetailState extends State<Carddetail> {
               SizedBox(
                   child: Row(
                 children: [
-                  const SizedBox(
-                    width: 30,
-                  ),
+                  const SizedBox(width: 30),
                   // ignore: prefer_const_constructors
                   Icon(
                     Icons.call,
@@ -198,54 +195,45 @@ class _CarddetailState extends State<Carddetail> {
                     '   ${widget.data['phone']}',
                     style: const TextStyle(fontSize: 18),
                   ),
-                  const SizedBox(
-                    width: 120,
-                  ),
+                  const SizedBox(width: 120),
                 ],
               )),
+              const SizedBox(height: 10),
+              Row(children: [
+                Row(
+                  children: [
+                    const SizedBox(width: 25),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute<void>(
+                        //         builder: (BuildContext context) =>
+                        //             GoogleMaps()));
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.map,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 15),
+                          Text(
+                            '''${widget.data['adr1']}
+${widget.data['adr2']} ${widget.data['city']}''',
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
               const SizedBox(
-                height: 20,
-              ),
-//               Row(children: [
-//                 Row(
-//                   children: [
-//                     const SizedBox(
-//                       width: 30,
-//                     ),
-//                     IconButton(
-//                       icon: const Icon(Icons.map),
-//                       color: Colors.blue,
-//                       iconSize: 30,
-//                       onPressed: () {
-//                         Navigator.push(
-//                             context,
-//                             MaterialPageRoute<void>(
-//                                 builder: (BuildContext context) =>
-//                                     GoogleMaps()));
-//                       },
-//                     ),
-//                     TextButton(
-//                       style: TextButton.styleFrom(
-//                         textStyle: const TextStyle(fontSize: 20),
-//                       ),
-//                       onPressed: () {
-//                         Navigator.push(
-//                             context,
-//                             MaterialPageRoute<void>(
-//                                 builder: (BuildContext context) =>
-//                                     GoogleMaps()));
-//                       },
-//                       child: Text(
-//                         '''${widget.data['adr1']}
-// ${widget.data['adr2']} ${widget.data['city']}''',
-//                         style: const TextStyle(fontSize: 18),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ]),
-              const SizedBox(
-                height: 30,
+                height: 15,
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -254,6 +242,9 @@ class _CarddetailState extends State<Carddetail> {
                     minWidth: 150.0,
                     height: 45.0,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                          primary: Color.fromARGB(255, 203, 41, 0)),
                       onPressed: () {
                         confirmBook(widget.data['idb'], 74, context);
                         Navigator.of(context).pushAndRemoveUntil(
@@ -270,11 +261,14 @@ class _CarddetailState extends State<Carddetail> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 13),
                   ButtonTheme(
                     minWidth: 150.0,
                     height: 45.0,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                          primary: Colors.green),
                       onPressed: () {
                         confirmBook(widget.data['idb'], 72, context);
                         Navigator.of(context).pushAndRemoveUntil(
@@ -292,34 +286,6 @@ class _CarddetailState extends State<Carddetail> {
                     ),
                   )
                 ],
-              ),
-
-              // Column(
-              //   children: <Widget>[
-              //     TextButton(
-              //       style: TextButton.styleFrom(
-              //         padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(10.0),
-              //         ),
-              //         backgroundColor: Color.fromARGB(255, 4, 117, 21),
-              //         primary: Color.fromARGB(255, 255, 255, 255),
-              //         textStyle: const TextStyle(fontSize: 20),
-              //       ),
-              //       onPressed: () {
-              //         Navigator.push(
-              //             context,
-              //             MaterialPageRoute<void>(
-              //                 builder: (BuildContext context) => Booking()));
-              //       },
-              //       child: const Text(
-              //         'ยืนยัน',
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              const SizedBox(
-                height: 10,
               ),
             ],
           ),

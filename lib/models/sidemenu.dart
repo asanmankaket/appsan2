@@ -1,11 +1,8 @@
-import 'dart:convert';
-
+import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/views/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../configs/config.dart';
 import '../views/bcome/_login.dart';
-import 'package:http/http.dart' as http;
 
 class SideMenu extends StatefulWidget {
   const SideMenu({
@@ -30,7 +27,7 @@ class _SideMenuState extends State<SideMenu> {
 
   startApi() async {
     //เอาตัวidของcustomerมาใช้กับหน้านี้แล้วเอาค่าไปใส่ในidUser
-    dynamic item = await Getdata(); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getProfile(); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });
@@ -122,6 +119,13 @@ ${data['fname']}  ${data['lname']}''',
                 ),
                 routeItem(
                   context,
+                  Icon(Icons.settings_backup_restore),
+                  //แก้ตรงนี้--------------------------------------------------------------------------------------
+                  'ดูประวัติ',
+                  '/Backup',
+                ),
+                routeItem(
+                  context,
                   Icon(Icons.map),
                   //แก้ตรงนี้--------------------------------------------------------------------------------------
                   'Map',
@@ -130,24 +134,6 @@ ${data['fname']}  ${data['lname']}''',
               ],
             ),
           ),
-          //  TextButton(
-          //   style: TextButton.styleFrom(
-          //     textStyle: const TextStyle(fontSize: 20),
-          //   ),
-          //   onPressed: () async {
-          //     SharedPreferences prefs =
-          //               await SharedPreferences.getInstance();
-          //           prefs.remove('token');
-          //           Navigator.pushAndRemoveUntil(
-          //               context,
-          //               MaterialPageRoute(
-          //                 builder: (context) => MyHomePage(),
-          //                 //แก้ตรงนี้--------------------------------------------------------------------------------------
-          //               ),
-          //               (route) => false);
-          //   },
-          //   child: const Text('ออกจากระบบ',style: TextStyle(color: Colors.red,fontSize: 24,fontWeight: FontWeight.bold)),
-          // ),
           Align(
             alignment: Alignment.bottomCenter,
             child: TextButton(
@@ -176,33 +162,6 @@ ${data['fname']}  ${data['lname']}''',
               ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.bottomLeft,
-          //   child: Column(
-          //     mainAxisSize: MainAxisSize.min,
-          //     children: [
-          //       ListTile(
-          //         // leading: Icon(FontAwesomeIcons.rightFromBracket),
-          //         title: Text(
-          //           'ออกจากระบบ',
-          //           style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),
-          //         ), //แก้ตรงนี้--------------------------------------------------------------------------------------
-          //         onTap: () async {
-          //           SharedPreferences prefs =
-          //               await SharedPreferences.getInstance();
-          //           prefs.remove('token');
-          //           Navigator.pushAndRemoveUntil(
-          //               context,
-          //               MaterialPageRoute(
-          //                 builder: (context) => MyHomePage(),
-          //                 //แก้ตรงนี้--------------------------------------------------------------------------------------
-          //               ),
-          //               (route) => false);
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
@@ -222,27 +181,4 @@ ${data['fname']}  ${data['lname']}''',
       },
     );
   }
-}
-
-Future<dynamic> Getdata() async {
-  final prefs =
-      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
-  int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/$idUser');
-  // Uri url = Uri.parse('http://192.168.1.9:3200/api/customer/$idUser');
-  return await http
-      .get(
-    url,
-    headers: headers,
-  )
-      .then((req) async {
-    print(req.statusCode);
-    if (req.statusCode == 200) {
-      var data = jsonDecode(req.body);
-      return data;
-    } else {
-      print('error');
-      return null;
-    }
-  });
 }

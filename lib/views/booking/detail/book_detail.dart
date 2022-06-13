@@ -37,14 +37,18 @@ class _BookdetailState extends State<Bookdetail> {
               const SizedBox(
                 height: 15,
               ),
+              Text(
+                '${widget.data['title']} ${widget.data['fname']} ${widget.data['lname']}',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'เวลานัด',
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -102,10 +106,7 @@ class _BookdetailState extends State<Bookdetail> {
                     const SizedBox(
                       height: 10,
                     ),
-                    // Text(
-                    //   'ชื่อ ${widget.data['fname']} ${widget.data['lname']}',
-                    //   style: TextStyle(fontSize: 18),
-                    // ),
+
                     const Padding(
                       padding: EdgeInsets.only(left: 50),
                       child: const Align(
@@ -244,19 +245,6 @@ class _BookdetailState extends State<Bookdetail> {
               const SizedBox(
                 height: 50,
               ),
-              // TextButton(
-              //   style: TextButton.styleFrom(
-              //     padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(10.0),
-              //     ),
-              //     backgroundColor: Color.fromARGB(255, 232, 92, 22),
-              //     primary: Color.fromARGB(255, 255, 255, 255),
-              //     textStyle: const TextStyle(fontSize: 20),
-              //   ),
-              //   onPressed: () {},
-              //   child: const Text('ยกเลิกนัด'),
-              // ),
             ],
           ),
         ),

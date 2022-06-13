@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:creative/configs/config.dart';
 import 'package:creative/views/bcome/_register.dart';
-import 'package:creative/views/booking/booking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:creative/views/booking/mainpage.dart';
@@ -75,9 +74,8 @@ Future<dynamic> getdata(int idPage) async {
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/booking/men/$idPage/$idUser '); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
-  // Uri url = Uri.parse(
-  //     'http://192.168.1.9:3200/api/booking/cust/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.92.71:3200/api/booking/cust/$idPage/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+//รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .get(
     url,
@@ -94,7 +92,7 @@ Future<dynamic> getdata(int idPage) async {
 
 Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/booking/$idb '); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.92.71:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .put(
     url,
@@ -104,6 +102,27 @@ Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
       .then((req) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
+    } else {
+      return null;
+    }
+  });
+}
+
+Future<dynamic> getProfile() async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/$idUser');
+  // Uri url = Uri.parse('http://192.168.1.9:3200/api/customer/$idUser');
+  return await http
+      .get(
+    url,
+    headers: headers,
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      var data = jsonDecode(req.body);
+      return data;
     } else {
       return null;
     }

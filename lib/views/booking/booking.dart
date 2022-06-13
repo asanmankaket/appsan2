@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creative/views/booking/book_detail.dart';
+import 'package:creative/views/booking/detail/book_detail.dart';
 import 'package:intl/intl.dart';
 import '../../configs/api.dart';
 import '../../models/sidemenu.dart';
@@ -33,22 +33,6 @@ class _BookingState extends State<Booking> {
       appBar: AppBar(
         title: const Text('นัดหมาย'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-        // actions: <Widget>[
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.timelapse_sharp,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {
-        //       // Navigator.push(
-        //       //     context,
-        //       //     MaterialPageRoute<void>(
-        //       //         builder: (BuildContext context) => WaitingBooking()));
-
-        //       // do something
-        //     },
-        //   )
-        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
