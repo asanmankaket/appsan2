@@ -1,23 +1,17 @@
-// ignore_for_file: prefer_const_constructors, unused_element, avoid_print, duplicate_ignore, dead_code, deprecated_member_use, sized_box_for_whitespace, empty_catches, unused_local_variable
-
 import 'dart:convert';
 
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_appcare/models/textformfieldmodel.dart';
-import 'package:flutter_appcare/views/mainpage.dart';
+import 'package:creative/views/booking/mainpage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import '../configs/config.dart';
-import 'nextRegister.dart';
+import '../../configs/config.dart';
 
 class NextRegister extends StatefulWidget {
-  NextRegister({Key? key}) : super(key: key);
+  const NextRegister({Key? key}) : super(key: key);
 
   @override
   State<NextRegister> createState() => _Register();
@@ -38,7 +32,7 @@ class _Register extends State<NextRegister> {
 
   DateTime? datenow = DateTime.now();
 
-  String? DropdownValue = 'address';
+  String? dropdownValue = 'address';
   List<DropdownMenuItem<String>>? items = [
     const DropdownMenuItem(
       value: 'value',
@@ -243,109 +237,117 @@ class _Register extends State<NextRegister> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(children: [
-                  Expanded(
-                        child:  TextFormField(
-                  validator: (value) {
-                    if (value!.length < 6) {
-                      return 'กรุณาตรวจสอบตำเเหน่งของท่าน';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'ตำเเหน่ง',
-                    labelStyle: TextStyle(color: Colors.white),
-                    helperText: 'Tyep you password more 6 Charactor',
-                    hintText: 'ตำเเหน่ง',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return 'กรุณาตรวจสอบตำเเหน่งของท่าน';
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 17),
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        // ignore: prefer_const_constructors
+                        decoration: InputDecoration(
+                          labelText: 'ตำเเหน่ง',
+                          labelStyle: TextStyle(color: Colors.white),
+                          helperText: 'Tyep you password more 6 Charactor',
+                          hintText: 'ตำเเหน่ง',
+                          hintStyle: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 240, 4, 4)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 255, 255)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          prefixIcon: Icon(
+                            Icons.badge,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: Icon(
-                      Icons.badge,
-                      size: 30,
-                      color: Colors.white,
+                    const SizedBox(
+                      width: 20,
                     ),
-                  ),
+                    Expanded(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return 'กรุณากรอกทักษะของท่านให้เรียบร้อย';
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 17),
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        // ignore: prefer_const_constructors
+                        decoration: InputDecoration(
+                          labelText: 'ทักษะ',
+                          labelStyle: TextStyle(color: Colors.white),
+                          helperText: 'Tyep you password more 6 Charactor',
+                          hintText: 'ทักษะ',
+                          hintStyle: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 240, 4, 4)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 255, 255)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          prefixIcon: Icon(
+                            Icons.handyman,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                  validator: (value) {
-                    if (value!.length < 6) {
-                      return 'กรุณากรอกทักษะของท่านให้เรียบร้อย';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'ทักษะ',
-                    labelStyle: TextStyle(color: Colors.white),
-                    helperText: 'Tyep you password more 6 Charactor',
-                    hintText: 'ทักษะ',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: Icon(
-                      Icons.handyman,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                      ),
-                ],),
                 SizedBox(
                   height: 10,
                 ),
                 DropdownButtonFormField<String>(
-                  value: DropdownValue,
+                  value: dropdownValue,
                   items: items,
                   onChanged: (value) {
                     print(value);
                     setState(() {
-                      DropdownValue = value;
+                      dropdownValue = value;
                     });
                   },
                   decoration: const InputDecoration(
@@ -355,7 +357,8 @@ class _Register extends State<NextRegister> {
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255), width: 1),
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     errorBorder: OutlineInputBorder(
                         borderSide:
@@ -363,7 +366,8 @@ class _Register extends State<NextRegister> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255), width: 1),
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     prefixIcon: Icon(
                       Icons.location_on,
@@ -388,7 +392,7 @@ class _Register extends State<NextRegister> {
 
                     print('สมัครสมาชิก');
 
-                    await CheckRegister(username.text, password.text, name.text,
+                    await checkRegister(username.text, password.text, name.text,
                         surname.text, picdate.text, context);
 
                     // Navigator.pushNamedAndRemoveUntil(context,
@@ -445,7 +449,7 @@ Widget grorpImage() {
   );
 }
 
-Future CheckRegister(String username, String password, String name,
+Future checkRegister(String username, String password, String name,
     String surname, String picdate, context) async {
   EasyLoading.show(status: 'loading...');
 

@@ -1,20 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unused_element, avoid_print, duplicate_ignore, dead_code
-
-import 'dart:convert';
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_appcare/models/textformfieldmodel.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import '../configs/config.dart';
-import 'nextRegister.dart';
+import 'next_register.dart';
 
 class PageOne extends StatefulWidget {
-  PageOne({Key? key}) : super(key: key);
+  const PageOne({Key? key}) : super(key: key);
 
   @override
   State<PageOne> createState() => _Register();
@@ -48,8 +37,6 @@ class _Register extends State<PageOne> {
         });
       }
     }
-
-
 
     void newtime() async {
       TimeOfDay? time =
@@ -260,7 +247,8 @@ class _Register extends State<PageOne> {
                         //   // newDate();
                         // },
                         style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 17),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           print(value);
@@ -488,39 +476,4 @@ class _Register extends State<PageOne> {
 //   );
 // }
 
-// Future CheckRegister(String username, String password, String name,
-//     String surname, String picdate, context) async {
-//   EasyLoading.show(status: 'loading...');
-
-//   Uri url = Uri.parse('http://165.22.63.114:3200/api/customer');
-//   http
-//       .post(
-//     url,
-//     headers: headers,
-//     body: jsonEncode({
-//       "username": username,
-//       "password": password,
-//       "fname": name,
-//       "lname": surname,
-//     }),
-//   )
-//       .then((req) async {
-//     // if (req.statusCode == 200) {
-//     //   final prefs = await SharedPreferences.getInstance();
-//     //   var data = jsonDecode(req.body);
-//     //   prefs.setString('token', data['token']);
-
-//     //   print('ข้อมูลid');
-//     //   print(prefs.get('idm'));
-//     //   headers?['Authorization'] = "bearer ${data['token']}";
-//     //   EasyLoading.showSuccess('Great Success!');
-//     //   Navigator.of(context).pushAndRemoveUntil(
-//     //       MaterialPageRoute(builder: (context) => Page1()),
-//     //       (Route<dynamic> route) => false);
-//     //   prefs.setInt('idm', data['id']);
-//     // } else {
-//       // print('error');
-//       // EasyLoading.showError('Failed with Error');
-//     // }
-//   });
-// }
+// 
