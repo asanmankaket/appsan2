@@ -53,15 +53,33 @@ class _ProfileNameState extends State<ProfileName> {
           child: Column(children: [
         const SizedBox(height: 20),
         DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            labelText: 'คำนำหน้า',
+            labelStyle: const TextStyle(color: Colors.black),
+            hintStyle: const TextStyle(color: Colors.black),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.pink),
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
+              borderRadius: BorderRadius.all(
+                const Radius.circular(50),
+              ),
+            ),
+          ),
           value: dropdownValue,
           items: items,
           onChanged: (value) {
             dropdownValue = value;
           },
-        ),
-        TextFormFieldModel2(
-          controller: title,
-          labelText: 'คำนำหน้า',
         ),
         const SizedBox(height: 15),
         TextFormFieldModel2(
@@ -75,7 +93,9 @@ class _ProfileNameState extends State<ProfileName> {
         ),
         TextButton(
             onPressed: () {
-              sendDataProfile1(title.text, name.text, surname.text, context);
+              sendDataProfile1(
+                  dropdownValue!, name.text, surname.text, context);
+              print(dropdownValue);
             },
             child: Text('ยืนยันการแก้ไข'))
       ])),
