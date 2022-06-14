@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import '../../configs/api.dart';
 import '../../models/textformfieldmodel2.dart';
@@ -47,58 +49,86 @@ class _ProfileNameState extends State<ProfileName> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        title: const Text('Edit Name'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
-      body: SizedBox(
-          child: Column(children: [
-        const SizedBox(height: 20),
-        DropdownButtonFormField<String>(
-          decoration: InputDecoration(
-            labelText: 'คำนำหน้า',
-            labelStyle: const TextStyle(color: Colors.black),
-            hintStyle: const TextStyle(color: Colors.black),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(50),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SizedBox(
+            child: Column(children: [
+          const SizedBox(height: 20),
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              labelText: 'คำนำหน้า',
+              labelStyle: const TextStyle(color: Colors.black),
+              hintStyle: const TextStyle(color: Colors.black),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(50),
+                ),
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
+                borderRadius: BorderRadius.all(
+                  const Radius.circular(50),
+                ),
               ),
             ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.pink),
-              borderRadius: const BorderRadius.all(Radius.circular(50)),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
-              borderRadius: BorderRadius.all(
-                const Radius.circular(50),
-              ),
-            ),
+            value: dropdownValue,
+            items: items,
+            onChanged: (value) {
+              dropdownValue = value;
+            },
           ),
-          value: dropdownValue,
-          items: items,
-          onChanged: (value) {
-            dropdownValue = value;
-          },
-        ),
-        const SizedBox(height: 15),
-        TextFormFieldModel2(
-          labelText: 'ชื่อ',
-          controller: name,
-        ),
-        const SizedBox(height: 15),
-        TextFormFieldModel2(
-          labelText: 'นามสกุล',
-          controller: surname,
-        ),
-        TextButton(
+          const SizedBox(height: 15),
+          TextFormFieldModel2(
+            labelText: 'ชื่อ',
+            controller: name,
+          ),
+          const SizedBox(height: 15),
+          TextFormFieldModel2(
+            labelText: 'นามสกุล',
+            controller: surname,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          ElevatedButton(
             onPressed: () {
               sendDataProfile1(
                   dropdownValue!, name.text, surname.text, context);
               print(dropdownValue);
             },
-            child: Text('ยืนยันการแก้ไข'))
-      ])),
+            child: Wrap(
+              children: <Widget>[
+                Icon(
+                  Icons.save,
+                  color: Colors.white,
+                  size: 24.0,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("SAVE", style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              primary: Colors.purple,
+            ),
+          ),
+
+          // TextButton(
+        ])),
+      ),
     );
   }
 }

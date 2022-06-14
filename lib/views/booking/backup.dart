@@ -11,7 +11,7 @@ class BackUp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('ประวัติย้อนหลัง'),
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Column(children: [
         Container(
@@ -29,7 +29,7 @@ class BackUp extends StatelessWidget {
                 }),
                 child: Text('ดูประวัติที่สำเร็จ'),
                 style: TextButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 39, 110, 168),
+                    backgroundColor: const Color.fromARGB(255, 160, 42, 207),
                     primary: Colors.white),
               ),
               const SizedBox(width: 20),
@@ -45,7 +45,7 @@ class BackUp extends StatelessWidget {
                   'ดูประวัติที่ยกเลิก',
                 ),
                 style: TextButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 39, 110, 168),
+                    backgroundColor: const Color.fromARGB(255, 160, 42, 207),
                     primary: Colors.white),
               ),
             ],

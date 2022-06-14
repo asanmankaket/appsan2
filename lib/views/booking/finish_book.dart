@@ -33,73 +33,78 @@ class _FinishBookingState extends State<FinishBooking> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('การนัดหมายที่สำเร็จ'),
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: RefreshIndicator(
-          onRefresh: () async {
-            startApi();
-          },
-          child: ListView.builder(
-            itemCount:
-                data?.length ?? 0, //เอาออกไปก่อนเพราะตัวdata.lengthยังพังอยู่
-            // itemCount: 3, //ใช้ตัวนี้แทนเพราะตัวdataพัง
-            itemBuilder: (context, i) => InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                        builder: (BuildContext context) =>
-                            Bookdetail(data: data[i])));
-              },
-              child: Card(
-                elevation: 10,
-                color: Color.fromARGB(255, 111, 210, 174),
-                shadowColor: Color.fromARGB(255, 148, 148, 148),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const SizedBox(
-                              width: 55.0,
-                              height: 55.0,
-                              child: CircleAvatar(),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(22),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text('เริ่ม : ' +
-                                      DateFormat('dd-mm-yy' 'HH:mm').format(
-                                          DateTime.parse(
-                                              '${data[i]['start_time']}'))),
-                                  Text('สิ้นสุด : ' +
-                                      DateFormat('dd-mm-yy' 'HH:mm').format(
-                                          DateTime.parse(
-                                              '${data[i]['end_time']}'))),
-                                ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              startApi();
+            },
+            child: ListView.builder(
+              itemCount:
+                  data?.length ?? 0, //เอาออกไปก่อนเพราะตัวdata.lengthยังพังอยู่
+              // itemCount: 3, //ใช้ตัวนี้แทนเพราะตัวdataพัง
+              itemBuilder: (context, i) => InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              Bookdetail(data: data[i])));
+                },
+                child: Card(
+                  elevation: 10,
+                  color: Color.fromARGB(255, 111, 210, 174),
+                  shadowColor: Color.fromARGB(255, 148, 148, 148),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(27),
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              const SizedBox(
+                                width: 20,
                               ),
-                            ),
-                          ])
-                    ]),
+                              const SizedBox(
+                                width: 55.0,
+                                height: 55.0,
+                                child: CircleAvatar(),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(22),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Text('เริ่ม : ' +
+                                        DateFormat('dd-mm-yy' 'HH:mm').format(
+                                            DateTime.parse(
+                                                '${data[i]['start_time']}'))),
+                                     SizedBox(height: 5,),
+                                    Text('สิ้นสุด : ' +
+                                        DateFormat('dd-mm-yy' 'HH:mm').format(
+                                            DateTime.parse(
+                                                '${data[i]['end_time']}'))),
+                                  ],
+                                ),
+                              ),
+                            ])
+                      ]),
+                ),
               ),
             ),
           ),

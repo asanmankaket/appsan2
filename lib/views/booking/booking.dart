@@ -56,13 +56,13 @@ class _BookingState extends State<Booking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 205, 94, 249),
+                  color:  Colors.purple.shade200,
                   shadowColor: const Color.fromARGB(255, 10, 91, 111),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                     side: BorderSide(
                       color:
-                          const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
+                          Colors.black.withOpacity(0.5),
                       width: 1,
                     ),
                   ),
