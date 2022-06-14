@@ -1,3 +1,4 @@
+import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -8,8 +9,10 @@ import 'bcome/_login.dart';
 import 'editprofile/profilename.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key, this.data}) : super(key: key);
-  final dynamic data;
+  const Profile({
+    Key? key,
+  }) : super(key: key);
+
   @override
   State<Profile> createState() => _ProfileState();
 }
@@ -26,6 +29,7 @@ class _ProfileState extends State<Profile> {
   startApi() async {
     //เอาตัวidของcustomerมาใช้กับหน้านี้แล้วเอาค่าไปใส่ในidUser
     dynamic item = await getProfile();
+
     loadingDialogSuc(); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
@@ -36,13 +40,13 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข้อมูลส่วนตัว'),
+        title: const Text('ข้อมูลส่วนตัว'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: data != null
           ? Column(
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,7 +57,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ProfileMenu(
                     text: '${data['title']} ${data['fname']}  ${data['lname']}',
                     press: () {
@@ -75,7 +79,7 @@ class _ProfileState extends State<Profile> {
                   text: '${data['address']}',
                   press: () {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextButton(
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.fromLTRB(100, 15, 100, 15),
@@ -116,9 +120,10 @@ class _ProfileState extends State<Profile> {
   loadingDialogSuc() {
     EasyLoading.showSuccess('Success');
   }
-//   Future<Null> editThread() async{
-//     showDialog(context: context, builder: (context) => SimpleDialog(
-//       title: ListTile(leading: Icon(Icons.a)),
-//     ));
-//   }
+
+  ageCalculator(dynamic birthday) {
+    DateDuration duration;
+    duration = AgeCalculator.age(birthday, today: DateTime.now());
+    return duration;
+  }
 }

@@ -62,8 +62,7 @@ class _SideMenuState extends State<SideMenu> {
                     Navigator.push(
                         context,
                         MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                Profile(data: data)));
+                            builder: (BuildContext context) => Profile()));
                   }),
                   child: Row(
                     children: [
