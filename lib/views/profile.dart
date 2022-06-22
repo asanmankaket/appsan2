@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:creative/models/settingManu.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,6 +19,15 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   dynamic data;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  void _closeEndDrawer() {
+    Navigator.of(context).pop();
+  }
 
   @override
   void initState() {
@@ -34,10 +46,23 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    var scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
+      // endDrawer: Drawer(),
       appBar: AppBar(
         title: Text('ข้อมูลส่วนตัว'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.settings_sharp,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              })
+        ],
       ),
       body: data != null
           ? Column(
@@ -105,7 +130,102 @@ class _ProfileState extends State<Profile> {
           : SizedBox(
               child: loadingDialog(),
             ),
-      drawer: const SideMenu(),
+      drawer: SideMenu(),
+      endDrawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              // child: Align(
+              //   alignment:Alignment.center,
+              //   child: Text('การตั้งค่า',style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              // ),
+      
+              padding: EdgeInsets.all(60),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 160, 42, 207),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                padding: const EdgeInsets.only(left:100),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextButton(
+                        child: Text(
+                          'เปลี่ยนรหัสผ่าน',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          print('Pressed');
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextButton(
+                        child: Text(
+                          'เปลี่ยนรหัสผ่าน',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          print('Pressed');
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextButton(
+                        child: Text(
+                          'เปลี่ยนรหัสผ่าน',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          print('Pressed');
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextButton(
+                        child: Text(
+                          'เปลี่ยนรหัสผ่าน',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          print('Pressed');
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    // const Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    // SizedBox(height: 10,),
+                    // const Text('This is the Drawer'),
+                    // const Text('This is the Drawer'),
+                    // ElevatedButton(
+                    //   onPressed: _closeEndDrawer,
+                    //   child: const Text('Close Drawer'),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      endDrawerEnableOpenDragGesture: false,
+      // drawer: SettingManu(),
     );
   }
 
