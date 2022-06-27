@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:creative/models/settingManu.dart';
+import 'package:creative/views/editprofile/setting/Repassword.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -19,6 +20,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   dynamic data;
+   dynamic age;
+   late TextEditingController title;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _openEndDrawer() {
@@ -94,7 +97,12 @@ class _ProfileState extends State<Profile> {
                 ),
                 ProfileMenu(
                   text: '${data['phone']}',
-                  press: () {},
+                  press: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //       builder: (context) => ProfilePhone(data: data)),
+                    // );
+                  },
                 ),
                 ProfileMenu(
                   text: '${data['address']}',
@@ -132,15 +140,24 @@ class _ProfileState extends State<Profile> {
             ),
       drawer: SideMenu(),
       endDrawer: Drawer(
+        backgroundColor: Colors.white70,
         child: Column(
           children: [
             Container(
-              // child: Align(
-              //   alignment:Alignment.center,
-              //   child: Text('การตั้งค่า',style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              // ),
-      
-              padding: EdgeInsets.all(60),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, left: 150),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text('การตั้งค่า',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                ),
+              ),
+
+              // padding: EdgeInsets.all(60),
+              padding: EdgeInsets.fromLTRB(20, 43, 20, 15),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 160, 42, 207),
                 boxShadow: [
@@ -156,21 +173,12 @@ class _ProfileState extends State<Profile> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
-                padding: const EdgeInsets.only(left:100),
+                padding: const EdgeInsets.only(left: 100),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    TextButton(
-                        child: Text(
-                          'เปลี่ยนรหัสผ่าน',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          print('Pressed');
-                        }),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     TextButton(
                         child: Text(
@@ -178,36 +186,21 @@ class _ProfileState extends State<Profile> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {
-                          print('Pressed');
-                        }),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextButton(
-                        child: Text(
-                          'เปลี่ยนรหัสผ่าน',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextButton.styleFrom(
+                          primary: Colors.purple,
                         ),
                         onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      Repassword()));
                           print('Pressed');
                         }),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
-                    TextButton(
-                        child: Text(
-                          'เปลี่ยนรหัสผ่าน',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          print('Pressed');
-                        }),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    
 
                     // const Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     // SizedBox(height: 10,),

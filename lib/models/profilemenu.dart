@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ProfileMenu extends StatelessWidget {
-  const ProfileMenu({
-    Key? key,
-    required this.text,
-    this.press,
-  }) : super(key: key);
-
+class ProfileMenu extends StatefulWidget {
+  const ProfileMenu({Key? key, required this.text, this.press, controller})
+      : super(key: key);
   final String text;
   final VoidCallback? press;
+
+  @override
+  State<ProfileMenu> createState() => _ProfileMenuState();
+}
+
+class _ProfileMenuState extends State<ProfileMenu> {
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,11 @@ class ProfileMenu extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: const Color.fromARGB(255, 227, 230, 241),
         ),
-        onPressed: press,
+        onPressed: widget.press,
         child: Row(
           children: [
             const SizedBox(width: 20),
-            Expanded(child: Text(text)),
+            Expanded(child: Text(widget.text)),
             const Icon(Icons.arrow_forward_ios),
           ],
         ),

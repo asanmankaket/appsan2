@@ -49,7 +49,7 @@ class _ProfileNameState extends State<ProfileName> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Name'),
+        title: const Text('เเก้ไขชื่อผู้ใช้'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Padding(
@@ -115,7 +115,7 @@ class _ProfileNameState extends State<ProfileName> {
                 SizedBox(
                   width: 10,
                 ),
-                Text("SAVE", style: TextStyle(fontSize: 20)),
+                Text("บันทึก", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
               ],
             ),
             style: ElevatedButton.styleFrom(
