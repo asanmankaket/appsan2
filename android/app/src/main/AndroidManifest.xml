@@ -25,7 +25,7 @@
         </intent>
     </queries>
    <application
-        android:label="Nut-SanAPP"
+        android:label="Caregiver_mentor"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:creative/models/settingManu.dart';
+import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/setting/Repassword.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/sidemenu.dart';
 import 'bcome/_login.dart';
+import 'editprofile/profile_phone.dart';
 import 'editprofile/profilename.dart';
 
 class Profile extends StatefulWidget {
@@ -20,8 +22,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   dynamic data;
-   dynamic age;
-   late TextEditingController title;
+  dynamic age;
+  late TextEditingController title;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _openEndDrawer() {
@@ -98,15 +100,21 @@ class _ProfileState extends State<Profile> {
                 ProfileMenu(
                   text: '${data['phone']}',
                   press: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //       builder: (context) => ProfilePhone(data: data)),
-                    // );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePhone(data: data)),
+                    );
                   },
                 ),
                 ProfileMenu(
-                  text: '${data['address']}',
-                  press: () {},
+                  text:
+                      '${data['tambons']} ${data['amphures']} ${data['provinces']} ${data['pincode']}',
+                  press: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => ProfileAddress(data: data)),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 TextButton(
@@ -200,7 +208,6 @@ class _ProfileState extends State<Profile> {
                     SizedBox(
                       height: 5,
                     ),
-                    
 
                     // const Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     // SizedBox(height: 10,),

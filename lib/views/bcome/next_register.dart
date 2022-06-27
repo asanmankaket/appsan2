@@ -1,30 +1,27 @@
-import 'dart:convert';
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:creative/views/booking/mainpage.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import '../../configs/config.dart';
+import '../../configs/api.dart';
 
 class NextRegister extends StatefulWidget {
-  const NextRegister({Key? key}) : super(key: key);
-
+  NextRegister(
+      {Key? key,
+      required this.username,
+      required this.password,
+      required this.name,
+      required this.surname,
+      required this.picdate})
+      : super(key: key);
+  String username, password, name, surname, picdate;
   @override
   State<NextRegister> createState() => _Register();
 }
 
 class _Register extends State<NextRegister> {
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmpassword = TextEditingController();
-  TextEditingController name = TextEditingController();
-  TextEditingController surname = TextEditingController();
-  TextEditingController picdate = TextEditingController();
-  TextEditingController pictime = TextEditingController();
+  TextEditingController citizenId = TextEditingController();
+  TextEditingController phonenumber = TextEditingController();
+  TextEditingController latilongti = TextEditingController();
+  TextEditingController skill = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
@@ -48,48 +45,10 @@ class _Register extends State<NextRegister> {
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
-    // const DropdownMenuItem(
-    //   value: 'address',
-    //   child: Text(
-    //     'ปัตตานี',
-    //     style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-    //   ),
-    // )
   ];
 
   @override
   Widget build(BuildContext context) {
-    // void newDate() async {
-    //   DateTime? date = await showDatePicker(
-    //       context: context,
-    //       initialDate: datenow!,
-    //       firstDate: DateTime(DateTime.now().year - 70),
-    //       lastDate: DateTime(DateTime.now().year, DateTime.now().day));
-    //   // firstDate: DateTime(DateTime.now().year, DateTime.now().month, 1),
-    //   // lastDate: DateTime(DateTime.now().year, DateTime.now().month, 30),
-    //   // );
-    //   print(date);
-
-    //   if (date != null) {
-    //     setState(() {
-    //       datenow = date;
-    //       picdate.text = date.toString();
-    //       picdate.text = DateFormat("dd/MM/yyyy").format(date);
-    //     });
-    //   }
-    // }
-
-    void newtime() async {
-      TimeOfDay? time =
-          await showTimePicker(context: context, initialTime: TimeOfDay.now());
-      if (time != null) {
-        setState(() {
-          // picdate.text = date.toString();
-          pictime.text = '${time.hour}:${time.minute}';
-        });
-      }
-    }
-
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 205, 94, 249),
       appBar: AppBar(
@@ -109,6 +68,7 @@ class _Register extends State<NextRegister> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: phonenumber,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'โปรดกรอกหมายเลขโทรศัพท์';
@@ -150,17 +110,11 @@ class _Register extends State<NextRegister> {
                     ),
                   ),
                 ),
-                // TextFormFieldModel(
-                //   // key: _formkey,
-                //   labeltext: 'Usename',
-                //   controller: username,
-                //   // as: 'ใส่ส่ะ',
-                //   // validator:(String value){},
-                // ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
+                  controller: citizenId,
                   validator: (value) {
                     if (value!.length < 6) {
                       return 'โปรดกรอกหมายเลขบัตรประชาชน';
@@ -202,10 +156,6 @@ class _Register extends State<NextRegister> {
                     ),
                   ),
                 ),
-                // TextFormFieldModel(
-                //   labeltext: 'password',
-                //   controller: password,
-                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -219,7 +169,7 @@ class _Register extends State<NextRegister> {
                       ),
                       onPressed: () => chooseImage(ImageSource.camera),
                     ),
-                    Container(
+                    SizedBox(
                       width: 200.0,
                       child: file == null
                           ? Image.asset('assets/images/one.jpg')
@@ -234,13 +184,12 @@ class _Register extends State<NextRegister> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: TextFormField(
+                        controller: latilongti,
                         validator: (value) {
                           if (value!.length < 6) {
                             return 'กรุณาตรวจสอบตำเเหน่งของท่าน';
@@ -291,6 +240,7 @@ class _Register extends State<NextRegister> {
                     ),
                     Expanded(
                       child: TextFormField(
+                        controller: skill,
                         validator: (value) {
                           if (value!.length < 6) {
                             return 'กรุณากรอกทักษะของท่านให้เรียบร้อย';
@@ -391,9 +341,19 @@ class _Register extends State<NextRegister> {
                     //     builder: (BuildContext context) => NextRegister()));
 
                     print('สมัครสมาชิก');
+                    print(widget.username);
+                    checkRegister(
+                        widget.username,
+                        widget.password,
+                        widget.name,
+                        widget.surname,
+                        widget.picdate,
+                        phonenumber.text,
+                        citizenId.text,
+                        context);
 
-                    await checkRegister(username.text, password.text, name.text,
-                        surname.text, picdate.text, context);
+                    // await checkRegister(username.text, password.text, name.text,
+                    //     surname.text, picdate.text, context);
 
                     // Navigator.pushNamedAndRemoveUntil(context,
                     //     "/Page1", (Route<dynamic> route) => false);
@@ -447,41 +407,4 @@ Widget grorpImage() {
       ),
     ],
   );
-}
-
-Future checkRegister(String username, String password, String name,
-    String surname, String picdate, context) async {
-  EasyLoading.show(status: 'loading...');
-
-  Uri url = Uri.parse('http://165.22.63.114:3200/api/customer');
-  http
-      .post(
-    url,
-    headers: headers,
-    body: jsonEncode({
-      "username": username,
-      "password": password,
-      "fname": name,
-      "lname": surname,
-    }),
-  )
-      .then((req) async {
-    if (req.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      var data = jsonDecode(req.body);
-      prefs.setString('token', data['token']);
-
-      print('ข้อมูลid');
-      print(prefs.get('idm'));
-      headers?['Authorization'] = "bearer ${data['token']}";
-      EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => MainPage()),
-          (Route<dynamic> route) => false);
-      prefs.setInt('idm', data['id']);
-    } else {
-      print('error');
-      EasyLoading.showError('Failed with Error');
-    }
-  });
 }

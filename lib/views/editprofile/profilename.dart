@@ -40,7 +40,7 @@ class _ProfileNameState extends State<ProfileName> {
   @override
   void initState() {
     super.initState();
-    title.text = widget.data['title'];
+    dropdownValue = widget.data['title'];
     name.text = widget.data['fname'];
     surname.text = widget.data['lname'];
   }
@@ -115,7 +115,9 @@ class _ProfileNameState extends State<ProfileName> {
                 SizedBox(
                   width: 10,
                 ),
-                Text("บันทึก", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                Text("บันทึก",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             ),
             style: ElevatedButton.styleFrom(
