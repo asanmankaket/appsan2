@@ -44,7 +44,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
                   textStyle: const TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  sendDataProfile2(phone.text, context);
+                  sendDataProfile4(phone.text, context);
                 },
                 child: const Text(
                   'ยืนยัน',

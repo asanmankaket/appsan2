@@ -101,7 +101,7 @@ class _ProfileNameState extends State<ProfileName> {
           ),
           ElevatedButton(
             onPressed: () {
-              sendDataProfile1(
+              sendDataProfile2(
                   dropdownValue!, name.text, surname.text, context);
               print(dropdownValue);
             },
