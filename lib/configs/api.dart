@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:creative/configs/config.dart';
-import 'package:creative/views/bcome/_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:creative/views/booking/mainpage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../views/profile.dart';
 
 Future checkLogin(String username, String password, context) async {
@@ -37,11 +34,17 @@ Future checkLogin(String username, String password, context) async {
   });
 }
 
-Future checkRegister(String username, String password, String name,
-    String surname, String picdate, context) async {
+Future checkRegister(
+    String username,
+    String password,
+    String name,
+    String surname,
+    String picdate,
+    String phone,
+    String citizenid,
+    context) async {
   EasyLoading.show(status: 'loading...');
-
-  Uri url = Uri.parse('http://165.22.63.114:3200/api/customer');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor');
   http
       .post(
     url,
@@ -51,20 +54,16 @@ Future checkRegister(String username, String password, String name,
       "password": password,
       "fname": name,
       "lname": surname,
+      "phone": phone,
+      // "birtday": picdate,
+      "idcard": citizenid
     }),
   )
       .then((req) async {
+    print(req.statusCode);
     if (req.statusCode == 201) {
-      final prefs = await SharedPreferences.getInstance();
       var data = jsonDecode(req.body);
-      prefs.setString('token', data['token']);
-
-      headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const PageOne()),
-          (Route<dynamic> route) => false);
-      prefs.setInt('idm', data['id']);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -131,7 +130,50 @@ Future<dynamic> getProfile() async {
   });
 }
 
-Future<dynamic> sendDataProfile1(
+Future<dynamic> getProfilepassword() async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/password/$idUser');
+  return await http
+      .get(
+    url,
+    headers: headers,
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      var data = jsonDecode(req.body);
+      return data;
+    } else {
+      return null;
+    }
+  });
+}
+
+Future sendDataProfile1(oldpassword, password, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/customer/p1/$idUser');
+  http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({"oldpassword": oldpassword, "password": password}),
+  )
+      .then((req) async {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Profile()),
+          (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future<dynamic> sendDataProfile2(
     String title, String name, String surname, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
@@ -160,7 +202,7 @@ Future<dynamic> sendDataProfile1(
   });
 }
 
-Future sendDataProfile2(phone, context) async {
+Future sendDataProfile4(phone, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
@@ -170,6 +212,57 @@ Future sendDataProfile2(phone, context) async {
     url,
     headers: headers,
     body: jsonEncode({"phone": phone}),
+  )
+      .then((req) async {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Profile()),
+          (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
+    idaddress, context) async {
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idaddress');
+  http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({
+      "tambons": tambons,
+      "amphures": amphures,
+      "provinces": provinces,
+      "geographies": geographies,
+      "pincode": pincode
+    }),
+  )
+      .then((req) async {
+    print(req.statusCode);
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Profile()),
+          (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future sendDataProfile6(birtday, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/customer/p4/$idUser');
+  http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({"birtday": birtday}),
   )
       .then((req) async {
     if (req.statusCode == 204) {

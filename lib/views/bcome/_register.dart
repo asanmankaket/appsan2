@@ -16,7 +16,6 @@ class _Register extends State<PageOne> {
   TextEditingController name = TextEditingController();
   TextEditingController surname = TextEditingController();
   TextEditingController picdate = TextEditingController();
-  TextEditingController pictime = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
@@ -34,17 +33,6 @@ class _Register extends State<PageOne> {
           datenow = date;
           picdate.text = DateFormat("dd/MM/yyyy").format(date);
           DateFormat("dd/MM/yyyy").format(date);
-        });
-      }
-    }
-
-    void newtime() async {
-      TimeOfDay? time =
-          await showTimePicker(context: context, initialTime: TimeOfDay.now());
-      if (time != null) {
-        setState(() {
-          // picdate.text = date.toString();
-          pictime.text = '${time.hour}:${time.minute}';
         });
       }
     }
@@ -78,7 +66,9 @@ class _Register extends State<PageOne> {
                 SizedBox(
                   height: 20,
                 ),
+                //username
                 TextFormField(
+                  controller: username,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please fill you Usename in the blank';
@@ -120,17 +110,12 @@ class _Register extends State<PageOne> {
                         color: Color.fromARGB(255, 255, 255, 255),
                       )),
                 ),
-                // TextFormFieldModel(
-                //   // key: _formkey,
-                //   labeltext: 'Usename',
-                //   controller: username,
-                //   // as: 'ใส่ส่ะ',
-                //   // validator:(String value){},
-                // ),
                 SizedBox(
                   height: 10,
                 ),
+                //รหัสผ่าน
                 TextFormField(
+                  controller: password,
                   validator: (value) {
                     if (value!.length < 6) {
                       return 'Password More 6 Charactor';
@@ -173,19 +158,15 @@ class _Register extends State<PageOne> {
                     ),
                   ),
                 ),
-                // TextFormFieldModel(
-                //   labeltext: 'password',
-                //   controller: password,
-                // ),
                 SizedBox(
                   height: 10,
                 ),
+                //ยืนยันรหัสผ่าน
                 TextFormField(
+                  controller: confirmpassword,
                   validator: (value) {
-                    if (value!.length < 6) {
-                      return 'Confirm Password More 6 Charactor';
-                    } else {
-                      return null;
+                    if (confirmpassword != password) {
+                      return 'password not same';
                     }
                   },
                   style: TextStyle(
@@ -223,17 +204,13 @@ class _Register extends State<PageOne> {
                     ),
                   ),
                 ),
-                // TextFormFieldModel(
-                //   labeltext: 'confirm password',
-                //   controller: confirmpassword,
-                // ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
+                      //name
                       child: TextFormField(
+                        controller: name,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please fill you surname in the blank';
@@ -241,11 +218,7 @@ class _Register extends State<PageOne> {
                             return null;
                           }
                         },
-                        // controller: surname,
-                        // readOnly: true,
-                        // onTap: () {
-                        //   // newDate();
-                        // },
+
                         style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 17),
@@ -285,14 +258,14 @@ class _Register extends State<PageOne> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     Expanded(
+                      //surname
                       child: TextFormField(
+                        controller: surname,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please fill you name in the blank';
+                            return 'Please fill you surname in the blank';
                           } else {
                             return null;
                           }
@@ -339,9 +312,7 @@ class _Register extends State<PageOne> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -390,62 +361,22 @@ class _Register extends State<PageOne> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-
-                // TextFormField(
-                //   controller: pictime,
-
-                //   readOnly: true,
-                //   onTap: () {
-                //     newtime();
-                //   },
-                //   style: TextStyle(
-                //       color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                //   keyboardType: TextInputType.text,
-                //   onChanged: (value) {
-                //     print(value);
-                //   },
-                //   // ignore: prefer_const_constructors
-                //   decoration: InputDecoration(
-                //     labelText: 'time',
-                //     labelStyle: TextStyle(color: Colors.white),
-                //     hintText: 'time',
-                //     hintStyle:
-                //         TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                //     enabledBorder: OutlineInputBorder(
-                //       borderSide:
-                //           BorderSide(color: Color.fromARGB(255, 62, 144, 202)),
-                //       borderRadius: BorderRadius.all(Radius.circular(50)),
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //         borderSide:
-                //             BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                //         borderRadius: BorderRadius.all(Radius.circular(50))),
-                //   ),
-                // ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 10),
+                SizedBox(height: 5),
                 ElevatedButton(
                   onPressed: () async {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
                     }
-
                     Navigator.push(
                         context,
                         MaterialPageRoute<void>(
-                            builder: (BuildContext context) => NextRegister()));
-
-                    print('next');
-
-                    // await CheckRegister(username.text, password.text, name.text,
-                    //     surname.text, picdate.text, context);
-
-                    // Navigator.pushNamedAndRemoveUntil(context,
-                    //     "/Page1", (Route<dynamic> route) => false);
+                            builder: (BuildContext context) => NextRegister(
+                                username: username.text,
+                                password: password.text,
+                                name: name.text,
+                                surname: surname.text,
+                                picdate: picdate.text)));
                   },
                   child: Text(
                     'ถัดไป',
@@ -469,11 +400,3 @@ class _Register extends State<PageOne> {
     );
   }
 }
-
-// Widget grorpImage() {
-//   return Row(
-    
-//   );
-// }
-
-// 
