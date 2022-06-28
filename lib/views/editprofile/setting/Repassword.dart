@@ -16,10 +16,10 @@ class _RepasswordState extends State<Repassword> {
   @override
   void initState() {
     super.initState();
-    startApi();
+    startApi1();
   }
 
-  startApi() async {
+  startApi1() async {
     dynamic item = await getProfile(); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
