@@ -57,8 +57,8 @@ class _FinishBookingState extends State<FinishBooking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: Color.fromARGB(255, 111, 210, 174),
-                  shadowColor: Color.fromARGB(255, 148, 148, 148),
+                  color: const Color.fromARGB(255, 111, 210, 174),
+                  shadowColor: const Color.fromARGB(255, 148, 148, 148),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                   ),
@@ -89,12 +89,12 @@ class _FinishBookingState extends State<FinishBooking> {
                                       '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
                                       style: const TextStyle(fontSize: 15),
                                     ),
-                                    SizedBox(height: 5,),
+                                    const SizedBox(height: 5),
                                     Text('เริ่ม : ' +
                                         DateFormat('dd-mm-yy' 'HH:mm').format(
                                             DateTime.parse(
                                                 '${data[i]['start_time']}'))),
-                                     SizedBox(height: 5,),
+                                    const SizedBox(height: 5),
                                     Text('สิ้นสุด : ' +
                                         DateFormat('dd-mm-yy' 'HH:mm').format(
                                             DateTime.parse(

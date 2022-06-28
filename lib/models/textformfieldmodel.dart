@@ -20,10 +20,7 @@ class TextFormFieldModel extends StatelessWidget {
       controller: controller,
       style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
       keyboardType: TextInputType.text,
-      onChanged: (value) {
-        print(value);
-      },
-      // ignore: prefer_const_constructors
+      onChanged: (value) {},
       decoration: InputDecoration(
         labelText: labeltext,
         labelStyle: TextStyle(color: Colors.white),

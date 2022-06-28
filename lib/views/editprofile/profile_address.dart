@@ -16,7 +16,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController provinces = TextEditingController();
   TextEditingController geographies = TextEditingController();
   TextEditingController pincode = TextEditingController();
-  var idaddress;
+  dynamic idaddress;
   @override
   void initState() {
     super.initState();

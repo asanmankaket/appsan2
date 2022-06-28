@@ -35,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('AppMentor'),
-          backgroundColor: Color.fromARGB(255, 160, 42, 207),
+          title: const Text('AppMentor'),
+          backgroundColor: const Color.fromARGB(255, 160, 42, 207),
         ),
         backgroundColor: Colors.purple.shade50,
         body: SafeArea(
@@ -47,37 +47,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Column(children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     // Icon(Icons.wheelchair_pickup, size: 50),
-                    Text(
+                    const Text(
                       'Login Account',
                       style: TextStyle(
                           color: Colors.purple,
                           fontSize: 40,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
-                    Text(
+                    const SizedBox(height: 8),
+                    const Text(
                       'appication for mentor',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w300),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     Form(
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Stack(
                           children: <Widget>[
                             Container(
                               height: 250.0,
                               width: 380.0,
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 10.0,
                                 vertical: 25.0,
                               ),
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     children: <Widget>[
                                       TextField(
                                         controller: username,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black, fontSize: 17),
                                         keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
@@ -100,28 +100,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                             fillColor: Colors.purple.shade100,
                                             labelText: 'username',
                                             hintText: 'ชื่อผู้ใช้',
-                                            hintStyle:
-                                                TextStyle(color: Colors.purple),
-                                            enabledBorder: OutlineInputBorder(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.purple),
+                                            enabledBorder:
+                                                const OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Colors.purple,
                                               ),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(50)),
                                             ),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.purple,
-                                                    width: 2.5),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(100))),
-                                            prefixIcon: Icon(
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                                    borderSide:
+                                                        BorderSide(
+                                                            color: Colors
+                                                                .purple,
+                                                            width: 2.5),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100))),
+                                            prefixIcon: const Icon(
                                               Icons.account_circle,
                                               size: 30,
                                               color: Colors.purple,
                                             )),
                                       ),
-                                      SizedBox(height: 20),
+                                      const SizedBox(height: 20),
                                       TextField(
                                           controller: password,
                                           obscureText: hidepassword,
@@ -131,22 +137,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                               fillColor: Colors.purple.shade100,
                                               labelText: 'password',
                                               hintText: 'รหัสผ่าน',
-                                              hintStyle: TextStyle(
+                                              hintStyle: const TextStyle(
                                                   color: Colors.purple),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: Colors.purple),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(50))),
-                                              focusedBorder: OutlineInputBorder(
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors.purple),
+                                                      borderRadius: BorderRadius
+                                                          .all(Radius
+                                                              .circular(50))),
+                                              focusedBorder:
+                                                  const OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     color: Colors.purple,
                                                     width: 2.5),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(100)),
                                               ),
-                                              prefixIcon: Icon(
+                                              prefixIcon: const Icon(
                                                 Icons.lock,
                                                 size: 30,
                                                 color: Colors.purple,
@@ -165,12 +173,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     size: 30,
                                                     color: Colors.purple,
                                                   )))),
-                                      SizedBox(height: 5),
+                                      const SizedBox(height: 5),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: <Widget>[
-                                          Text(
+                                          const Text(
                                             'Foeget Password ?',
                                             style: TextStyle(
                                                 fontSize: 14.0,
@@ -185,14 +193,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: () async {
                         await checkLogin(username.text, password.text, context);
                         // Navigator.pushNamedAndRemoveUntil(context,
                         //     "/Page1", (Route<dynamic> route) => false);
                       },
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                             color: Colors.white,
@@ -200,21 +208,21 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
                         primary: Colors.purple,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       'or',
                       style: TextStyle(color: Colors.purple),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     ElevatedButton(
@@ -222,16 +230,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.pushNamed(context, "/PageOne");
                         // Navigator.pushNamed(context, "/PageOne");
                       },
-                      child: Text('Register',
+                      child: const Text('Register',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold)),
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
                         primary: Colors.purple,
                       ),
                     )

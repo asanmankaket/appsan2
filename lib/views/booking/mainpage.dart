@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
       ),
       backgroundColor: Colors.purple.shade50,
       body: Padding(
-        padding: const EdgeInsets.all(13),
+        padding: const EdgeInsets.fromLTRB(3, 10, 3, 0),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: RefreshIndicator(

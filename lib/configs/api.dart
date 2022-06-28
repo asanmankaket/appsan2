@@ -60,9 +60,7 @@ Future checkRegister(
     }),
   )
       .then((req) async {
-    print(req.statusCode);
     if (req.statusCode == 201) {
-      var data = jsonDecode(req.body);
       EasyLoading.showSuccess('Great Success!');
     } else {
       EasyLoading.showError('Failed with Error');
@@ -81,14 +79,16 @@ Future<dynamic> getdata(int idPage) async {
       .get(
     url,
   )
-      .then((req) async {
-    if (req.statusCode == 200) {
-      var data = jsonDecode(req.body);
-      return data;
-    } else {
-      return null;
-    }
-  });
+      .then(
+    (req) async {
+      if (req.statusCode == 200) {
+        var data = jsonDecode(req.body);
+        return data;
+      } else {
+        return null;
+      }
+    },
+  );
 }
 
 Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
@@ -241,7 +241,6 @@ Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
     }),
   )
       .then((req) async {
-    print(req.statusCode);
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(

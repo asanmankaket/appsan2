@@ -55,8 +55,8 @@ class _CancleBookingState extends State<CancleBooking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: Color.fromARGB(255, 186, 198, 201),
-                  shadowColor: Color.fromARGB(255, 99, 108, 110),
+                  color: const Color.fromARGB(255, 186, 198, 201),
+                  shadowColor: const Color.fromARGB(255, 99, 108, 110),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                   ),

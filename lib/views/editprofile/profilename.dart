@@ -64,19 +64,19 @@ class _ProfileNameState extends State<ProfileName> {
               hintStyle: const TextStyle(color: Colors.black),
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blue),
-                borderRadius: const BorderRadius.all(
+                borderRadius: BorderRadius.all(
                   Radius.circular(50),
                 ),
               ),
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.pink),
-                borderRadius: const BorderRadius.all(Radius.circular(50)),
+                borderRadius: BorderRadius.all(Radius.circular(50)),
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide:
-                    const BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
+                    BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
                 borderRadius: BorderRadius.all(
-                  const Radius.circular(50),
+                  Radius.circular(50),
                 ),
               ),
             ),
@@ -103,7 +103,6 @@ class _ProfileNameState extends State<ProfileName> {
             onPressed: () {
               sendDataProfile2(
                   dropdownValue!, name.text, surname.text, context);
-              print(dropdownValue);
             },
             child: Wrap(
               children: <Widget>[

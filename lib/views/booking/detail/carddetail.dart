@@ -42,14 +42,15 @@ class _CarddetailState extends State<Carddetail> {
               ),
               Text(
                 '${widget.data['title']} ${widget.data['fname']} ${widget.data['lname']}',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child: Text(
                     'เวลานัด',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
@@ -95,7 +96,7 @@ class _CarddetailState extends State<Carddetail> {
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child: Text(
                     'อายุ 68 ปี',
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
@@ -109,7 +110,7 @@ class _CarddetailState extends State<Carddetail> {
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child: Text(
                     'โรคประจำตัว',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -124,8 +125,8 @@ class _CarddetailState extends State<Carddetail> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '- โรคหัวใจ',
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.normal),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
                   ),
                 ),
               ),
@@ -142,7 +143,7 @@ class _CarddetailState extends State<Carddetail> {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 70),
-                child: const Align(
+                child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '- โรคความดัน',
@@ -158,7 +159,7 @@ class _CarddetailState extends State<Carddetail> {
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child: Text(
                     'ลักษณะผู้ป่วย',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -169,7 +170,7 @@ class _CarddetailState extends State<Carddetail> {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 70),
-                child: const Align(
+                child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '- ผู้ป่วยติดเตียง',
@@ -244,7 +245,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
-                          primary: Color.fromARGB(255, 203, 41, 0)),
+                          primary: const Color.fromARGB(255, 203, 41, 0)),
                       onPressed: () {
                         confirmBook(widget.data['idb'], 74, context);
                         Navigator.of(context).pushAndRemoveUntil(
@@ -278,7 +279,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                       },
                       child: const Text(
                         'ยืนยัน',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
