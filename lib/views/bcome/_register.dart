@@ -1,3 +1,4 @@
+import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'next_register.dart';
@@ -67,241 +68,46 @@ class _Register extends State<PageOne> {
                   height: 20,
                 ),
                 //username
-                TextFormField(
+                TextFieldRegis(
+                  labeltext: 'Usename',
                   controller: username,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please fill you Usename in the blank';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {},
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                      labelText: 'Usename',
-                      labelStyle: const TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255)),
-                      helperText: 'Tyep you Usename for display',
-                      hintText: 'Usename',
-                      hintStyle: const TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255)),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      prefixIcon: const Icon(
-                        Icons.account_circle,
-                        size: 30,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      )),
+                  textEmpty: 'Please fill you Usename in the blank',
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 //รหัสผ่าน
-                TextFormField(
+                TextFieldRegis(
+                  labeltext: 'password',
                   controller: password,
-                  validator: (value) {
-                    if (value!.length < 6) {
-                      return 'Password More 6 Charactor';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {},
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'password',
-                    labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    helperText: 'Tyep you password more 6 Charactor',
-                    hintText: 'password',
-                    hintStyle: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    errorBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      size: 30,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                  ),
+                  textEmpty: 'Password More 6 Charactor',
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 //ยืนยันรหัสผ่าน
-                TextFormField(
+                TextFieldRegis(
+                  labeltext: 'confirm password',
                   controller: confirmpassword,
-                  validator: (value) {
-                    if (confirmpassword != password) {
-                      return 'password not same';
-                    }
-                  },
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {},
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'confirm password',
-                    labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    helperText: 'Tyep confirm password for display',
-                    hintText: 'confirm password',
-                    hintStyle: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    errorBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      size: 30,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                  ),
+                  textEmpty: 'password not same',
                 ),
+
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
-                      //name
-                      child: TextFormField(
+                      child: TextFieldRegis(
                         controller: name,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please fill you surname in the blank';
-                          } else {
-                            return null;
-                          }
-                        },
-
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 17),
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {},
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          helperText: 'Tyep you surname for display',
-                          hintText: 'Name',
-                          hintStyle: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          errorBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: const Color.fromARGB(255, 240, 4, 4)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          focusedBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255)),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: const Icon(
-                            Icons.person,
-                            size: 30,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
+                        textEmpty: 'Please fill you name in the blank',
+                        labeltext: 'Name',
                       ),
                     ),
                     const SizedBox(width: 20),
                     Expanded(
-                      //surname
-                      child: TextFormField(
+                      child: TextFieldRegis(
                         controller: surname,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please fill you surname in the blank';
-                          } else {
-                            return null;
-                          }
-                        },
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 17),
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {
-                          print(value);
-                        },
-                        maxLines: 1,
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          labelText: 'Last name',
-                          labelStyle: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          helperText: 'Tyep you name for display',
-                          hintText: 'Last name',
-                          hintStyle: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color:
-                                    const Color.fromARGB(255, 255, 255, 255)),
-                            borderRadius: const BorderRadius.all(
-                                const Radius.circular(10)),
-                          ),
-                          errorBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 240, 4, 4)),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10))),
-                          focusedBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: const Icon(
-                            Icons.person,
-                            size: 30,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
+                        textEmpty: 'Please fill you surname in the blank',
+                        labeltext: 'surname',
                       ),
                     ),
                   ],
