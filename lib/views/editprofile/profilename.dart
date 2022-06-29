@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../../configs/api.dart';
-import '../../models/textformfieldmodel2.dart';
+import '../../models/textformfieldmodel.dart';
 
 class ProfileName extends StatefulWidget {
   const ProfileName({Key? key, required this.data}) : super(key: key);
