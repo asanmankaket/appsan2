@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 import '../../configs/api.dart';
@@ -33,35 +35,62 @@ class _ProfileAddressState extends State<ProfileAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        title: const Text('เเก้ไขที่อยู่'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
-      body: SizedBox(
-          child: Column(children: [
-        const SizedBox(height: 15),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: pincode,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: SizedBox(
+              child: Column(children: [
+            const SizedBox(height: 15),
+            TextFormFieldModel2(
+              labelText: 'ตำบล',
+              controller: tambons,
+            ),
+            TextFormFieldModel2(
+              labelText: 'อำเภอ',
+              controller: amphures,
+            ),
+            TextFormFieldModel2(
+              labelText: 'จังหวัด',
+              controller: provinces,
+            ),
+            TextFormFieldModel2(
+              labelText: 'รหัสไปรษณี',
+              controller: pincode,
+            ),
+            TextFormFieldModel2(labelText: 'ภูมิภาค', controller: geographies),
+            ElevatedButton(
+              onPressed: () {
+                sendDataProfile5(tambons.text, amphures.text, provinces.text,
+                    geographies.text, pincode.text, idaddress, context);
+              },
+              child: Wrap(
+                children: <Widget>[
+                  Icon(
+                    Icons.save,
+                    color: Colors.white,
+                    size: 24.0,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("บันทึก",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                primary: Colors.purple,
+              ),
+            ),
+          ])),
         ),
-        TextFormFieldModel2(labelText: 'address', controller: geographies),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: provinces,
-        ),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: amphures,
-        ),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: tambons,
-        ),
-        TextButton(
-            onPressed: () {
-              sendDataProfile5(tambons.text, amphures.text, provinces.text,
-                  geographies.text, pincode.text, idaddress, context);
-            },
-            child: const Text('ยืนยันการแก้ไข'))
-      ])),
+      ),
     );
   }
 }

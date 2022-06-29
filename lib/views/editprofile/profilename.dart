@@ -86,18 +86,14 @@ class _ProfileNameState extends State<ProfileName> {
               dropdownValue = value;
             },
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 20),
           TextFormFieldModel2(
             labelText: 'ชื่อ',
             controller: name,
           ),
-          const SizedBox(height: 15),
           TextFormFieldModel2(
             labelText: 'นามสกุล',
             controller: surname,
-          ),
-          const SizedBox(
-            height: 15,
           ),
           ElevatedButton(
             onPressed: () {
@@ -126,8 +122,6 @@ class _ProfileNameState extends State<ProfileName> {
               primary: Colors.purple,
             ),
           ),
-
-          // TextButton(
         ])),
       ),
     );

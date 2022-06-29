@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:creative/configs/api.dart';
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
@@ -56,14 +58,36 @@ class _RepasswordState extends State<Repassword> {
               hintText: 'ยืนยันรหัสผ่านใหม่',
               labeltext: 'ยืนยันรหัสผ่านใหม่',
             ),
-            TextButton(
-                onPressed: () {
-                  if (newpassword.text == confirmpassword.text) {
+            SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () {
+                if (newpassword.text == confirmpassword.text) {
                     sendDataProfile1(
                         oldpassword.text, newpassword.text, context);
-                  }
-                },
-                child: const Text('บันทึกข้อมูล'))
+                }
+              },
+              child: Wrap(
+                children: <Widget>[
+                  Icon(
+                    Icons.save,
+                    color: Colors.white,
+                    size: 24.0,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("บันทึก",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                primary: Colors.purple,
+              ),
+            ),
           ],
         ),
       ),
