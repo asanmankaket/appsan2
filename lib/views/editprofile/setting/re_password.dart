@@ -40,19 +40,22 @@ class _RepasswordState extends State<Repassword> {
         child: Column(
           children: [
             TextRepassword(
-                controller: oldpassword,
-                hintText: 'รหัสผ่านเก่า',
-                labeltext: 'รหัสผ่านเก่า'),
+              controller: oldpassword,
+              hintText: 'รหัสผ่านเก่า',
+              labeltext: 'รหัสผ่านเก่า',
+            ),
             const SizedBox(height: 10),
             TextRepassword(
-                controller: newpassword,
-                hintText: 'รหัสผ่านใหม่',
-                labeltext: 'รหัสผ่านใหม่'),
+              controller: newpassword,
+              hintText: 'รหัสผ่านใหม่',
+              labeltext: 'รหัสผ่านใหม่',
+            ),
             const SizedBox(height: 10),
             TextRepassword(
-                controller: newpassword,
-                hintText: 'ยืนยันรหัสผ่านใหม่',
-                labeltext: 'ยืนยันรหัสผ่านใหม่'),
+              controller: newpassword,
+              hintText: 'ยืนยันรหัสผ่านใหม่',
+              labeltext: 'ยืนยันรหัสผ่านใหม่',
+            ),
             TextButton(
                 onPressed: () {
                   if (newpassword.text == confirmpassword.text) {
