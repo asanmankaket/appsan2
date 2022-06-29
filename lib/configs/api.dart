@@ -55,14 +55,11 @@ Future checkRegister(
       "fname": name,
       "lname": surname,
       "phone": phone,
-      // "birtday": picdate,
       "idcard": citizenid
     }),
   )
-      .then((req) async {
-    print(req.statusCode);
+      .then((req) {
     if (req.statusCode == 201) {
-      var data = jsonDecode(req.body);
       EasyLoading.showSuccess('Great Success!');
     } else {
       EasyLoading.showError('Failed with Error');
@@ -81,14 +78,16 @@ Future<dynamic> getdata(int idPage) async {
       .get(
     url,
   )
-      .then((req) async {
-    if (req.statusCode == 200) {
-      var data = jsonDecode(req.body);
-      return data;
-    } else {
-      return null;
-    }
-  });
+      .then(
+    (req) {
+      if (req.statusCode == 200) {
+        var data = jsonDecode(req.body);
+        return data;
+      } else {
+        return null;
+      }
+    },
+  );
 }
 
 Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
@@ -100,7 +99,7 @@ Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
     headers: headers,
     body: jsonEncode({"bstatus": statusbook}),
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
     } else {
@@ -120,7 +119,7 @@ Future<dynamic> getProfile() async {
     url,
     headers: headers,
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 200) {
       var data = jsonDecode(req.body);
       return data;
@@ -140,7 +139,7 @@ Future<dynamic> getProfilepassword() async {
     url,
     headers: headers,
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 200) {
       var data = jsonDecode(req.body);
       return data;
@@ -161,7 +160,7 @@ Future sendDataProfile1(oldpassword, password, context) async {
     headers: headers,
     body: jsonEncode({"oldpassword": oldpassword, "password": password}),
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
@@ -190,7 +189,7 @@ Future<dynamic> sendDataProfile2(
       "lname": surname,
     }),
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
       Navigator.of(context).pushAndRemoveUntil(
@@ -213,7 +212,7 @@ Future sendDataProfile4(phone, context) async {
     headers: headers,
     body: jsonEncode({"phone": phone}),
   )
-      .then((req) async {
+      .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
@@ -240,8 +239,7 @@ Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
       "pincode": pincode
     }),
   )
-      .then((req) async {
-    print(req.statusCode);
+      .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(

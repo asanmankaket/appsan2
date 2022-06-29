@@ -34,7 +34,7 @@ class _CancleBookingState extends State<CancleBooking> {
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: RefreshIndicator(
@@ -55,8 +55,8 @@ class _CancleBookingState extends State<CancleBooking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: Color.fromARGB(255, 186, 198, 201),
-                  shadowColor: Color.fromARGB(255, 99, 108, 110),
+                  color: const Color.fromARGB(255, 186, 198, 201),
+                  shadowColor: const Color.fromARGB(255, 99, 108, 110),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                   ),

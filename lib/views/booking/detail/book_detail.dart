@@ -39,9 +39,10 @@ class _BookdetailState extends State<Bookdetail> {
               ),
               Text(
                 '${widget.data['title']} ${widget.data['fname']} ${widget.data['lname']}',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 50),
                 child: Align(
@@ -92,11 +93,11 @@ class _BookdetailState extends State<Bookdetail> {
                 // borderRadius: BorderRadius.circular(10.0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 50),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
+                        child: Text(
                           'อายุ 68 ปี',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.normal),
@@ -109,7 +110,7 @@ class _BookdetailState extends State<Bookdetail> {
 
                     const Padding(
                       padding: EdgeInsets.only(left: 50),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'โรคประจำตัว',
@@ -123,9 +124,9 @@ class _BookdetailState extends State<Bookdetail> {
                     ),
                     const Padding(
                       padding: EdgeInsets.only(left: 70),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
+                        child: Text(
                           '- โรคหัวใจ',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.normal),
@@ -145,9 +146,9 @@ class _BookdetailState extends State<Bookdetail> {
                     ),
                     const Padding(
                       padding: EdgeInsets.only(left: 70),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
+                        child: Text(
                           '- โรคความดัน',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.normal),
@@ -158,12 +159,12 @@ class _BookdetailState extends State<Bookdetail> {
                       height: 10,
                     ),
                     const Padding(
-                      padding: const EdgeInsets.only(left: 50),
-                      child: const Align(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
+                        child: Text(
                           'ลักษณะผู้ป่วย',
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),

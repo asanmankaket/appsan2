@@ -1,8 +1,9 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 
 class Repassword extends StatefulWidget {
-  Repassword({Key? key}) : super(key: key);
+  const Repassword({Key? key}) : super(key: key);
 
   @override
   State<Repassword> createState() => _RepasswordState();
@@ -31,24 +32,27 @@ class _RepasswordState extends State<Repassword> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('เปลี่ยนรหัสผ่าน'),
-        backgroundColor: Color.fromARGB(255, 160, 42, 207),
+        title: const Text('เปลี่ยนรหัสผ่าน'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
         child: Column(
           children: [
-            TextFormField(
-              controller: oldpassword,
-            ),
-            SizedBox(height: 10),
-            TextFormField(
-              controller: newpassword,
-            ),
-            SizedBox(height: 10),
-            TextFormField(
-              controller: confirmpassword,
-            ),
+            TextRepassword(
+                controller: oldpassword,
+                hintText: 'รหัสผ่านเก่า',
+                labeltext: 'รหัสผ่านเก่า'),
+            const SizedBox(height: 10),
+            TextRepassword(
+                controller: newpassword,
+                hintText: 'รหัสผ่านใหม่',
+                labeltext: 'รหัสผ่านใหม่'),
+            const SizedBox(height: 10),
+            TextRepassword(
+                controller: newpassword,
+                hintText: 'ยืนยันรหัสผ่านใหม่',
+                labeltext: 'ยืนยันรหัสผ่านใหม่'),
             TextButton(
                 onPressed: () {
                   if (newpassword.text == confirmpassword.text) {
@@ -56,7 +60,7 @@ class _RepasswordState extends State<Repassword> {
                         oldpassword.text, newpassword.text, context);
                   }
                 },
-                child: Text('บันทึกข้อมูล'))
+                child: const Text('บันทึกข้อมูล'))
           ],
         ),
       ),

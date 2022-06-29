@@ -42,15 +42,15 @@ class _SideMenuState extends State<SideMenu> {
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 160, 42, 207),
+              color: const Color.fromARGB(255, 160, 42, 207),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
             ),
@@ -62,11 +62,12 @@ class _SideMenuState extends State<SideMenu> {
                     Navigator.push(
                         context,
                         MaterialPageRoute<void>(
-                            builder: (BuildContext context) => Profile()));
+                            builder: (BuildContext context) =>
+                                const Profile()));
                   }),
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage:
                             AssetImage('assets/images/profile.jpg'),
                         backgroundColor: Colors.white,
@@ -82,12 +83,12 @@ class _SideMenuState extends State<SideMenu> {
                                 ? Text(
                                     '''${data['username']}
 ${data['fname']}  ${data['lname']}''',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   )
-                                : Text(''),
+                                : const Text(''),
                           ],
                         ),
                       )
@@ -99,33 +100,33 @@ ${data['fname']}  ${data['lname']}''',
           ),
           Expanded(
             child: ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               children: [
                 routeItem(
                   context,
-                  Icon(Icons.house),
+                  const Icon(Icons.house),
                   //แก้ตรงนี้--------------------------------------------------------------------------------------
                   'หน้าหลัก',
                   '/MainPage',
                 ),
                 routeItem(
                   context,
-                  Icon(Icons.event_note),
+                  const Icon(Icons.event_note),
                   //แก้ตรงนี้--------------------------------------------------------------------------------------
                   'นัดหมาย',
                   '/book',
                 ),
                 routeItem(
                   context,
-                  Icon(Icons.settings_backup_restore),
+                  const Icon(Icons.settings_backup_restore),
                   //แก้ตรงนี้--------------------------------------------------------------------------------------
                   'ดูประวัติ',
                   '/Backup',
                 ),
                 routeItem(
                   context,
-                  Icon(Icons.map),
+                  const Icon(Icons.map),
                   //แก้ตรงนี้--------------------------------------------------------------------------------------
                   'Map',
                   '/Map',

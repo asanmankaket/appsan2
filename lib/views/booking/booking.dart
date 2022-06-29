@@ -35,7 +35,7 @@ class _BookingState extends State<Booking> {
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: RefreshIndicator(
@@ -56,13 +56,12 @@ class _BookingState extends State<Booking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color:  Colors.purple.shade200,
+                  color: Colors.purple.shade200,
                   shadowColor: const Color.fromARGB(255, 10, 91, 111),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                     side: BorderSide(
-                      color:
-                          Colors.black.withOpacity(0.5),
+                      color: Colors.black.withOpacity(0.5),
                       width: 1,
                     ),
                   ),

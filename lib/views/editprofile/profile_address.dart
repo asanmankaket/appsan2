@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../configs/api.dart';
-import '../../models/textformfieldmodel2.dart';
+import '../../models/textformfieldmodel.dart';
 
 class ProfileAddress extends StatefulWidget {
   const ProfileAddress({Key? key, required this.data}) : super(key: key);
@@ -16,7 +16,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController provinces = TextEditingController();
   TextEditingController geographies = TextEditingController();
   TextEditingController pincode = TextEditingController();
-  var idaddress;
+  dynamic idaddress;
   @override
   void initState() {
     super.initState();

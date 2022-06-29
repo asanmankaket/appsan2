@@ -21,25 +21,25 @@ class _ProfilePhoneState extends State<ProfilePhone> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('แก้ไขเบอร์โทรศัพท์'),
+        title: const Text('แก้ไขเบอร์โทรศัพท์'),
         backgroundColor: const Color.fromARGB(255, 45, 134, 156),
       ),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
           children: [
             TextField(
               controller: phone,
               maxLength: 10,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextButton(
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  backgroundColor: Color.fromARGB(255, 0, 142, 54),
+                  backgroundColor: const Color.fromARGB(255, 0, 142, 54),
                   primary: const Color.fromARGB(255, 255, 255, 255),
                   textStyle: const TextStyle(fontSize: 20),
                 ),

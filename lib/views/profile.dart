@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:age_calculator/age_calculator.dart';
-import 'package:creative/models/settingManu.dart';
+import 'package:creative/models/setting_menu.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
-import 'package:creative/views/editprofile/setting/Repassword.dart';
+import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -207,7 +207,6 @@ class _ProfileState extends State<Profile> {
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) =>
                                       Repassword()));
-                          print('Pressed');
                         }),
                     SizedBox(
                       height: 5,

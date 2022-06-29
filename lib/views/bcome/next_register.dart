@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../configs/api.dart';
@@ -60,105 +61,23 @@ class _Register extends State<NextRegister> {
           child: Form(
             key: _formkey,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(children: [
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
+                const SizedBox(height: 10),
+                TextFieldRegis(
+                  labeltext: 'เบอร์โทรศัพท์',
                   controller: phonenumber,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'โปรดกรอกหมายเลขโทรศัพท์';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'เบอร์โทรศัพท์',
-                    labelStyle: TextStyle(color: Colors.white),
-                    helperText: 'Tyep you Usename for display',
-                    hintText: 'เบอร์โทรศัพท์',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: Icon(
-                      Icons.add_call,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
+                  textEmpty: 'โปรดกรอกหมายเลขโทรศัพท์',
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
+                const SizedBox(height: 10),
+                TextFieldRegis(
+                  labeltext: 'หมายเลขบัตรประชาชน',
                   controller: citizenId,
-                  validator: (value) {
-                    if (value!.length < 6) {
-                      return 'โปรดกรอกหมายเลขบัตรประชาชน';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    labelText: 'หมายเลขบัตรประชาชน',
-                    labelStyle: TextStyle(color: Colors.white),
-                    helperText: 'Tyep you password more 6 Charactor',
-                    hintText: 'หมายเลขบัตรประชาชน',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: Icon(
-                      Icons.assignment_ind,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
+                  textEmpty: 'โปรดกรอกหมายเลขบัตรประชาชน',
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

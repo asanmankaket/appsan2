@@ -47,8 +47,9 @@ class _GoogleMapsState extends State<GoogleMaps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(  title: Text('Map'),
-      backgroundColor: Color.fromARGB(255, 160, 42, 207),
+      appBar: AppBar(
+        title: Text('Map'),
+        backgroundColor: Color.fromARGB(255, 160, 42, 207),
       ),
       body: GoogleMap(
         mapType: MapType.hybrid,

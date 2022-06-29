@@ -10,12 +10,12 @@ class BackUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ประวัติย้อนหลัง'),
+        title: const Text('ประวัติย้อนหลัง'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Column(children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -27,7 +27,7 @@ class BackUp extends StatelessWidget {
                           builder: (BuildContext context) =>
                               const FinishBooking()));
                 }),
-                child: Text('ดูประวัติที่สำเร็จ'),
+                child: const Text('ดูประวัติที่สำเร็จ'),
                 style: TextButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 160, 42, 207),
                     primary: Colors.white),
@@ -52,7 +52,7 @@ class BackUp extends StatelessWidget {
           ),
         ),
       ]),
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
     );
   }
 }
