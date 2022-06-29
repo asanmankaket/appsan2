@@ -148,10 +148,43 @@ class _TextFormFieldModel2State extends State<TextFormFieldModel2> {
 }
 
 class TextRepassword extends StatelessWidget {
-  const TextRepassword({Key? key, @required this.controller}) : super(key: key);
+  const TextRepassword(
+      {Key? key,
+      @required this.controller,
+      @required this.hintText,
+      @required this.labeltext})
+      : super(key: key);
   final TextEditingController? controller;
+  final String? hintText;
+  final String? labeltext;
   @override
   Widget build(BuildContext context) {
-    return TextFormField();
+    bool hidepassword = true;
+    return TextField(
+        controller: controller,
+        obscureText: hidepassword,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.purple.shade100,
+          labelText: labeltext,
+          hintText: hintText,
+          hintStyle: const TextStyle(color: Colors.purple),
+          enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.purple),
+              borderRadius: BorderRadius.all(Radius.circular(50))),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.purple, width: 2.5),
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+          ),
+          // suffixIcon: IconButton(
+          //     onPressed: (() {
+          //       hidepassword = !hidepassword;
+          //     }),
+          //     icon: Icon(
+          //       hidepassword ? Icons.visibility : Icons.visibility_off,
+          //       size: 30,
+          //       color: Colors.purple,
+          //     )),
+        ));
   }
 }

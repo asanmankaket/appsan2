@@ -1,4 +1,5 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 
 class Repassword extends StatefulWidget {
@@ -38,17 +39,20 @@ class _RepasswordState extends State<Repassword> {
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
         child: Column(
           children: [
-            TextFormField(
-              controller: oldpassword,
-            ),
+            TextRepassword(
+                controller: oldpassword,
+                hintText: 'รหัสผ่านเก่า',
+                labeltext: 'รหัสผ่านเก่า'),
             const SizedBox(height: 10),
-            TextFormField(
-              controller: newpassword,
-            ),
+            TextRepassword(
+                controller: newpassword,
+                hintText: 'รหัสผ่านใหม่',
+                labeltext: 'รหัสผ่านใหม่'),
             const SizedBox(height: 10),
-            TextFormField(
-              controller: confirmpassword,
-            ),
+            TextRepassword(
+                controller: newpassword,
+                hintText: 'ยืนยันรหัสผ่านใหม่',
+                labeltext: 'ยืนยันรหัสผ่านใหม่'),
             TextButton(
                 onPressed: () {
                   if (newpassword.text == confirmpassword.text) {
