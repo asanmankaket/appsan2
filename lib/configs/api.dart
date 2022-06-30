@@ -63,8 +63,6 @@ Future checkRegister(
     }),
   )
       .then((req) async {
-    print(req.body);
-    print(req.statusCode);
     if (req.statusCode == 201) {
       final prefs = await SharedPreferences.getInstance();
       var data = jsonDecode(req.body);
@@ -238,9 +236,11 @@ Future sendDataProfile4(phone, context) async {
   });
 }
 
-Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
-    idaddress, context) async {
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idaddress');
+Future sendDataProfile5(tambons, amphures, provinces, pincode, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idUser');
   http
       .put(
     url,
@@ -249,16 +249,13 @@ Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
       "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
-      "geographies": geographies,
       "pincode": pincode
     }),
   )
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Profile()),
-          (Route<dynamic> route) => false);
+      Navigator.pop(context);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -282,33 +279,6 @@ Future sendDataProfile6(birtday, context) async {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const Profile()),
           (Route<dynamic> route) => false);
-    } else {
-      EasyLoading.showError('Failed with Error');
-    }
-  });
-}
-
-Future addDataProfile(tambons, amphures, provinces, geographies, pincode,
-    idaddress, context) async {
-  EasyLoading.show(status: 'loading...');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor');
-  http
-      .post(
-    url,
-    headers: headers,
-    body: jsonEncode({
-      "tambons": tambons,
-      "amphures": amphures,
-      "provinces": provinces,
-      "geographies": geographies,
-      "pincode": pincode
-    }),
-  )
-      .then((req) async {
-    print(req.body);
-    print(req.statusCode);
-    if (req.statusCode == 201) {
-      EasyLoading.showSuccess('Great Success!');
     } else {
       EasyLoading.showError('Failed with Error');
     }
