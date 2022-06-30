@@ -39,19 +39,22 @@ class TextFormFieldModel extends StatelessWidget {
 }
 
 class TextFieldRegis extends StatelessWidget {
-  const TextFieldRegis({
-    Key? key,
-    @required this.labeltext,
-    @required this.controller,
-    @required this.textEmpty,
-  }) : super(key: key);
+  const TextFieldRegis(
+      {Key? key,
+      @required this.labeltext,
+      @required this.controller,
+      @required this.textEmpty,
+      this.maxlength})
+      : super(key: key);
   final String? textEmpty;
   final String? labeltext;
   final TextEditingController? controller;
+  final int? maxlength;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxlength,
       controller: controller,
       validator: (value) {
         if (value!.isEmpty) {
@@ -108,41 +111,48 @@ class TextFormFieldModel2 extends StatefulWidget {
 class _TextFormFieldModel2State extends State<TextFormFieldModel2> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return widget.textError;
-        } else {
-          return null;
-        }
-      },
-      style: const TextStyle(
-        color: Color.fromARGB(255, 28, 28, 28),
-        fontSize: 16,
-      ),
-      decoration: InputDecoration(
-        labelText: widget.labelText,
-        hintText: widget.hintText,
-        labelStyle: const TextStyle(color: Colors.black),
-        hintStyle: const TextStyle(color: Colors.black),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
+    return Column(
+      children: [
+        TextFormField(
+          controller: widget.controller,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return widget.textError;
+            } else {
+              return null;
+            }
+          },
+          style: const TextStyle(
+            color: Color.fromARGB(255, 28, 28, 28),
+            fontSize: 16,
+          ),
+          decoration: InputDecoration(
+            labelText: widget.labelText,
+            hintText: widget.hintText,
+            labelStyle: const TextStyle(color: Colors.black),
+            hintStyle: const TextStyle(color: Colors.black),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.pink),
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
           ),
         ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.pink),
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-        ),
-      ),
+        SizedBox(
+          height: 20,
+        )
+      ],
     );
   }
 }

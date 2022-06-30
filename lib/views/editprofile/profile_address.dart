@@ -21,12 +21,24 @@ class _ProfileAddressState extends State<ProfileAddress> {
   void initState() {
     super.initState();
 
-    tambons.text = widget.data['tambons'];
-    amphures.text = widget.data['amphures'];
-    provinces.text = widget.data['provinces'];
-    geographies.text = widget.data['geographies'];
-    pincode.text = widget.data['pincode'];
-    idaddress = widget.data['id_am'];
+    widget.data['tambons'] != null
+        ? tambons.text = widget.data['tambons']
+        : tambons.text = "";
+    widget.data['amphures'] != null
+        ? tambons.text = widget.data['amphures']
+        : tambons.text = "";
+    widget.data['provinces'] != null
+        ? tambons.text = widget.data['provinces']
+        : tambons.text = "";
+    widget.data['geographies'] != null
+        ? tambons.text = widget.data['geographies']
+        : tambons.text = "";
+    widget.data['pincode'] != null
+        ? tambons.text = widget.data['pincode']
+        : tambons.text = "";
+    widget.data['id_am'] != null
+        ? tambons.text = widget.data['id_am']
+        : tambons.text = "";
   }
 
   @override
@@ -35,33 +47,51 @@ class _ProfileAddressState extends State<ProfileAddress> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 45, 134, 156),
       ),
-      body: SizedBox(
-          child: Column(children: [
-        const SizedBox(height: 15),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: pincode,
-        ),
-        TextFormFieldModel2(labelText: 'address', controller: geographies),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: provinces,
-        ),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: amphures,
-        ),
-        TextFormFieldModel2(
-          labelText: 'address',
-          controller: tambons,
-        ),
-        TextButton(
-            onPressed: () {
-              sendDataProfile5(tambons.text, amphures.text, provinces.text,
-                  geographies.text, pincode.text, idaddress, context);
-            },
-            child: const Text('ยืนยันการแก้ไข'))
-      ])),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SizedBox(
+            child: Column(children: [
+          const SizedBox(height: 15),
+          TextFormFieldModel2(
+            labelText: 'รหัสไปรษณี',
+            controller: pincode,
+          ),
+          TextFormFieldModel2(labelText: 'address', controller: geographies),
+          TextFormFieldModel2(
+            labelText: 'จังหวัด',
+            controller: provinces,
+          ),
+          TextFormFieldModel2(
+            labelText: 'อำเภอ',
+            controller: amphures,
+          ),
+          TextFormFieldModel2(
+            labelText: 'ตำบล',
+            controller: tambons,
+          ),
+          TextButton(
+              onPressed: () {
+                widget.data['id_am']
+                    ? sendDataProfile5(
+                        tambons.text,
+                        amphures.text,
+                        provinces.text,
+                        geographies.text,
+                        pincode.text,
+                        idaddress,
+                        context)
+                    : addDataProfile(
+                        tambons.text,
+                        amphures.text,
+                        provinces.text,
+                        geographies.text,
+                        pincode.text,
+                        idaddress,
+                        context);
+              },
+              child: const Text('ยืนยันการแก้ไข'))
+        ])),
+      ),
     );
   }
 }

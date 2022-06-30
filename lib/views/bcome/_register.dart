@@ -19,23 +19,20 @@ class _Register extends State<PageOne> {
   TextEditingController picdate = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
+  late DateTime datenow = DateTime.now();
 
-  DateTime? datenow = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    void newDate() async {
+    Future newDate() async {
       DateTime? date = await showDatePicker(
           context: context,
-          initialDate: datenow!,
-          firstDate: DateTime(DateTime.now().year, DateTime.now().month, 1),
-          lastDate: DateTime(DateTime.now().year, DateTime.now().month, 30));
-      if (date != null) {
-        setState(() {
-          datenow = date;
-          picdate.text = DateFormat("dd/MM/yyyy").format(date);
-          DateFormat("dd/MM/yyyy").format(date);
-        });
-      }
+          initialDate: datenow,
+          firstDate: DateTime(DateTime.now().year - 70),
+          lastDate: DateTime(DateTime.now().year, DateTime.now().day));
+
+      date != null
+          ? picdate.text = DateFormat("yyyy-MM-dd").format(date)
+          : picdate.text = "";
     }
 
     return Scaffold(
@@ -113,6 +110,7 @@ class _Register extends State<PageOne> {
                   ],
                 ),
                 const SizedBox(height: 10),
+
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -127,11 +125,9 @@ class _Register extends State<PageOne> {
                     newDate();
                   },
                   style: const TextStyle(
-                      color: Color.fromARGB(255, 244, 4, 4), fontSize: 17),
+                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
                   keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                    print(value);
-                  },
+
                   // ignore: prefer_const_constructors
                   decoration: InputDecoration(
                     labelText: 'date',
@@ -168,6 +164,7 @@ class _Register extends State<PageOne> {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
                     }
+                    print(picdate.text);
                     Navigator.push(
                         context,
                         MaterialPageRoute<void>(
