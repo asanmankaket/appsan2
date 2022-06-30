@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:numberpicker/numberpicker.dart';
 import '../../configs/api.dart';
 
 class NextRegister extends StatefulWidget {
@@ -23,26 +24,34 @@ class _Register extends State<NextRegister> {
   TextEditingController phonenumber = TextEditingController();
   TextEditingController latilongti = TextEditingController();
   TextEditingController skill = TextEditingController();
-
+  TextEditingController rate = TextEditingController();
+  late int _currentIntValue = 32;
   final _formkey = GlobalKey<FormState>();
 
   File? file;
 
   DateTime? datenow = DateTime.now();
 
-  String? dropdownValue = 'address';
+  String? dropdownValue;
   List<DropdownMenuItem<String>>? items = [
     const DropdownMenuItem(
-      value: 'value',
+      value: 'เด็ก',
       child: Text(
-        'สงขลา',
+        'เด็ก',
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
     const DropdownMenuItem(
-      value: 'address',
+      value: 'ผู้ป่วย',
       child: Text(
-        'สตูล',
+        'ผู้ป่วย',
+        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+      ),
+    ),
+    const DropdownMenuItem(
+      value: 'ผู้สูงอายุ',
+      child: Text(
+        'ผู้สูงอายุ',
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
@@ -67,12 +76,14 @@ class _Register extends State<NextRegister> {
               child: Column(children: [
                 const SizedBox(height: 10),
                 TextFieldRegis(
+                  maxlength: 10,
                   labeltext: 'เบอร์โทรศัพท์',
                   controller: phonenumber,
                   textEmpty: 'โปรดกรอกหมายเลขโทรศัพท์',
                 ),
                 const SizedBox(height: 10),
                 TextFieldRegis(
+                  maxlength: 13,
                   labeltext: 'หมายเลขบัตรประชาชน',
                   controller: citizenId,
                   textEmpty: 'โปรดกรอกหมายเลขบัตรประชาชน',
@@ -107,35 +118,25 @@ class _Register extends State<NextRegister> {
                 Row(
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: latilongti,
-                        validator: (value) {
-                          if (value!.length < 6) {
-                            return 'กรุณาตรวจสอบตำเเหน่งของท่าน';
-                          } else {
-                            return null;
-                          }
-                        },
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 17),
-                        keyboardType: TextInputType.text,
+                      child: DropdownButtonFormField<String>(
+                        value: dropdownValue,
+                        items: items,
                         onChanged: (value) {
-                          print(value);
+                          setState(() {
+                            dropdownValue = value;
+                          });
                         },
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          labelText: 'ตำเเหน่ง',
-                          labelStyle: TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          labelText: 'ประเภทการทำงาน',
                           helperText: 'Tyep you password more 6 Charactor',
-                          hintText: 'ตำเเหน่ง',
-                          hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
+                          labelStyle: TextStyle(color: Colors.white),
+                          hintStyle: TextStyle(color: Colors.white),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color.fromARGB(255, 240, 4, 4)),
@@ -143,84 +144,53 @@ class _Register extends State<NextRegister> {
                                   BorderRadius.all(Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255)),
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  width: 1),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: Icon(
-                            Icons.badge,
-                            size: 30,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        controller: skill,
-                        validator: (value) {
-                          if (value!.length < 6) {
-                            return 'กรุณากรอกทักษะของท่านให้เรียบร้อย';
-                          } else {
-                            return null;
-                          }
-                        },
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 17),
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {
-                          print(value);
-                        },
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          labelText: 'ทักษะ',
-                          labelStyle: TextStyle(color: Colors.white),
-                          helperText: 'Tyep you password more 6 Charactor',
-                          hintText: 'ทักษะ',
-                          hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 240, 4, 4)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 255, 255, 255)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          prefixIcon: Icon(
-                            Icons.handyman,
-                            size: 30,
-                            color: Colors.white,
-                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                DropdownButtonFormField<String>(
-                  value: dropdownValue,
-                  items: items,
-                  onChanged: (value) {
-                    print(value);
-                    setState(() {
-                      dropdownValue = value;
-                    });
-                  },
+                TextFormField(
+                  readOnly: true,
+                  controller: rate,
+                  onTap: (() {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: const Text('ค่าแรงต่อชั่วโมงโดยเฉลี่ย'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text('32 บาทต่อชั่วโมง'),
+                                  NumberPicker(
+                                    value: _currentIntValue,
+                                    minValue: 0,
+                                    maxValue: 100,
+                                    step: 1,
+                                    haptics: true,
+                                    onChanged: (value) => setState(() {
+                                      _currentIntValue = value;
+                                    }),
+                                  ),
+                                  Text('Current value:' +
+                                      _currentIntValue.toString()),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context,
+                                            rate.text =
+                                                _currentIntValue.toString());
+                                      },
+                                      child: const Text('ยืนยัน'))
+                                ],
+                              ),
+                            ));
+                  }),
                   decoration: const InputDecoration(
-                    labelText: 'สถานที่',
+                    labelText: 'ค่าแรงต่อชั่วโมง',
                     helperText: 'Tyep you password more 6 Charactor',
                     labelStyle: TextStyle(color: Colors.white),
                     hintStyle: TextStyle(color: Colors.white),
@@ -238,29 +208,18 @@ class _Register extends State<NextRegister> {
                             color: Color.fromARGB(255, 255, 255, 255),
                             width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    prefixIcon: Icon(
-                      Icons.location_on,
-                      size: 30,
-                      color: Colors.white,
-                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
+                const SizedBox(
+                  height: 20,
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
                     }
+                    print(dropdownValue);
 
-                    // Navigator.push(
-                    // context,
-                    // MaterialPageRoute<void>(
-                    //     builder: (BuildContext context) => NextRegister()));
-
-                    print('สมัครสมาชิก');
-                    print(widget.username);
                     checkRegister(
                         widget.username,
                         widget.password,
@@ -269,6 +228,8 @@ class _Register extends State<NextRegister> {
                         widget.picdate,
                         phonenumber.text,
                         citizenId.text,
+                        "ผู้ป่วย",
+                        rate.text,
                         context);
 
                     // await checkRegister(username.text, password.text, name.text,

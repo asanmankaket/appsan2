@@ -39,19 +39,22 @@ class TextFormFieldModel extends StatelessWidget {
 }
 
 class TextFieldRegis extends StatelessWidget {
-  const TextFieldRegis({
-    Key? key,
-    @required this.labeltext,
-    @required this.controller,
-    @required this.textEmpty,
-  }) : super(key: key);
+  const TextFieldRegis(
+      {Key? key,
+      @required this.labeltext,
+      @required this.controller,
+      @required this.textEmpty,
+      this.maxlength})
+      : super(key: key);
   final String? textEmpty;
   final String? labeltext;
   final TextEditingController? controller;
+  final int? maxlength;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxlength,
       controller: controller,
       validator: (value) {
         if (value!.isEmpty) {
@@ -146,7 +149,9 @@ class _TextFormFieldModel2State extends State<TextFormFieldModel2> {
             ),
           ),
         ),
-        SizedBox(height: 20,)
+        SizedBox(
+          height: 20,
+        )
       ],
     );
   }

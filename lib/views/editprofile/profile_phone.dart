@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import '../../configs/api.dart';
 
@@ -24,7 +22,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('แก้ไขเบอร์โทรศัพท์'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
       ),
       body: Container(
         padding: const EdgeInsets.all(30),
@@ -35,32 +33,22 @@ class _ProfilePhoneState extends State<ProfilePhone> {
               maxLength: 10,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                 sendDataProfile4(phone.text, context);
-              },
-              child: Wrap(
-                children: <Widget>[
-                  Icon(
-                    Icons.save,
-                    color: Colors.white,
-                    size: 24.0,
+            TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("บันทึก",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                primary: Colors.purple,
-              ),
-            ),
+                  backgroundColor: const Color.fromARGB(255, 0, 142, 54),
+                  primary: const Color.fromARGB(255, 255, 255, 255),
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  sendDataProfile4(phone.text, context);
+                },
+                child: const Text(
+                  'ยืนยัน',
+                ))
           ],
         ),
       ),

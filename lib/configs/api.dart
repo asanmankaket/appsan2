@@ -42,6 +42,8 @@ Future checkRegister(
     String picdate,
     String phone,
     String citizenid,
+    String type,
+    String rate,
     context) async {
   EasyLoading.show(status: 'loading...');
   Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor');
@@ -55,12 +57,22 @@ Future checkRegister(
       "fname": name,
       "lname": surname,
       "phone": phone,
-      "idcard": citizenid
+      "idcard": citizenid,
+      "type_id": type,
+      "rate": rate,
     }),
   )
-      .then((req) {
+      .then((req) async {
     if (req.statusCode == 201) {
+      final prefs = await SharedPreferences.getInstance();
+      var data = jsonDecode(req.body);
+      prefs.setString('token', data['token']);
+      prefs.setInt('idm', data['id']);
+      headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const MainPage()),
+          (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -205,7 +217,7 @@ Future sendDataProfile4(phone, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/customer/p4/$idUser');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p4/$idUser');
   http
       .put(
     url,
@@ -224,9 +236,11 @@ Future sendDataProfile4(phone, context) async {
   });
 }
 
-Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
-    idaddress, context) async {
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idaddress');
+Future sendDataProfile5(tambons, amphures, provinces, pincode, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idUser');
   http
       .put(
     url,
@@ -235,16 +249,13 @@ Future sendDataProfile5(tambons, amphures, provinces, geographies, pincode,
       "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
-      "geographies": geographies,
-      "pincode": pincode
+      "pincode": pincode,
     }),
   )
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Profile()),
-          (Route<dynamic> route) => false);
+      Navigator.pop(context);
     } else {
       EasyLoading.showError('Failed with Error');
     }

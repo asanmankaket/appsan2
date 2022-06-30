@@ -91,10 +91,12 @@ class _ProfileNameState extends State<ProfileName> {
             labelText: 'ชื่อ',
             controller: name,
           ),
+
           TextFormFieldModel2(
             labelText: 'นามสกุล',
             controller: surname,
           ),
+
           ElevatedButton(
             onPressed: () {
               sendDataProfile2(
@@ -122,6 +124,8 @@ class _ProfileNameState extends State<ProfileName> {
               primary: Colors.purple,
             ),
           ),
+
+          // TextButton(
         ])),
       ),
     );
