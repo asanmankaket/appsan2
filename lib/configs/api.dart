@@ -249,7 +249,7 @@ Future sendDataProfile5(tambons, amphures, provinces, pincode, context) async {
       "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
-      "pincode": pincode
+      "pincode": pincode,
     }),
   )
       .then((req) {
