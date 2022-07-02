@@ -1,4 +1,6 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/button_sidemenu.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/views/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,13 +60,6 @@ class _SideMenuState extends State<SideMenu> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: GestureDetector(
-                  onTap: (() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                const Profile()));
-                  }),
                   child: Row(
                     children: [
                       const CircleAvatar(
@@ -88,7 +83,7 @@ ${data['fname']}  ${data['lname']}''',
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   )
-                                : const Text(''),
+                                : const CupertinoActivityIndicator(),
                           ],
                         ),
                       )
@@ -102,35 +97,48 @@ ${data['fname']}  ${data['lname']}''',
             child: ListView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                routeItem(
-                  context,
-                  const Icon(Icons.house),
-                  //แก้ตรงนี้--------------------------------------------------------------------------------------
-                  'หน้าหลัก',
-                  '/MainPage',
-                ),
-                routeItem(
-                  context,
-                  const Icon(Icons.event_note),
-                  //แก้ตรงนี้--------------------------------------------------------------------------------------
-                  'นัดหมาย',
-                  '/book',
-                ),
-                routeItem(
-                  context,
-                  const Icon(Icons.settings_backup_restore),
-                  //แก้ตรงนี้--------------------------------------------------------------------------------------
-                  'ดูประวัติ',
-                  '/Backup',
-                ),
-                routeItem(
-                  context,
-                  const Icon(Icons.map),
-                  //แก้ตรงนี้--------------------------------------------------------------------------------------
-                  'Map',
-                  '/Map',
-                ),
+                const ButtonSidemenu(
+                    next: Icons.house, text: "หน้าหลัก", page: 0),
+                const SizedBox(height: 15),
+                const ButtonSidemenu(
+                    next: Icons.event_note, text: "นัดหมาย", page: 1),
+                const SizedBox(height: 15),
+                const ButtonSidemenu(
+                    next: Icons.settings_backup_restore,
+                    text: "ดูประวัติ",
+                    page: 2),
+                const SizedBox(height: 15),
+
+                // routeItem(
+                //   context,
+                //   const Icon(Icons.house),
+                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
+                //   'หน้าหลัก',
+                //   '/MainPage',
+                // ),
+                // routeItem(
+                //   context,
+                //   const Icon(Icons.event_note),
+                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
+                //   'นัดหมาย',
+                //   '/book',
+                // ),
+                // routeItem(
+                //   context,
+                //   const Icon(Icons.settings_backup_restore),
+                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
+                //   'ดูประวัติ',
+                //   '/Backup',
+                // ),
+                // routeItem(
+                //   context,
+                //   const Icon(Icons.map),
+                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
+                //   'Map',
+                //   '/Map',
+                // ),
               ],
             ),
           ),

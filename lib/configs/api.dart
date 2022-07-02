@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:creative/views/booking/mainpage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../views/battom_main.dart';
 import '../views/profile.dart';
 
 Future checkLogin(String username, String password, context) async {
@@ -26,7 +27,7 @@ Future checkLogin(String username, String password, context) async {
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const MainPage()),
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -71,7 +72,7 @@ Future checkRegister(
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const MainPage()),
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');

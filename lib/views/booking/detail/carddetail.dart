@@ -1,7 +1,9 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/button_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'Map.dart';
+import '../../battom_main.dart';
 import '../booking.dart';
 
 class Carddetail extends StatefulWidget {
@@ -250,7 +252,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                         confirmBook(widget.data['idb'], 74, context);
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const Booking()),
+                                builder: (context) => BottomBarMain(index: 1)),
                             (Route<dynamic> route) => false);
                       },
                       child: const Text(
@@ -274,7 +276,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                         confirmBook(widget.data['idb'], 72, context);
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const Booking()),
+                                builder: (context) => BottomBarMain(index: 1)),
                             (Route<dynamic> route) => false);
                       },
                       child: const Text(

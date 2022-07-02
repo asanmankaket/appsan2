@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../configs/api.dart';
+import '../battom_main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -26,8 +27,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getString('token') != null) {
       headers?['Authorization'] = "bearer ${prefs.getString('token')}";
-      Navigator.pushNamedAndRemoveUntil(
-          context, "/MainPage", (Route<dynamic> route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          (Route<dynamic> route) => false);
     }
   }
 
