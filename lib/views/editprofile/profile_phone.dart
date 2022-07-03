@@ -14,7 +14,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
   @override
   void initState() {
     super.initState();
-    phone.text = widget.data['phone'];
+    phone.text = widget.data['men_phone'];
   }
 
   @override

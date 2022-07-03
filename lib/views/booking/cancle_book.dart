@@ -20,7 +20,7 @@ class _CancleBookingState extends State<CancleBooking> {
   }
 
   startApi() async {
-    dynamic item = await getdata(74); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata("ยกเลิก"); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });
@@ -84,14 +84,14 @@ class _CancleBookingState extends State<CancleBooking> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
+                                      '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
                                       style: const TextStyle(fontSize: 15),
                                     ),
                                     Text(
                                       'เริ่ม : ' +
                                           DateFormat('dd-mm-yy HH:mm').format(
                                               DateTime.parse(
-                                                  '${data[i]['start_time']}')),
+                                                  '${data[i]['book_starttime']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),
@@ -100,7 +100,7 @@ class _CancleBookingState extends State<CancleBooking> {
                                       'ถึง :  ' +
                                           DateFormat('dd-mm-yy HH:mm').format(
                                               DateTime.parse(
-                                                  '${data[i]['end_time']}')),
+                                                  '${data[i]['book_endtime']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),

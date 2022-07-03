@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   startApi() async {
-    dynamic item = await getdata(71); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata("รอยืนยัน"); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });
@@ -86,14 +86,14 @@ class _MainPageState extends State<MainPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
+                                      '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
                                       style: const TextStyle(fontSize: 15),
                                     ),
                                     Text(
                                       'เริ่ม : ' +
                                           DateFormat('dd-mm-yy KK:MM').format(
                                               DateTime.parse(
-                                                  '${data[i]['start_time']}')),
+                                                  '${data[i]['book_starttime']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),
@@ -102,7 +102,7 @@ class _MainPageState extends State<MainPage> {
                                       'ถึง :  ' +
                                           DateFormat('dd-mm-yy KK:MM').format(
                                               DateTime.parse(
-                                                  '${data[i]['end_time']}')),
+                                                  '${data[i]['book_endtime']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),

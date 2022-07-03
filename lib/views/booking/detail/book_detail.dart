@@ -38,7 +38,7 @@ class _BookdetailState extends State<Bookdetail> {
                 height: 15,
               ),
               Text(
-                '${widget.data['title']} ${widget.data['fname']} ${widget.data['lname']}',
+                '${widget.data['cust_title']} ${widget.data['cust_fname']} ${widget.data['cust_lname']}',
                 style:
                     const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
@@ -65,8 +65,8 @@ class _BookdetailState extends State<Bookdetail> {
                     children: [
                       Text(
                         'วันที่ : ' +
-                            DateFormat('dd-mm-yy KK:MM').format(
-                                DateTime.parse('${widget.data['start_time']}')),
+                            DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
+                                '${widget.data['book_starttime']}')),
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -76,8 +76,8 @@ class _BookdetailState extends State<Bookdetail> {
                       ),
                       Text(
                         'เวลาตั้งเเต่ :  ' +
-                            DateFormat('dd-mm-yy KK:MM').format(
-                                DateTime.parse('${widget.data['end_time']}')),
+                            DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
+                                '${widget.data['book_endtime']}')),
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -210,7 +210,7 @@ class _BookdetailState extends State<Bookdetail> {
                         size: 30,
                       ),
                       Text(
-                        '   ${widget.data['phone']}',
+                        '   ${widget.data['cust_phone']}',
                         style: const TextStyle(fontSize: 18),
                       ),
                     ],

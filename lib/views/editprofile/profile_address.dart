@@ -21,17 +21,17 @@ class _ProfileAddressState extends State<ProfileAddress> {
   void initState() {
     super.initState();
 
-    widget.data['tambons'] != null
-        ? tambons.text = widget.data['tambons']
+    widget.data['men_tambons'] != null
+        ? tambons.text = widget.data['men_tambons']
         : tambons.text = "";
-    widget.data['amphures'] != null
-        ? amphures.text = widget.data['amphures']
+    widget.data['men_amphures'] != null
+        ? amphures.text = widget.data['men_amphures']
         : amphures.text = "";
-    widget.data['provinces'] != null
-        ? provinces.text = widget.data['provinces']
+    widget.data['men_provinces'] != null
+        ? provinces.text = widget.data['men_provinces']
         : provinces.text = "";
-    widget.data['pincode'] != null
-        ? pincode.text = widget.data['pincode']
+    widget.data['men_pincode'] != null
+        ? pincode.text = widget.data['men_pincode']
         : pincode.text = "";
   }
 

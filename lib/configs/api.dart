@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:creative/configs/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:creative/views/booking/mainpage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/battom_main.dart';
@@ -23,7 +22,7 @@ Future checkLogin(String username, String password, context) async {
       final prefs = await SharedPreferences.getInstance();
       var data = jsonDecode(req.body);
       prefs.setString('token', data['token']);
-      prefs.setInt('idm', data['idm']);
+      prefs.setInt('idm', data['men_id']);
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
@@ -80,12 +79,12 @@ Future checkRegister(
   });
 }
 
-Future<dynamic> getdata(int idPage) async {
+Future<dynamic> getdata(String idPage) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/booking/cust/$idPage/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.92.71:3200/api/booking/cust/"$idPage"/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
 //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .get(
@@ -103,7 +102,7 @@ Future<dynamic> getdata(int idPage) async {
   );
 }
 
-Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
+Future<dynamic> confirmBook(dynamic idb, String statusbook, context) async {
   Uri url = Uri.parse(
       'http://206.189.92.71:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http

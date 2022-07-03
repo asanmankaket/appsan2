@@ -22,7 +22,7 @@ class _FinishBookingState extends State<FinishBooking> {
   }
 
   startApi() async {
-    dynamic item = await getdata(73); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata("สำเร็จ"); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });
@@ -86,19 +86,19 @@ class _FinishBookingState extends State<FinishBooking> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${data[i]['title']} ${data[i]['fname']} ${data[i]['lname']}',
+                                      '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
                                       style: const TextStyle(fontSize: 15),
                                     ),
                                     const SizedBox(height: 5),
                                     Text('เริ่ม : ' +
                                         DateFormat('dd-mm-yy' 'HH:mm').format(
                                             DateTime.parse(
-                                                '${data[i]['start_time']}'))),
+                                                '${data[i]['book_starttime']}'))),
                                     const SizedBox(height: 5),
                                     Text('สิ้นสุด : ' +
                                         DateFormat('dd-mm-yy' 'HH:mm').format(
                                             DateTime.parse(
-                                                '${data[i]['end_time']}'))),
+                                                '${data[i]['book_endtime']}'))),
                                   ],
                                 ),
                               ),
