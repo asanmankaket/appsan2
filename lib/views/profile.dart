@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:age_calculator/age_calculator.dart';
-import 'package:creative/models/setting_menu.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/sidemenu.dart';
@@ -115,7 +113,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   ProfileMenu(
                     text:
-                        '${data['men_tambons']} ${data['men_amphures']} ${data['men_provinces']} ${data['men_pincode']}',
+                        '${data['men_tambons']} ${data['men_amphures']} ${data['men_provinces']}',
                     press: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(

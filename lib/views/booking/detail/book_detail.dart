@@ -11,6 +11,19 @@ class Bookdetail extends StatefulWidget {
 
 class _BookdetailState extends State<Bookdetail> {
   get children => null;
+  TextEditingController type = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.data['book_type'] == '0'
+        ? type.text = "เด็ก"
+        : widget.data['book_type'] == '1'
+            ? type.text = "ผู้ป่วย"
+            : widget.data['book_type'] == '2'
+                ? type.text = "ผู้สูงอายุ"
+                : type.text = "ไม่มา";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +76,11 @@ class _BookdetailState extends State<Bookdetail> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
+                      Text('ราคาต่อชั่วโมง ${widget.data['book_result']}',
+                          style: TextStyle(fontSize: 17)),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         'วันที่ : ' +
                             DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
@@ -87,7 +105,7 @@ class _BookdetailState extends State<Bookdetail> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               ClipRRect(
                 // borderRadius: BorderRadius.circular(10.0),
@@ -98,22 +116,7 @@ class _BookdetailState extends State<Bookdetail> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'อายุ 68 ปี',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-
-                    const Padding(
-                      padding: EdgeInsets.only(left: 50),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'โรคประจำตัว',
+                          'ประเภทงาน',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -122,71 +125,7 @@ class _BookdetailState extends State<Bookdetail> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 70),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '- โรคหัวใจ',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 70),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '- โรคเบาหวาน',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 70),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '- โรคความดัน',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 50),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'ลักษณะผู้ป่วย',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 70),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '- ผู้ป่วยติดเตียง',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    // Text('ราคาต่อชั่วโมง ${widget.data['rate']}',
-                    //     style: TextStyle(fontSize: 18)),
-                    // Text('${widget.data['type']}',
-                    //     style: TextStyle(fontSize: 18)),
+                    Text(type.text),
                   ],
                 ),
               ),
@@ -219,29 +158,6 @@ class _BookdetailState extends State<Bookdetail> {
               ),
               const SizedBox(
                 height: 10,
-              ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: SizedBox(
-                          width: 40,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.map,
-                        color: Colors.blue,
-                      ),
-                      Text(
-                        '''   ${widget.data['adr1']} ${widget.data['adr2']} 
-    ${widget.data['city']}''',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 50,

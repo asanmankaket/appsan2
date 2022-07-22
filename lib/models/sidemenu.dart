@@ -76,8 +76,8 @@ class _SideMenuState extends State<SideMenu> {
                           children: [
                             data != null
                                 ? Text(
-                                    '''${data['username']}
-${data['fname']}  ${data['lname']}''',
+                                    '''${data['men_username']}
+${data['men_fname']}  ${data['men_lname']}''',
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,

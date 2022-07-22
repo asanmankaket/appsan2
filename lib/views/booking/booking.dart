@@ -20,8 +20,7 @@ class _BookingState extends State<Booking> {
   }
 
   startApi() async {
-    dynamic item =
-        await getdata("ยืนยันแล้ว"); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata(1); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });

@@ -79,7 +79,7 @@ Future checkRegister(
   });
 }
 
-Future<dynamic> getdata(String idPage) async {
+Future<dynamic> getdata(int idPage) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
@@ -102,7 +102,7 @@ Future<dynamic> getdata(String idPage) async {
   );
 }
 
-Future<dynamic> confirmBook(dynamic idb, String statusbook, context) async {
+Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
   Uri url = Uri.parse(
       'http://206.189.92.71:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
@@ -236,7 +236,7 @@ Future sendDataProfile4(phone, context) async {
   });
 }
 
-Future sendDataProfile5(tambons, amphures, provinces, pincode, context) async {
+Future sendDataProfile5(tambons, amphures, provinces, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
@@ -249,7 +249,6 @@ Future sendDataProfile5(tambons, amphures, provinces, pincode, context) async {
       "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
-      "pincode": pincode,
     }),
   )
       .then((req) {

@@ -20,7 +20,7 @@ class _CancleBookingState extends State<CancleBooking> {
   }
 
   startApi() async {
-    dynamic item = await getdata("ยกเลิก"); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata(3); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });

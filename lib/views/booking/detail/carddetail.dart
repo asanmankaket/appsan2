@@ -241,7 +241,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                         primary: const Color.fromARGB(255, 203, 41, 0)),
                     onPressed: () {
-                      confirmBook(widget.data['book_id'], "ยกเลิก", context);
+                      confirmBook(widget.data['book_id'], 3, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => BottomBarMain(index: 1)),
@@ -265,8 +265,7 @@ ${widget.data['adr2']} ${widget.data['city']}''',
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                         primary: Colors.green),
                     onPressed: () {
-                      confirmBook(
-                          widget.data['book_id'], "ยืนยันแล้ว", context);
+                      confirmBook(widget.data['book_id'], 1, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => BottomBarMain(index: 1)),

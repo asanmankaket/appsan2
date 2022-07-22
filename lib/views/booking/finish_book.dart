@@ -22,7 +22,7 @@ class _FinishBookingState extends State<FinishBooking> {
   }
 
   startApi() async {
-    dynamic item = await getdata("สำเร็จ"); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata(2); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });

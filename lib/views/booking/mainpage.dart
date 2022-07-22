@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   startApi() async {
-    dynamic item = await getdata("รอยืนยัน"); //ส่งค่าไปยัง getdataหรือตัวรับapi
+    dynamic item = await getdata(0); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
     });

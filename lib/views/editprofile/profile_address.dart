@@ -14,8 +14,6 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController tambons = TextEditingController();
   TextEditingController amphures = TextEditingController();
   TextEditingController provinces = TextEditingController();
-
-  TextEditingController pincode = TextEditingController();
   dynamic idaddress;
   @override
   void initState() {
@@ -30,9 +28,6 @@ class _ProfileAddressState extends State<ProfileAddress> {
     widget.data['men_provinces'] != null
         ? provinces.text = widget.data['men_provinces']
         : provinces.text = "";
-    widget.data['men_pincode'] != null
-        ? pincode.text = widget.data['men_pincode']
-        : pincode.text = "";
   }
 
   @override
@@ -47,10 +42,6 @@ class _ProfileAddressState extends State<ProfileAddress> {
             child: Column(children: [
           const SizedBox(height: 15),
           TextFormFieldModel2(
-            labelText: 'รหัสไปรษณี',
-            controller: pincode,
-          ),
-          TextFormFieldModel2(
             labelText: 'จังหวัด',
             controller: provinces,
           ),
@@ -64,8 +55,8 @@ class _ProfileAddressState extends State<ProfileAddress> {
           ),
           TextButton(
               onPressed: () {
-                sendDataProfile5(tambons.text, amphures.text, provinces.text,
-                    pincode.text, context);
+                sendDataProfile5(
+                    tambons.text, amphures.text, provinces.text, context);
               },
               child: const Text('ยืนยันการแก้ไข'))
         ])),
