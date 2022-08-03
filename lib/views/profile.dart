@@ -2,6 +2,7 @@
 
 import 'package:age_calculator/age_calculator.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
+import 'package:creative/views/editprofile/setting/edit_service.dart';
 import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -189,7 +190,7 @@ class _ProfileState extends State<Profile> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
-                padding: const EdgeInsets.only(left: 100),
+                padding: const EdgeInsets.only(left: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
@@ -215,7 +216,22 @@ class _ProfileState extends State<Profile> {
                     SizedBox(
                       height: 5,
                     ),
-
+                     TextButton(
+                        child: Text(
+                          'เเก้ไขประเภทการบริการ',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        style: TextButton.styleFrom(
+                          primary: Colors.purple,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      EditService()));
+                        }),
                     // const Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     // SizedBox(height: 10,),
                     // const Text('This is the Drawer'),

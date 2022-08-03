@@ -1,3 +1,4 @@
+import 'package:creative/views/booking/edit_view%20%5Bmain%5D/edit_data.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/views/booking/detail/carddetail.dart';
 import 'package:intl/intl.dart';
@@ -31,9 +32,22 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('รอการยืนยัน'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-      ),
+          title: const Text('รอการยืนยัน'),
+          backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.monetization_on_outlined,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                   Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      Editdata()));
+                })
+          ]),
       backgroundColor: Colors.purple.shade50,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
