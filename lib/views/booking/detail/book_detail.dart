@@ -22,7 +22,7 @@ class _BookdetailState extends State<Bookdetail> {
             ? type.text = "ผู้ป่วย"
             : widget.data['book_type'] == '2'
                 ? type.text = "ผู้สูงอายุ"
-                : type.text = "ไม่มา";
+                : type.text = "";
   }
 
   @override
@@ -125,7 +125,11 @@ class _BookdetailState extends State<Bookdetail> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text(type.text),
+                    Text(
+                      type.text,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
