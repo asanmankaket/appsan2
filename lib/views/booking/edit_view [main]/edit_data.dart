@@ -25,7 +25,7 @@ class _EditdataState extends State<Editdata> {
              SizedBox(height: 20,),
              Text('กำหนดค่าบริการ'),
              SizedBox(height: 20,),
-             Text('กำหนดวันเวลาที่ให้บริการ'),
+             Text('กำหนดวันเวลาที่ให้บริการ....'),
             ],
           ),
         ),
