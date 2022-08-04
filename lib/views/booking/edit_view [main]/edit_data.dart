@@ -21,7 +21,7 @@ class _EditdataState extends State<Editdata> {
         child: Center(
           child: Column(
             children: [
-             Text('ดูอัตราค่าบริการตามค่าเฉลี่ย'),
+             Text('อัตราค่าบริการตามค่าเฉลี่ย'),
              SizedBox(height: 20,),
              Text('กำหนดค่าบริการ'),
              SizedBox(height: 20,),

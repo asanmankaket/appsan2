@@ -34,7 +34,8 @@ class _ProfileAddressState extends State<ProfileAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        title: const Text('แก้ไขสถานที่'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

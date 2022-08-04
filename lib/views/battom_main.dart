@@ -63,7 +63,7 @@ class _BottomBarMainState extends State<BottomBarMain> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor:const Color.fromARGB(255, 160, 42, 207),
         onTap: _onItemTapped,
       ),
     );
