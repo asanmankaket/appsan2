@@ -2,7 +2,7 @@ import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'Map.dart';
-import '../../map_book.dart';
+import '../../mapbook.dart';
 import '../../battom_main.dart';
 
 class Carddetail extends StatefulWidget {
@@ -212,7 +212,9 @@ class _CarddetailState extends State<Carddetail> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                              builder: (BuildContext context) => GoogleMaps()));
+                              builder: (BuildContext context) => GoogleMaps(
+                                    latilongti: widget.data['book_latilongti'],
+                                  )));
                     },
                     child: Row(
                       children: [
