@@ -92,88 +92,88 @@ class _CarddetailState extends State<Carddetail> {
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 50),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'อายุ 68 ปี',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 50),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'โรคประจำตัว',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 70),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '- โรคหัวใจ',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 70),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '- โรคเบาหวาน',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 70),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '- โรคความดัน',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 50),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'ลักษณะผู้ป่วย',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 70),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '- ผู้ป่วยติดเตียง',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 50),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       'อายุ 68 ปี',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 50),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       'โรคประจำตัว',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 70),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       '- โรคหัวใจ',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            //     ),
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 70),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       '- โรคเบาหวาน',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            //     ),
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 70),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       '- โรคความดัน',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 50),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       'ลักษณะผู้ป่วย',
+            //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 70),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       '- ผู้ป่วยติดเตียง',
+            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -224,8 +224,8 @@ class _CarddetailState extends State<Carddetail> {
                         ),
                         const SizedBox(width: 15),
                         Text(
-                          '''${widget.data['adr1']}
-${widget.data['adr2']} ${widget.data['city']}''',
+                          '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
+${widget.data['amphur']} ${widget.data['provinces']}''',
                           style: const TextStyle(fontSize: 18),
                         ),
                       ],

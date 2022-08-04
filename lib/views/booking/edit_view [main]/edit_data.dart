@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
+import '../../../configs/api.dart';
 
 class Editdata extends StatefulWidget {
-  Editdata({Key? key}) : super(key: key);
+  const Editdata({Key? key}) : super(key: key);
 
   @override
   State<Editdata> createState() => _EditdataState();
 }
 
 class _EditdataState extends State<Editdata> {
+  dynamic data;
+  final TextEditingController _rateselect = TextEditingController();
+  final TextEditingController _dateselcet = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    startApi();
+  }
+
+  startApi() {
+    dynamic item = getAvg();
+    setState(() {
+      data = item;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,15 +38,21 @@ class _EditdataState extends State<Editdata> {
         child: Center(
           child: Column(
             children: [
-             Text('อัตราค่าบริการตามค่าเฉลี่ย'),
-             SizedBox(height: 20,),
-             Text('กำหนดค่าบริการ'),
-             SizedBox(height: 20,),
-             Text('กำหนดวันเวลาที่ให้บริการ....'),
+              Text('อัตราค่าบริการตามค่าเฉลี่ย : ${data['RateAvg']}'),
+              const SizedBox(height: 20),
+              const Text('กำหนดค่าบริการ'),
+              TextField(
+                controller: _rateselect,
+              ),
+              const SizedBox(height: 20),
+              const Text('กำหนดวันเวลาที่ให้บริการ....'),
+              TextField(
+                controller: _dateselcet,
+              )
             ],
           ),
         ),
       ),
-      );
+    );
   }
 }

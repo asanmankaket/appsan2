@@ -16,7 +16,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
   );
   @override
   List<Marker> myMarker = [];
-  TextEditingController latilongti = TextEditingController();
+  final TextEditingController _latilongti = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context, latilongti.text);
+              Navigator.pop(context, _latilongti.text);
               // do something
             },
           )
@@ -52,7 +52,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
 
   _handleTap(LatLng tappedPoint) {
     setState(() {
-      latilongti.text = tappedPoint.toString();
+      _latilongti.text = tappedPoint.toString();
       myMarker = [];
       myMarker.add(Marker(
         markerId: MarkerId(tappedPoint.toString()),
