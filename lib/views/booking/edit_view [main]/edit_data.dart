@@ -18,10 +18,11 @@ class _EditdataState extends State<Editdata> {
     startApi();
   }
 
-  startApi() {
-    dynamic item = getAvg();
+  startApi() async {
+    var item = await getAvg();
     setState(() {
       data = item;
+      print(data);
     });
   }
 
@@ -38,7 +39,7 @@ class _EditdataState extends State<Editdata> {
         child: Center(
           child: Column(
             children: [
-              Text('อัตราค่าบริการตามค่าเฉลี่ย : ${data['RateAvg']}'),
+              Text('อัตราค่าบริการตามค่าเฉลี่ย : ${data[0]['RateAvg']}'),
               const SizedBox(height: 20),
               const Text('กำหนดค่าบริการ'),
               TextField(
