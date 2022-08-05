@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMaps extends StatefulWidget {
-  GoogleMaps({Key? key, @required latilongti}) : super(key: key);
-  dynamic latilongti;
+  GoogleMaps({Key? key, required this.data}) : super(key: key);
+  dynamic data;
   @override
   State<GoogleMaps> createState() => _GoogleMapsState();
 }
@@ -16,8 +16,6 @@ class _GoogleMapsState extends State<GoogleMaps> {
   );
   @override
   List<Marker> myMarker = [];
-  final TextEditingController _latilongti = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +24,11 @@ class _GoogleMapsState extends State<GoogleMaps> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.done,
+              Icons.cancel_outlined,
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context, _latilongti.text);
-              // do something
+              Navigator.pop(context);
             },
           )
         ],
@@ -42,22 +39,11 @@ class _GoogleMapsState extends State<GoogleMaps> {
         myLocationEnabled: true,
         markers: {
           Marker(
-            markerId: MarkerId("1"),
-            position: widget.latilongti,
-          )
+              markerId: MarkerId("book_pinhome"),
+              position:
+                  LatLng(widget.data['book_lat'], widget.data['book_lng'])),
         },
       ),
     );
-  }
-
-  _handleTap(LatLng tappedPoint) {
-    setState(() {
-      _latilongti.text = tappedPoint.toString();
-      myMarker = [];
-      myMarker.add(Marker(
-        markerId: MarkerId(tappedPoint.toString()),
-        position: tappedPoint,
-      ));
-    });
   }
 }

@@ -1,13 +1,11 @@
 import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// import 'Map.dart';
 import '../../mapbook.dart';
 import '../../battom_main.dart';
 
 class Carddetail extends StatefulWidget {
   const Carddetail({Key? key, required this.data}) : super(key: key);
-
   final dynamic data;
   @override
   State<Carddetail> createState() => _CarddetailState();
@@ -15,7 +13,6 @@ class Carddetail extends StatefulWidget {
 
 class _CarddetailState extends State<Carddetail> {
   get childrer => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +23,7 @@ class _CarddetailState extends State<Carddetail> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             const Center(
               //รูปavatar
               child: CircleAvatar(
@@ -37,14 +32,13 @@ class _CarddetailState extends State<Carddetail> {
                 // backgroundImage: ('widget.data['image']'),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15),
             Text(
               '${widget.data['cust_title']} ${widget.data['cust_fname']} ${widget.data['cust_lname']}',
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
+            Text("ยอดรวมทั้งหมดคือ : ${widget.data['book_result']}  บาท"),
             const Padding(
               padding: EdgeInsets.only(left: 50),
               child: Align(
@@ -55,9 +49,7 @@ class _CarddetailState extends State<Carddetail> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Container(
@@ -74,9 +66,7 @@ class _CarddetailState extends State<Carddetail> {
                         fontSize: 18,
                       ),
                     ),
-                    const SizedBox(
-                      height: 7,
-                    ),
+                    const SizedBox(height: 7),
                     Text(
                       'สิ้นสุด' +
                           DateFormat('  dd-mm-yy    KK:MM').format(
@@ -89,94 +79,7 @@ class _CarddetailState extends State<Carddetail> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 50),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       'อายุ 68 ปี',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            //     ),
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 50),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       'โรคประจำตัว',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            //     ),
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 70),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       '- โรคหัวใจ',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            //     ),
-            //   ),
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 70),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       '- โรคเบาหวาน',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            //     ),
-            //   ),
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 70),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       '- โรคความดัน',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            //     ),
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 50),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       'ลักษณะผู้ป่วย',
-            //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            //     ),
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 70),
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(
-            //       '- ผู้ป่วยติดเตียง',
-            //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            //     ),
-            //   ),
-            // ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 30),
             SizedBox(
                 child: Row(
               children: [
@@ -204,16 +107,11 @@ class _CarddetailState extends State<Carddetail> {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute<void>(
-                      //         builder: (BuildContext context) =>
-                      //             GoogleMaps()));
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
                               builder: (BuildContext context) => GoogleMaps(
-                                    latilongti: widget.data['book_latilongti'],
+                                    data: widget.data,
                                   )));
                     },
                     child: Row(
@@ -225,7 +123,7 @@ class _CarddetailState extends State<Carddetail> {
                         const SizedBox(width: 15),
                         Text(
                           '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
-${widget.data['amphur']} ${widget.data['provinces']}''',
+${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                           style: const TextStyle(fontSize: 18),
                         ),
                       ],
@@ -234,9 +132,7 @@ ${widget.data['amphur']} ${widget.data['provinces']}''',
                 ],
               ),
             ]),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
