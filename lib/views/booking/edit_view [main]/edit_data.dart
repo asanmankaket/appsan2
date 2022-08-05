@@ -3,7 +3,6 @@ import '../../../configs/api.dart';
 
 class Editdata extends StatefulWidget {
   const Editdata({Key? key}) : super(key: key);
-
   @override
   State<Editdata> createState() => _EditdataState();
 }
@@ -22,7 +21,6 @@ class _EditdataState extends State<Editdata> {
     var item = await getAvg();
     setState(() {
       data = item;
-      print(data);
     });
   }
 
@@ -39,9 +37,17 @@ class _EditdataState extends State<Editdata> {
         child: Center(
           child: Column(
             children: [
-              Text('อัตราค่าบริการตามค่าเฉลี่ย : ${data[0]['RateAvg']}'),
               const SizedBox(height: 20),
-              const Text('กำหนดค่าบริการ'),
+              Text("ค่าแรงเฉลี่ยของแอพ : " + data[0]['RateAvg'] != null
+                  ? data[0]['RateAvg'].toString()
+                  : ""),
+              const SizedBox(height: 10),
+              Text("จำนวนพี่เลี้ยงที่ผ่านการสมัคร : " + data[0]['mentorpass'] !=
+                      null
+                  ? data[0]['mentorpass'].toString()
+                  : ""),
+              const SizedBox(height: 20),
+              const Text('กำหนดค่าบริการ '),
               TextField(
                 controller: _rateselect,
               ),

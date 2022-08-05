@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../mapbook.dart';
+
 class Bookdetail extends StatefulWidget {
   const Bookdetail({Key? key, required this.data}) : super(key: key);
 
@@ -17,11 +19,11 @@ class _BookdetailState extends State<Bookdetail> {
   void initState() {
     // TODO: implement initState
     widget.data['book_type'] == '0'
-        ? type.text = "เด็ก"
+        ? type.text = "ดูแลเด็ก"
         : widget.data['book_type'] == '1'
-            ? type.text = "ผู้ป่วย"
+            ? type.text = "ดูแลผู้ป่วย"
             : widget.data['book_type'] == '2'
-                ? type.text = "ผู้สูงอายุ"
+                ? type.text = "ดูแลผู้สูงอายุ"
                 : type.text = "";
   }
 
@@ -126,7 +128,7 @@ class _BookdetailState extends State<Bookdetail> {
                       height: 10,
                     ),
                     Text(
-                      type.text,
+                      "" + type.text,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -141,7 +143,7 @@ class _BookdetailState extends State<Bookdetail> {
                   Row(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.only(left: 40),
+                        padding: EdgeInsets.only(left: 10),
                         child: SizedBox(
                           width: 40,
                         ),
@@ -163,6 +165,43 @@ class _BookdetailState extends State<Bookdetail> {
               const SizedBox(
                 height: 10,
               ),
+              Row(children: [
+                Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 3),
+                      child: SizedBox(width: 39),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) => GoogleMaps(
+                                      data: widget.data,
+                                    )));
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.map,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 15),
+                          Text(
+                            '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
+${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
               const SizedBox(
                 height: 50,
               ),

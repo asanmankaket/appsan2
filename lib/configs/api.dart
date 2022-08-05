@@ -102,7 +102,7 @@ Future<dynamic> getdata(int idPage) async {
   );
 }
 
-Future getAvg() async {
+Future<dynamic> getAvg() async {
   Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/findAvg');
   return await http
       .get(
@@ -110,7 +110,7 @@ Future getAvg() async {
   )
       .then(
     (req) async {
-      if (req.statusCode == 200)  {
+      if (req.statusCode == 200) {
         var data = jsonDecode(req.body);
         return data;
       } else {
