@@ -102,6 +102,24 @@ Future<dynamic> getdata(int idPage) async {
   );
 }
 
+Future<dynamic> getAvg() async {
+  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/findAvg');
+  return await http
+      .get(
+    url,
+  )
+      .then(
+    (req) async {
+      if (req.statusCode == 200) {
+        var data = jsonDecode(req.body);
+        return data;
+      } else {
+        return null;
+      }
+    },
+  );
+}
+
 Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
   Uri url = Uri.parse(
       'http://206.189.92.71:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
@@ -246,7 +264,8 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
     url,
     headers: headers,
     body: jsonEncode({
-      "tambons": tambons,
+      ""
+          "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
     }),
