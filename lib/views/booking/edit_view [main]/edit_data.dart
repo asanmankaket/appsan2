@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class Editdata extends StatefulWidget {
@@ -21,15 +23,19 @@ class _EditdataState extends State<Editdata> {
         child: Center(
           child: Column(
             children: [
-             Text('อัตราค่าบริการตามค่าเฉลี่ย'),
-             SizedBox(height: 20,),
-             Text('กำหนดค่าบริการ'),
-             SizedBox(height: 20,),
-             Text('กำหนดวันเวลาที่ให้บริการ....'),
+              Text('อัตราค่าบริการตามค่าเฉลี่ย'),
+              SizedBox(
+                height: 20,
+              ),
+              Text('กำหนดค่าบริการ'),
+              SizedBox(
+                height: 20,
+              ),
+              Text('กำหนดวันเวลาที่ให้บริการ....'),
             ],
           ),
         ),
       ),
-      );
+    );
   }
 }
