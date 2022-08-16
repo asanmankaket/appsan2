@@ -35,23 +35,23 @@ class _Register extends State<NextRegister> {
   String? dropdownValue;
   List<DropdownMenuItem<String>>? items = [
     const DropdownMenuItem(
-      value: 'เด็ก',
+      value: '0',
       child: Text(
-        'เด็ก',
+        'ดูแลเด็ก',
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
     const DropdownMenuItem(
-      value: 'ผู้ป่วย',
+      value: '1',
       child: Text(
-        'ผู้ป่วย',
+        'ดูแลผู้ป่วย',
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
     const DropdownMenuItem(
-      value: 'ผู้สูงอายุ',
+      value: '2',
       child: Text(
-        'ผู้สูงอายุ',
+        'ดูแลผู้สูงอายุ',
         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
     ),
