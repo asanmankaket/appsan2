@@ -216,7 +216,7 @@ class _ProfileState extends State<Profile> {
                     SizedBox(
                       height: 5,
                     ),
-                     TextButton(
+                    TextButton(
                         child: Text(
                           'เเก้ไขประเภทการบริการ',
                           style: TextStyle(
