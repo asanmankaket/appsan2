@@ -68,7 +68,6 @@ class _EditdataState extends State<Editdata> {
                               ),
                             ),
                           ),
-<<<<<<< HEAD
                         ),
                       ),
                       Container(
@@ -176,7 +175,6 @@ class _EditdataState extends State<Editdata> {
                     contentPadding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
                   ),
                 ),
-=======
                           Center(
                             child: Column(
                               children: [
