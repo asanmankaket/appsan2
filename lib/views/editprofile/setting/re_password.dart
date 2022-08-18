@@ -52,7 +52,7 @@ class _RepasswordState extends State<Repassword> {
             ),
             const SizedBox(height: 10),
             TextRepassword(
-              controller: newpassword,
+              controller: confirmpassword,
               hintText: 'ยืนยันรหัสผ่านใหม่',
               labeltext: 'ยืนยันรหัสผ่านใหม่',
             ),
