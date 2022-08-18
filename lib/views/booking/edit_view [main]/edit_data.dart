@@ -68,113 +68,6 @@ class _EditdataState extends State<Editdata> {
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 50,
-                              ),
-                              Text('NULL',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                              Text('______________________________',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text('อัตราค่าบริการตามค่าเฉลี่ย',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text('กำหนดค่าบริการ',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
-                child: TextFormField(
-                  readOnly: true,
-                  controller: rate,
-                  onTap: (() {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                              title: const Text('ค่าแรงต่อชั่วโมงโดยเฉลี่ย'),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text('32 บาทต่อชั่วโมง'),
-                                  NumberPicker(
-                                    value: _currentIntValue,
-                                    minValue: 0,
-                                    maxValue: 100,
-                                    step: 1,
-                                    haptics: true,
-                                    onChanged: (value) => setState(() {
-                                      _currentIntValue = value;
-                                    }),
-                                  ),
-                                  Text('Current value:' +
-                                      _currentIntValue.toString()),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(
-                                            context,
-                                            rate.text =
-                                                _currentIntValue.toString());
-                                      },
-                                      child: const Text('ยืนยัน'))
-                                ],
-                              ),
-                            ));
-                  }),
-                  decoration: const InputDecoration(
-                    labelText: 'ค่าแรงต่อชั่วโมง',
-                    helperText: 'Tyep you password more 6 Charactor',
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintStyle: TextStyle(color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255), width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255), width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    contentPadding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
-                  ),
-                ),
                           Center(
                             child: Column(
                               children: [
@@ -280,7 +173,6 @@ class _EditdataState extends State<Editdata> {
                     ),
                   ),
                 ],
->>>>>>> f822ba403c1700dfb45de802d9ce00341ec642ab
               ),
             ))
           : SizedBox(
@@ -291,3 +183,34 @@ class _EditdataState extends State<Editdata> {
     );
   }
 }
+// Center(
+//           child: Column(
+//             children: [
+//               SizedBox(
+//                 height: 20,
+//               ),
+//               Text('NULL',
+//                   style: TextStyle(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.blue)),
+//               SizedBox(
+//                 height: 15,
+//               ),
+//               Text('อัตราค่าบริการตามค่าเฉลี่ย',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     fontWeight: FontWeight.bold,
+//                   )),
+//               SizedBox(
+//                 height: 20,
+//               ),
+//               Text('กำหนดค่าบริการ'),
+//               SizedBox(
+//                 height: 20,
+//               ),
+//               Text('กำหนดวันเวลาที่ให้บริการ....'),
+//             ],
+//           ),
+//         ),
+//       ),
