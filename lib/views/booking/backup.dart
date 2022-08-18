@@ -13,45 +13,46 @@ class BackUp extends StatelessWidget {
         title: const Text('ประวัติย้อนหลัง'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
-      body: Column(children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: (() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const FinishBooking()));
-                }),
-                child: const Text('ดูประวัติที่สำเร็จ'),
-                style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-                    primary: Colors.white),
-              ),
-              const SizedBox(width: 20),
-              TextButton(
-                onPressed: (() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const CancleBooking()));
-                }),
-                child: const Text(
-                  'ดูประวัติที่ยกเลิก',
-                ),
-                style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-                    primary: Colors.white),
-              ),
-            ],
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Container(
+            height: 50,
+            child: TextButton(
+              onPressed: (() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            const FinishBooking()));
+              }),
+              child: const Text('ดูประวัติที่สำเร็จ'),
+              style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+                  primary: Colors.white),
+            ),
           ),
-        ),
-      ]),
+          SizedBox(height: 15),
+          Container(
+            height: 50,
+            child: TextButton(
+              onPressed: (() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            const CancleBooking()));
+              }),
+              child: const Text(
+                'ดูประวัติที่ยกเลิก',
+              ),
+              style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+                  primary: Colors.white),
+            ),
+          ),
+        ],
+      ),
       drawer: const SideMenu(),
     );
   }
