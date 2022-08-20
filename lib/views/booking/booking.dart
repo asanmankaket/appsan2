@@ -1,3 +1,4 @@
+import 'package:creative/views/booking/detail/book_detailfinish.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/views/booking/detail/book_detail.dart';
 import 'package:intl/intl.dart';
@@ -52,7 +53,7 @@ class _BookingState extends State<Booking> {
                       context,
                       MaterialPageRoute<void>(
                           builder: (BuildContext context) =>
-                              Bookdetail(data: data[i])));
+                              BookdetailFinish(data: data[i])));
                 },
                 child: Card(
                   elevation: 10,
