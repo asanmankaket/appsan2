@@ -2,12 +2,11 @@ import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import '../../battom_main.dart';
 import '../../mapbook.dart';
-import '../scanqrcode.dart';
 
 class BookdetailFinish extends StatefulWidget {
   const BookdetailFinish({Key? key, required this.data}) : super(key: key);
-
   final dynamic data;
   @override
   State<BookdetailFinish> createState() => _BookdetailFinishState();
@@ -16,10 +15,10 @@ class BookdetailFinish extends StatefulWidget {
 class _BookdetailFinishState extends State<BookdetailFinish> {
   get children => null;
   TextEditingController type = TextEditingController();
-  late String result;
+  late String result = "";
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     widget.data['book_type'] == '0'
         ? type.text = "ดูแลเด็ก"
         : widget.data['book_type'] == '1'
@@ -204,7 +203,9 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                   onPressed: () {
                     startScan();
                   },
-                  child: const Text('จบงาน'))
+                  child: const Text('จบงาน')),
+              Text('ผลการจบงาน'),
+              Text(result)
             ],
           ),
         ),
@@ -213,9 +214,19 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
   }
 
   startScan() async {
-    String? scanResult = await scanner.scan();
-    scanResult == widget.data['book_id']
-        ? confirmBook(widget.data['book_id'], 2, context)
+    String cameraScanResult = await scanner.scan() as String;
+    print(cameraScanResult);
+    setState(() {
+      result = cameraScanResult;
+    });
+    result == widget.data['book_id'].toString()
+        ? {
+            confirmBook(widget.data['book_id'], 2, context),
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => BottomBarMain(index: 0)),
+                (Route<dynamic> route) => false)
+          }
         : AlertDialog(
             content: Text('QRCode ไม่ถูกต้อง'),
           );

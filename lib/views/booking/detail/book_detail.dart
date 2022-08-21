@@ -17,7 +17,8 @@ class _BookdetailState extends State<Bookdetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
+
     widget.data['book_type'] == '0'
         ? type.text = "ดูแลเด็ก"
         : widget.data['book_type'] == '1'
