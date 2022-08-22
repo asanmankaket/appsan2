@@ -9,12 +9,6 @@ class GoogleMaps extends StatefulWidget {
 }
 
 class _GoogleMapsState extends State<GoogleMaps> {
-  @override
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(7.1713644, 100.611544),
-    zoom: 14,
-  );
-  @override
   List<Marker> myMarker = [];
   @override
   Widget build(BuildContext context) {
@@ -35,11 +29,13 @@ class _GoogleMapsState extends State<GoogleMaps> {
       ),
       body: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
+        initialCameraPosition: CameraPosition(
+            target: LatLng(widget.data['book_lat'], widget.data['book_lng']),
+            zoom: 14),
         myLocationEnabled: true,
         markers: {
           Marker(
-              markerId: MarkerId("book_pinhome"),
+              markerId: MarkerId(widget.data['book_pinhome']),
               position:
                   LatLng(widget.data['book_lat'], widget.data['book_lng'])),
         },
