@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import '../../mapbook.dart';
-import '../scanqrcode.dart';
 
 class BookdetailFinish extends StatefulWidget {
   const BookdetailFinish({Key? key, required this.data}) : super(key: key);
