@@ -30,6 +30,7 @@ dependencies:
   numberpicker: ^2.1.1
   location: ^4.4.0
   qrscan: ^0.3.3
+  qr_code_scanner: ^0.7.0
 flutter_icons:
   android: "launcher_icon"
   image_path: "assets/images/LOGOAPP.png"
