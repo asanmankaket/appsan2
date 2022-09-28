@@ -2,6 +2,7 @@ import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import '../../../models/charofname.dart';
 import '../../mapbook.dart';
 
 class BookdetailFinish extends StatefulWidget {
@@ -14,18 +15,13 @@ class BookdetailFinish extends StatefulWidget {
 
 class _BookdetailFinishState extends State<BookdetailFinish> {
   get children => null;
-  TextEditingController type = TextEditingController();
   late String result;
+  dynamic worktype;
+
   @override
   void initState() {
     // TODO: implement initState
-    widget.data['book_type'] == '0'
-        ? type.text = "ดูแลเด็ก"
-        : widget.data['book_type'] == '1'
-            ? type.text = "ดูแลผู้ป่วย"
-            : widget.data['book_type'] == '2'
-                ? type.text = "ดูแลผู้สูงอายุ"
-                : type.text = "";
+    worktype = typeWork(int.parse(widget.data['book_type']));
   }
 
   @override
@@ -42,14 +38,20 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
               const SizedBox(
                 height: 40,
               ),
-              const Center(
-                //รูปavatar
-                child: CircleAvatar(
-                  radius: 70,
-                  // backgroundImage: ('${widget.data['image']}'),
-                  backgroundColor: Color.fromARGB(255, 45, 134, 156),
-                ),
-              ),
+              Center(
+                  //รูปavatar
+                  child: widget.data['cust_image'] != null
+                      ? CircleAvatar(
+                          radius: 70,
+                          backgroundImage:
+                              NetworkImage(widget.data['cust_image']),
+
+                          // backgroundImage: ('widget.data['image']'),
+                        )
+                      : const CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Color.fromARGB(255, 45, 134, 156),
+                        )),
               const SizedBox(
                 height: 15,
               ),
@@ -127,7 +129,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                       height: 10,
                     ),
                     Text(
-                      "" + type.text,
+                      worktype,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),

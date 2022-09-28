@@ -72,11 +72,17 @@ class _FinishBookingState extends State<FinishBooking> {
                               const SizedBox(
                                 width: 20,
                               ),
-                              const SizedBox(
-                                width: 55.0,
-                                height: 55.0,
-                                child: CircleAvatar(),
-                              ),
+                              SizedBox(
+                                  width: 55.0,
+                                  height: 55.0,
+                                  child: data[i]['cust_image'] != null
+                                      ? CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              data[i]['cust_image']),
+                                        )
+                                      : const CircleAvatar(
+                                          backgroundColor: Colors.blue,
+                                        )),
                               const SizedBox(
                                 width: 15,
                               ),

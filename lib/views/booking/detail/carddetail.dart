@@ -1,6 +1,7 @@
 import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../models/charofname.dart';
 import '../../mapbook.dart';
 import '../../battom_main.dart';
 
@@ -13,6 +14,14 @@ class Carddetail extends StatefulWidget {
 
 class _CarddetailState extends State<Carddetail> {
   get childrer => null;
+  dynamic worktype;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    worktype = typeWork(int.parse(widget.data['book_type']));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +92,31 @@ class _CarddetailState extends State<Carddetail> {
                     ),
                   ],
                 ),
+              ),
+            ),
+            ClipRRect(
+              // borderRadius: BorderRadius.circular(10.0),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'ประเภทงาน',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    worktype,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 30),

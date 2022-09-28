@@ -17,7 +17,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
         title: const Text("Map"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.cancel_outlined,
               color: Colors.white,
             ),

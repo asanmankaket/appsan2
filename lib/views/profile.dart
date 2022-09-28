@@ -34,14 +34,6 @@ class _ProfileState extends State<Profile> {
   TextEditingController picdate = TextEditingController();
   DateTime? datenow = DateTime.now();
 
-  void _openEndDrawer() {
-    _scaffoldKey.currentState!.openEndDrawer();
-  }
-
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -84,7 +76,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
         actions: <Widget>[
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.settings_sharp,
                 color: Colors.white,
               ),
@@ -121,13 +113,13 @@ class _ProfileState extends State<Profile> {
                                 );
                               },
                               elevation: 2.0,
-                              fillColor: Color(0xFFF5F6F9),
-                              child: Icon(
+                              fillColor: const Color(0xFFF5F6F9),
+                              child: const Icon(
                                 Icons.camera_alt_outlined,
                                 color: Colors.blue,
                               ),
-                              padding: EdgeInsets.all(15.0),
-                              shape: CircleBorder(),
+                              padding: const EdgeInsets.all(15.0),
+                              shape: const CircleBorder(),
                             )),
                       ],
                     ),
@@ -145,8 +137,7 @@ class _ProfileState extends State<Profile> {
                     press: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => ProfileBirtday(
-                                data: data)),
+                            builder: (context) => ProfileBirtday(data: data)),
                       );
                     },
                   ),
@@ -256,7 +247,7 @@ class _ProfileState extends State<Profile> {
                               context,
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) =>
-                                      Repassword()));
+                                      const Repassword()));
                         }),
                     const SizedBox(height: 5),
                     TextButton(
