@@ -71,10 +71,10 @@ class _Register extends State<NextRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 205, 94, 249),
+      backgroundColor: const Color.fromARGB(255, 205, 94, 249),
       appBar: AppBar(
-        title: Text('สมัครสมาชิก'),
-        backgroundColor: Color.fromARGB(255, 160, 42, 207),
+        title: const Text('สมัครสมาชิก'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -240,8 +240,6 @@ class _Register extends State<NextRegister> {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
                     }
-                    print(dropdownValue);
-
                     checkRegister(
                         widget.username,
                         widget.password,
@@ -254,7 +252,7 @@ class _Register extends State<NextRegister> {
                         rate.text,
                         context);
                   },
-                  child: Text(
+                  child: const Text(
                     'Confirm',
                     style: TextStyle(
                         color: Color.fromARGB(255, 45, 134, 156),
@@ -262,10 +260,10 @@ class _Register extends State<NextRegister> {
                         fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    primary: Color.fromARGB(255, 255, 255, 255),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    primary: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 )
               ]),
@@ -275,32 +273,4 @@ class _Register extends State<NextRegister> {
       ),
     );
   }
-}
-
-Future<Null> chooseImage(ImageSource imageSource) async {
-  try {
-    var object = await ImagePicker()
-        .getImage(source: imageSource, maxHeight: 800.0, maxWidth: 800.0);
-
-    setState(() {
-      File file = File(object!.path);
-    });
-  } catch (e) {}
-}
-
-void setState(Null Function() param0) {}
-
-Widget grorpImage() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      IconButton(
-        icon: Icon(
-          Icons.add_a_photo,
-          size: 36.0,
-        ),
-        onPressed: () {},
-      ),
-    ],
-  );
 }

@@ -1,12 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:age_calculator/age_calculator.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
+import 'package:creative/views/editprofile/profile_birtday.dart';
 import 'package:creative/views/editprofile/setting/edit_service.dart';
 import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/sidemenu.dart';
@@ -27,9 +27,12 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   dynamic data;
   dynamic age;
+  late String birtdaytime;
   late String addimage;
   late TextEditingController title;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController picdate = TextEditingController();
+  DateTime? datenow = DateTime.now();
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
@@ -48,7 +51,6 @@ class _ProfileState extends State<Profile> {
   startApi() async {
     //เอาตัวidของcustomerมาใช้กับหน้านี้แล้วเอาค่าไปใส่ในidUser
     dynamic item = await getProfile();
-
     //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
@@ -56,6 +58,19 @@ class _ProfileState extends State<Profile> {
           ? addimage = data['men_image'].toString()
           : addimage =
               "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
+      data['men_birtday'] != null
+          ? calculatorAge(data['men_birtday'])
+          : age = null;
+    });
+  }
+
+  calculatorAge(data) {
+    birtdaytime = data;
+    final dateTime = DateTime.parse(birtdaytime);
+    DateDuration duration;
+    duration = AgeCalculator.age(dateTime);
+    setState(() {
+      age = duration.years;
     });
   }
 
@@ -124,13 +139,16 @@ class _ProfileState extends State<Profile> {
                       press: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ProfileName(data: data)));
-                        // editThread();
-                        // senddata('${widget.data['idc']}', '${widget.data['title']}',
-                        //'${widget.data['fname']}', '${widget.data['lname']}'); อันนี้คือส่งข้อมูลอันเดียว
                       }),
                   ProfileMenu(
-                    text: '${data['men_birtday']}',
-                    press: () {},
+                    text: "อายุ : " + age.toString() + " ปี",
+                    press: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => ProfileBirtday(
+                                data: data)),
+                      );
+                    },
                   ),
                   ProfileMenu(
                     text: '${data['men_phone']}',
@@ -179,19 +197,19 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
             )
-          : SizedBox(
+          : const SizedBox(
               child: Center(
                 child: CupertinoActivityIndicator(),
               ),
             ),
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       endDrawer: Drawer(
         backgroundColor: Colors.white70,
         child: Column(
           children: [
             Container(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30, left: 150),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 30, left: 150),
                 child: Align(
                   alignment: Alignment.center,
                   child: Text('การตั้งค่า',
@@ -203,15 +221,15 @@ class _ProfileState extends State<Profile> {
               ),
 
               // padding: EdgeInsets.all(60),
-              padding: EdgeInsets.fromLTRB(20, 43, 20, 15),
+              padding: const EdgeInsets.fromLTRB(20, 43, 20, 15),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 160, 42, 207),
+                color: const Color.fromARGB(255, 160, 42, 207),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
@@ -223,11 +241,9 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     TextButton(
-                        child: Text(
+                        child: const Text(
                           'เปลี่ยนรหัสผ่าน',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -242,11 +258,9 @@ class _ProfileState extends State<Profile> {
                                   builder: (BuildContext context) =>
                                       Repassword()));
                         }),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     TextButton(
-                        child: Text(
+                        child: const Text(
                           'เเก้ไขประเภทการบริการ',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -261,14 +275,6 @@ class _ProfileState extends State<Profile> {
                                   builder: (BuildContext context) =>
                                       EditService()));
                         }),
-                    // const Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                    // SizedBox(height: 10,),
-                    // const Text('This is the Drawer'),
-                    // const Text('This is the Drawer'),
-                    // ElevatedButton(
-                    //   onPressed: _closeEndDrawer,
-                    //   child: const Text('Close Drawer'),
-                    // ),
                   ],
                 ),
               ),
@@ -277,13 +283,6 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       endDrawerEnableOpenDragGesture: false,
-      // drawer: SettingManu(),
     );
-  }
-
-  ageCalculator(dynamic birthday) {
-    DateDuration duration;
-    duration = AgeCalculator.age(birthday, today: DateTime.now());
-    return duration;
   }
 }

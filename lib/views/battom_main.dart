@@ -21,7 +21,6 @@ class _BottomBarMainState extends State<BottomBarMain> {
   ];
   @override
   void initState() {
-    // TODO: implement initState
     widget.index != null ? _selectedIndex = widget.index : _selectedIndex = 0;
   }
 

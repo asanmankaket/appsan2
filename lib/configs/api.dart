@@ -318,7 +318,7 @@ Future sendDataProfile6(birtday, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.145.138:3200/api/customer/p4/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p6/$idUser');
   http
       .put(
     url,
