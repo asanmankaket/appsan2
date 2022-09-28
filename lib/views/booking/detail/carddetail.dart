@@ -24,14 +24,20 @@ class _CarddetailState extends State<Carddetail> {
         child: Column(
           children: [
             const SizedBox(height: 40),
-            const Center(
-              //รูปavatar
-              child: CircleAvatar(
-                radius: 70,
-                backgroundColor: Color.fromARGB(255, 45, 134, 156),
-                // backgroundImage: ('widget.data['image']'),
-              ),
-            ),
+            Center(
+                //รูปavatar
+                child: widget.data['cust_image'] != null
+                    ? CircleAvatar(
+                        radius: 70,
+                        backgroundImage:
+                            NetworkImage(widget.data['cust_image']),
+
+                        // backgroundImage: ('widget.data['image']'),
+                      )
+                    : const CircleAvatar(
+                        radius: 70,
+                        backgroundColor: Color.fromARGB(255, 45, 134, 156),
+                      )),
             const SizedBox(height: 15),
             Text(
               '${widget.data['cust_title']} ${widget.data['cust_fname']} ${widget.data['cust_lname']}',

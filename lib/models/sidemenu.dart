@@ -20,7 +20,7 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   dynamic data;
-
+  late String addimage;
   @override
   void initState() {
     super.initState();
@@ -32,6 +32,10 @@ class _SideMenuState extends State<SideMenu> {
     dynamic item = await getProfile(); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
+      data['men_image'] != null
+          ? addimage = data['men_image'].toString()
+          : addimage =
+              "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
     });
   }
 
@@ -59,23 +63,22 @@ class _SideMenuState extends State<SideMenu> {
             child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: GestureDetector(
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/profile.jpg'),
-                        backgroundColor: Colors.white,
-                        radius: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: data != null
+                    ? GestureDetector(
+                        child: Row(
                           children: [
-                            data != null
-                                ? Text(
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(addimage),
+                              backgroundColor: Colors.white,
+                              radius: 40,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     '''${data['men_username']}
 ${data['men_fname']}  ${data['men_lname']}''',
                                     style: const TextStyle(
@@ -83,13 +86,13 @@ ${data['men_fname']}  ${data['men_lname']}''',
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   )
-                                : const CupertinoActivityIndicator(),
+                                ],
+                              ),
+                            )
                           ],
                         ),
                       )
-                    ],
-                  ),
-                ),
+                    : const CupertinoActivityIndicator(),
               ),
             ),
           ),

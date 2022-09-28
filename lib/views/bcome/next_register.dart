@@ -25,10 +25,21 @@ class _Register extends State<NextRegister> {
   TextEditingController latilongti = TextEditingController();
   TextEditingController skill = TextEditingController();
   TextEditingController rate = TextEditingController();
+
   late int _currentIntValue = 32;
   final _formkey = GlobalKey<FormState>();
 
-  File? file;
+  File? _image;
+  bool isTapped = false;
+  Future getImage(ImageSource wayimage) async {
+    final images = await ImagePicker().pickImage(source: wayimage);
+    if (images == null) return;
+
+    final imageTemporary = File(images.path);
+    setState(() {
+      this._image = imageTemporary;
+    });
+  }
 
   DateTime? datenow = DateTime.now();
 
@@ -93,24 +104,35 @@ class _Register extends State<NextRegister> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_a_photo,
                         size: 36.0,
                       ),
-                      onPressed: () => chooseImage(ImageSource.camera),
+                      onPressed: () {
+                        getImage(ImageSource.camera);
+                      },
                     ),
                     SizedBox(
-                      width: 200.0,
-                      child: file == null
-                          ? Image.asset('assets/images/one.jpg')
-                          : Image.file(file!),
+                      width: 150.0,
+                      child: _image != null
+                          ? ClipOval(
+                              child: SizedBox.fromSize(
+                                size: const Size.fromRadius(80), // Image radius
+                                child: Image.file(_image!, fit: BoxFit.cover),
+                              ),
+                            )
+                          : Image.asset(
+                              'assets/images/avatar.png',
+                            ),
                     ),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_photo_alternate,
                         size: 36.0,
                       ),
-                      onPressed: () => chooseImage(ImageSource.gallery),
+                      onPressed: () {
+                        getImage(ImageSource.gallery);
+                      },
                     ),
                   ],
                 ),
@@ -231,12 +253,6 @@ class _Register extends State<NextRegister> {
                         "ผู้ป่วย",
                         rate.text,
                         context);
-
-                    // await checkRegister(username.text, password.text, name.text,
-                    //     surname.text, picdate.text, context);
-
-                    // Navigator.pushNamedAndRemoveUntil(context,
-                    //     "/Page1", (Route<dynamic> route) => false);
                   },
                   child: Text(
                     'Confirm',

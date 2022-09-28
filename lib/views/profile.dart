@@ -12,6 +12,7 @@ import '../configs/api.dart';
 import '../models/sidemenu.dart';
 import 'bcome/_login.dart';
 import 'editprofile/profile_phone.dart';
+import 'editprofile/profile_photo.dart';
 import 'editprofile/profilename.dart';
 
 class Profile extends StatefulWidget {
@@ -26,6 +27,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   dynamic data;
   dynamic age;
+  late String addimage;
   late TextEditingController title;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -50,12 +52,15 @@ class _ProfileState extends State<Profile> {
     //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
+      data['men_image'] != null
+          ? addimage = data['men_image'].toString()
+          : addimage =
+              "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       // endDrawer: Drawer(),
@@ -78,15 +83,39 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 children: [
                   const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 60,
-                        // backgroundImage: AssetImage(''),
-                        backgroundColor: Colors.purple.shade300,
-                      ),
-                    ],
+                  SizedBox(
+                    height: 140,
+                    width: 140,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      fit: StackFit.expand,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(addimage),
+                        ),
+                        Positioned(
+                            bottom: 0,
+                            right: -25,
+                            child: RawMaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfilePhoto(
+                                            dataavatar: addimage,
+                                          )),
+                                );
+                              },
+                              elevation: 2.0,
+                              fillColor: Color(0xFFF5F6F9),
+                              child: Icon(
+                                Icons.camera_alt_outlined,
+                                color: Colors.blue,
+                              ),
+                              padding: EdgeInsets.all(15.0),
+                              shape: CircleBorder(),
+                            )),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20),
                   ProfileMenu(

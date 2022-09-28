@@ -41,11 +41,10 @@ class _MainPageState extends State<MainPage> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                   Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      Editdata()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) => Editdata()));
                 })
           ]),
       backgroundColor: Colors.purple.shade50,
@@ -86,11 +85,17 @@ class _MainPageState extends State<MainPage> {
                               const SizedBox(
                                 width: 15,
                               ),
-                              const SizedBox(
-                                width: 55.0,
-                                height: 55.0,
-                                child: CircleAvatar(),
-                              ),
+                              SizedBox(
+                                  width: 55.0,
+                                  height: 55.0,
+                                  child: data[i]['cust_image'] != null
+                                      ? CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              data[i]['cust_image']),
+                                        )
+                                      : const CircleAvatar(
+                                          backgroundColor: Colors.blue,
+                                        )),
                               const SizedBox(
                                 width: 15,
                               ),

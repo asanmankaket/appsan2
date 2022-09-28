@@ -1,16 +1,19 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:creative/configs/config.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/battom_main.dart';
 import '../views/profile.dart';
+import 'package:path/path.dart';
 
 Future checkLogin(String username, String password, context) async {
   EasyLoading.show(status: 'loading...');
 
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/login');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/login');
   http
       .post(
     url,
@@ -46,7 +49,7 @@ Future checkRegister(
     String rate,
     context) async {
   EasyLoading.show(status: 'loading...');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor');
   http
       .post(
     url,
@@ -84,7 +87,7 @@ Future<dynamic> getdata(int idPage) async {
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/booking/cust/"$idPage"/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.145.138:3200/api/booking/cust/"$idPage"/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
 //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .get(
@@ -104,7 +107,7 @@ Future<dynamic> getdata(int idPage) async {
 
 Future<dynamic> getAvg() async {
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/mentor/findAvg'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.145.138:3200/api/mentor/findAvg'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
 //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .get(
@@ -124,7 +127,7 @@ Future<dynamic> getAvg() async {
 
 Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.145.138:3200/api/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .put(
     url,
@@ -144,7 +147,7 @@ Future<dynamic> getProfile() async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/$idUser');
   // Uri url = Uri.parse('http://192.168.1.9:3200/api/customer/$idUser');
   return await http
       .get(
@@ -165,7 +168,8 @@ Future<dynamic> getProfilepassword() async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/password/$idUser');
+  Uri url =
+      Uri.parse('http://206.189.145.138:3200/api/mentor/password/$idUser');
   return await http
       .get(
     url,
@@ -185,7 +189,7 @@ Future sendDataProfile1(oldpassword, password, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p1/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p1/$idUser');
   http
       .put(
     url,
@@ -210,7 +214,7 @@ Future<dynamic> sendDataProfile2(
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
   Uri url = Uri.parse(
-      'http://206.189.92.71:3200/api/mentor/p2/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+      'http://206.189.145.138:3200/api/mentor/p2/$idUser'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .put(
     url,
@@ -233,11 +237,39 @@ Future<dynamic> sendDataProfile2(
   });
 }
 
+Future sendDataProfile3(File _image, context) async {
+  if (_image == null) return;
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  var stream = new http.ByteStream(_image.openRead());
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p3/$idUser');
+  var length = await _image.length();
+  http.MultipartRequest request = new http.MultipartRequest('PUT', url)
+    ..headers.addAll(headers!)
+    ..files.add(
+      // replace file with your field name exampe: image
+      http.MultipartFile('photo', stream, length,
+          contentType: new MediaType('image', 'jpeg'),
+          filename: basename(_image.path)),
+    );
+
+  var respons = await http.Response.fromStream(await request.send());
+  if (respons.statusCode == 204) {
+    EasyLoading.showSuccess('Great Success!');
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+        (Route<dynamic> route) => false);
+  } else {
+    EasyLoading.showError('Failed with Error');
+  }
+}
+
 Future sendDataProfile4(phone, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p4/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p4/$idUser');
   http
       .put(
     url,
@@ -260,7 +292,7 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/mentor/p5/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p5/$idUser');
   http
       .put(
     url,
@@ -286,7 +318,7 @@ Future sendDataProfile6(birtday, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  Uri url = Uri.parse('http://206.189.92.71:3200/api/customer/p4/$idUser');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/customer/p4/$idUser');
   http
       .put(
     url,
