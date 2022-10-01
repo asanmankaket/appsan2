@@ -66,7 +66,9 @@ class TextFieldRegis extends StatelessWidget {
       style: const TextStyle(
           color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
       keyboardType: TextInputType.text,
-      onChanged: (value) {},
+      onChanged: (value) {
+        
+      },
       decoration: InputDecoration(
         labelText: labeltext,
         labelStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),

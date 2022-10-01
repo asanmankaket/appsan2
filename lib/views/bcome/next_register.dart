@@ -41,6 +41,20 @@ class _Register extends State<NextRegister> {
     });
   }
 
+  checkIdCard(citizenId) {
+    String idcard = citizenId;
+    int total = 0;
+    for (int i = 0, sum = 0; i < 12; i++) {
+      sum += int.parse(idcard[i]) * (13 - i);
+      total = sum;
+    }
+    if ((11 - total % 11) % 10 != int.parse(idcard[12])) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   DateTime? datenow = DateTime.now();
 
   String? dropdownValue;
@@ -98,6 +112,17 @@ class _Register extends State<NextRegister> {
                   labeltext: 'หมายเลขบัตรประชาชน',
                   controller: citizenId,
                   textEmpty: 'โปรดกรอกหมายเลขบัตรประชาชน',
+                ),
+                TextFormField(
+                  maxLength: 13,
+                  controller: citizenId,
+                  validator: (value) {
+                    if (checkIdCard(value)) {
+                      return null;
+                    } else {
+                      "เลขบัตรประชาชนไม่ถูกต้อง";
+                    }
+                  },
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -240,6 +265,7 @@ class _Register extends State<NextRegister> {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
                     }
+
                     checkRegister(
                         widget.username,
                         widget.password,
