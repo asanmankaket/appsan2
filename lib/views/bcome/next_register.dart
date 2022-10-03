@@ -113,18 +113,18 @@ class _Register extends State<NextRegister> {
                   controller: citizenId,
                   textEmpty: 'โปรดกรอกหมายเลขบัตรประชาชน',
                 ),
-                TextFormField(
-                  maxLength: 13,
-                  controller: citizenId,
-                  validator: (value) {
-                    if (checkIdCard(value)) {
-                      return null;
-                    } else {
-                      "เลขบัตรประชาชนไม่ถูกต้อง";
-                    }
-                  },
-                ),
-                const SizedBox(height: 10),
+                // TextFormField(
+                //   maxLength: 13,
+                //   controller: citizenId,
+                //   validator: (value) {
+                //     if (checkIdCard(value)) {
+                //       return null;
+                //     } else {
+                //       "เลขบัตรประชาชนไม่ถูกต้อง";
+                //     }
+                //   },
+                // ),
+                // const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

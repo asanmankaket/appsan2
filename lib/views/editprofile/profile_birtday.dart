@@ -17,7 +17,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
   @override
   void initState() {
     super.initState();
-    widget.data != null
+    widget.data['men_birtday'] != null
         ? picdate.text = DateFormat("yyyy-MM-dd")
             .format(DateTime.parse(widget.data['men_birtday']))
         : picdate.text = "";
