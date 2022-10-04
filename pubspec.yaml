@@ -46,7 +46,6 @@ flutter:
   assets:
     - assets/json/thai_amphures.json
     - assets/json/thai_provinces.json
-    - assets/json/thai_geographies.json
     - assets/json/thai_tambons.json
     - assets/images/
     - assets/images/customer/

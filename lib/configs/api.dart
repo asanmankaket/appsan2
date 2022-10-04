@@ -229,7 +229,7 @@ Future<dynamic> sendDataProfile2(
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Profile()),
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       return null;
@@ -280,7 +280,7 @@ Future sendDataProfile4(phone, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Profile()),
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -329,7 +329,7 @@ Future sendDataProfile6(birtday, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Profile()),
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');

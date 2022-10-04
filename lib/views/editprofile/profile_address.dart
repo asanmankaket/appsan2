@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import '../../configs/api.dart';
+import '../../configs/jsonprovinces.dart';
 import '../../models/textformfieldmodel.dart';
 
 class ProfileAddress extends StatefulWidget {
@@ -15,6 +17,8 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController amphures = TextEditingController();
   TextEditingController provinces = TextEditingController();
   dynamic idaddress;
+  dynamic idProvinces = 0;
+  dynamic idAmphures = 0;
   @override
   void initState() {
     super.initState();
@@ -33,35 +37,89 @@ class _ProfileAddressState extends State<ProfileAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('แก้ไขสถานที่'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SizedBox(
-            child: Column(children: [
-          const SizedBox(height: 15),
-          TextFormFieldModel2(
-            labelText: 'จังหวัด',
-            controller: provinces,
-          ),
-          TextFormFieldModel2(
-            labelText: 'อำเภอ',
-            controller: amphures,
-          ),
-          TextFormFieldModel2(
-            labelText: 'ตำบล',
-            controller: tambons,
-          ),
-          TextButton(
-              onPressed: () {
-                sendDataProfile5(
-                    tambons.text, amphures.text, provinces.text, context);
+        appBar: AppBar(
+          title: const Text('แก้ไขสถานที่'),
+          backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        ),
+        body: Column(
+          children: [
+            FutureBuilder(
+              future: readJsonDataProvinces(),
+              builder: (context, data) {
+                if (data.hasError) {
+                  return Center(child: Text("${data.error}"));
+                } else if (data.hasData) {
+                  var items = data.data as List<Provinces>;
+                  // return DropdownButton(items: , onChanged: onChanged)
+                  return DropdownButton(
+                      value: idProvinces,
+                      items: items.map((value) {
+                        return DropdownMenuItem(
+                            child: Text(items[value.id - 1].nameTh.toString()),
+                            value: value.id - 1);
+                      }).toList(),
+                      onChanged: (index) {
+                        setState(() {
+                          idProvinces = index;
+                        });
+                      });
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
               },
-              child: const Text('ยืนยันการแก้ไข'))
-        ])),
-      ),
-    );
+            ),
+            // FutureBuilder(
+            //   future: readJsonDataAmphures(),
+            //   builder: (context, data) {
+            //     if (data.hasError) {
+            //       return Center(child: Text("${data.error}"));
+            //     } else if (data.hasData) {
+            //       var items = data.data as List<Amphures>;
+            //       return DropdownButton(
+            //           value: idAmphures,
+            //           items: items.where((element) => element.provinceId.(idProvinces))).map((value) {
+            //             return DropdownMenuItem(
+            //                 child: Text(items[value.id - 1].nameTh.toString()),
+            //                 value: value.provinceId - 1);
+            //           }).toList(),
+            //           onChanged: (index) {
+            //             setState(() {
+            //               idAmphures = index;
+            //             });
+            //           });
+            //     } else {
+            //       return Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     }
+            //   },
+            // ),
+          ],
+        ));
   }
+}
+
+// DropdownMenuItem(child: Text(items[index].nameTh),)
+Future<List<Provinces>> readJsonDataProvinces() async {
+  //read json file
+  final jsondataprovince =
+      await rootBundle.loadString('assets/json/thai_provinces.json');
+  final listprovinces = json.decode(jsondataprovince) as List<dynamic>;
+  return listprovinces.map((e) => Provinces.fromJson(e)).toList();
+}
+
+Future<List<Amphures>> readJsonDataAmphures() async {
+  final jsondataamphures =
+      await rootBundle.loadString('assets/json/thai_amphures.json');
+  final listamphures = json.decode(jsondataamphures) as List<dynamic>;
+  return listamphures.map((e) => Amphures.fromJson(e)).toList();
+}
+
+Future<List<Tambons>> readJsonDataTambons() async {
+  final jsondatatambons =
+      await rootBundle.loadString('assets/json/thai_amphures.json');
+  final listtambons = json.decode(jsondatatambons) as List<dynamic>;
+  return listtambons.map((e) => Tambons.fromJson(e)).toList();
 }
