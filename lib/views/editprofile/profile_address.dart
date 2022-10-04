@@ -70,32 +70,32 @@ class _ProfileAddressState extends State<ProfileAddress> {
                 }
               },
             ),
-            // FutureBuilder(
-            //   future: readJsonDataAmphures(),
-            //   builder: (context, data) {
-            //     if (data.hasError) {
-            //       return Center(child: Text("${data.error}"));
-            //     } else if (data.hasData) {
-            //       var items = data.data as List<Amphures>;
-            //       return DropdownButton(
-            //           value: idAmphures,
-            //           items: items.where((element) => element.provinceId.(idProvinces))).map((value) {
-            //             return DropdownMenuItem(
-            //                 child: Text(items[value.id - 1].nameTh.toString()),
-            //                 value: value.provinceId - 1);
-            //           }).toList(),
-            //           onChanged: (index) {
-            //             setState(() {
-            //               idAmphures = index;
-            //             });
-            //           });
-            //     } else {
-            //       return Center(
-            //         child: CircularProgressIndicator(),
-            //       );
-            //     }
-            //   },
-            // ),
+            FutureBuilder(
+              future: readJsonDataAmphures(),
+              builder: (context, data) {
+                if (data.hasError) {
+                  return Center(child: Text("${data.error}"));
+                } else if (data.hasData) {
+                  var items = data.data as List<Amphures>;
+                  // return DropdownButton(items: , onChanged: onChanged)
+                  return DropdownButton(
+                      items: items.map((value) {
+                        return DropdownMenuItem(
+                            child: Text(items[1].nameTh.toString()),
+                            value: value.id);
+                      }).toList(),
+                      onChanged: (index) {
+                        setState(() {
+                          idAmphures = index;
+                        });
+                      });
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
           ],
         ));
   }

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../models/charofname.dart';
 import '../../mapbook.dart';
 import '../../battom_main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Carddetail extends StatefulWidget {
   const Carddetail({Key? key, required this.data}) : super(key: key);
@@ -20,6 +21,15 @@ class _CarddetailState extends State<Carddetail> {
   void initState() {
     // TODO: implement initState
     worktype = typeWork(int.parse(widget.data['book_type']));
+  }
+
+  _makingPhoneCall(phone) async {
+    var url = Uri.parse("tel:$phone");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -120,58 +130,65 @@ class _CarddetailState extends State<Carddetail> {
               ),
             ),
             const SizedBox(height: 30),
-            SizedBox(
-                child: Row(
+            Row(
               children: [
-                const SizedBox(width: 30),
-                // ignore: prefer_const_constructors
-                Icon(
-                  Icons.call,
-                  color: Colors.blue,
-                  size: 30,
+                SizedBox(width: 25),
+                TextButton(
+                  onPressed: () {
+                    _makingPhoneCall(widget.data['cust_phone']);
+                  },
+                  child: SizedBox(
+                      child: Row(
+                    children: [
+                      // ignore: prefer_const_constructors
+                      Icon(
+                        Icons.call,
+                        color: Colors.blue,
+                        size: 30,
+                      ),
+                      Text(
+                        '   ${widget.data['cust_phone']}',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(width: 120),
+                    ],
+                  )),
                 ),
-                Text(
-                  '   ${widget.data['cust_phone']}',
-                  style: const TextStyle(fontSize: 18),
-                ),
-                const SizedBox(width: 120),
               ],
-            )),
+            ),
             const SizedBox(height: 10),
-            Row(children: [
-              Row(
-                children: [
-                  const SizedBox(width: 25),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                              builder: (BuildContext context) => GoogleMaps(
-                                    data: widget.data,
-                                  )));
-                    },
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.map,
-                          size: 30,
-                        ),
-                        const SizedBox(width: 15),
-                        Text(
-                          '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
-${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
+            Row(
+              children: [
+                const SizedBox(width: 25),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
                   ),
-                ],
-              ),
-            ]),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) => GoogleMaps(
+                                  data: widget.data,
+                                )));
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.map,
+                        size: 30,
+                      ),
+                      const SizedBox(width: 15),
+                      Text(
+                        '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
+${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 15),
             Row(
               mainAxisSize: MainAxisSize.min,

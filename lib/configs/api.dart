@@ -164,27 +164,6 @@ Future<dynamic> getProfile() async {
   });
 }
 
-Future<dynamic> getProfilepassword() async {
-  final prefs =
-      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
-  int? idUser = prefs.getInt('idm');
-  Uri url =
-      Uri.parse('http://206.189.145.138:3200/api/mentor/password/$idUser');
-  return await http
-      .get(
-    url,
-    headers: headers,
-  )
-      .then((req) {
-    if (req.statusCode == 200) {
-      var data = jsonDecode(req.body);
-      return data;
-    } else {
-      return null;
-    }
-  });
-}
-
 Future sendDataProfile1(oldpassword, password, context) async {
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
@@ -238,19 +217,18 @@ Future<dynamic> sendDataProfile2(
 }
 
 Future sendDataProfile3(File _image, context) async {
-  if (_image == null) return;
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
-  var stream = new http.ByteStream(_image.openRead());
+  var stream = http.ByteStream(_image.openRead());
   Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p3/$idUser');
   var length = await _image.length();
-  http.MultipartRequest request = new http.MultipartRequest('PUT', url)
+  http.MultipartRequest request = http.MultipartRequest('PUT', url)
     ..headers.addAll(headers!)
     ..files.add(
       // replace file with your field name exampe: image
       http.MultipartFile('photo', stream, length,
-          contentType: new MediaType('image', 'jpeg'),
+          contentType: MediaType('image', 'jpeg'),
           filename: basename(_image.path)),
     );
 
@@ -330,6 +308,53 @@ Future sendDataProfile6(birtday, context) async {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future sendDataProfile7(mentype, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor/p7/$idUser');
+  http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({"mentype": mentype}),
+  )
+      .then((req) async {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future sendDataProfileWorkRate(rate, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url =
+      Uri.parse('http://206.189.145.138:3200/api/mentor/workRate/$idUser');
+  http
+      .put(
+    url,
+    headers: headers,
+    body: jsonEncode({"rate": rate}),
+  )
+      .then((req) async {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');

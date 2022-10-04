@@ -8,3 +8,13 @@ typeWork(int i) {
       return "ดูแลผู้ป่วย";
   }
 }
+
+typeWorkRevers(String i) {
+  if (i == "เด็ก") {
+    return "0";
+  } else if (i == "ผู้ป่วย") {
+    return "1";
+  } else {
+    return "2";
+  }
+}

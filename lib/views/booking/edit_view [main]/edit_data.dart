@@ -13,7 +13,7 @@ class Editdata extends StatefulWidget {
 }
 
 class _EditdataState extends State<Editdata> {
-  dynamic data;
+  dynamic data, data2;
 
   @override
   void initState() {
@@ -22,14 +22,17 @@ class _EditdataState extends State<Editdata> {
   }
 
   startApi() async {
+    dynamic item2 = await getProfile();
     dynamic item = await getAvg();
     setState(() {
       data = item;
+      data2 = item2;
     });
   }
 
   TextEditingController rate = TextEditingController();
-  late int _currentIntValue = 32;
+
+  late int _currentIntValue = data[0]['RateAvg'].toInt();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,20 +77,18 @@ class _EditdataState extends State<Editdata> {
                                 SizedBox(
                                   height: 50,
                                 ),
-                                Text('${data[0]['RateAvg']}',
+                                Text('${data2['men_rate']} บาท/ชั่วโมง',
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white)),
-                                Text('______________________________',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
-                                SizedBox(
-                                  height: 30,
+                                SizedBox(height: 20),
+                                Divider(
+                                  color: Colors.black,
+                                  thickness: 3,
                                 ),
-                                Text('อัตราค่าบริการตามค่าเฉลี่ย',
+                                SizedBox(height: 20),
+                                Text('อัตราค่าบริการที่ตั้งไว้',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -110,68 +111,68 @@ class _EditdataState extends State<Editdata> {
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    readOnly: true,
-                    controller: rate,
-                    onTap: (() {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                                title: const Text('ค่าแรงต่อชั่วโมงโดยเฉลี่ย'),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Text('32 บาทต่อชั่วโมง'),
-                                    NumberPicker(
-                                      value: _currentIntValue,
-                                      minValue: 0,
-                                      maxValue: 100,
-                                      step: 1,
-                                      haptics: true,
-                                      onChanged: (value) => setState(() {
-                                        _currentIntValue = value;
-                                      }),
-                                    ),
-                                    Text('Current value:' +
-                                        _currentIntValue.toString()),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context,
-                                              rate.text =
-                                                  _currentIntValue.toString());
-                                        },
-                                        child: const Text('ยืนยัน'))
-                                  ],
-                                ),
-                              ));
-                    }),
-                    decoration: const InputDecoration(
-                      labelText: 'ค่าแรงต่อชั่วโมง',
-                      helperText: 'Tyep you password more 6 Charactor',
-                      labelStyle: TextStyle(color: Colors.black),
-                      hintStyle: TextStyle(color: Colors.black),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      errorBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    color: Color.fromARGB(255, 241, 196, 253),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                          width: 300,
+                        ),
+                        Text('อัตราค่าบริการเฉลี่ยของทั้งแอพประมาณ :'),
+                        Text(
+                          '${data[0]['RateAvg']} บาท/ชั่วโมง',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 64, 0, 255),
+                              fontSize: 20),
+                        ),
+                        SizedBox(height: 20),
+                      ],
                     ),
                   ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  NumberPicker(
+                    axis: Axis.horizontal,
+                    value: _currentIntValue,
+                    minValue: 0,
+                    maxValue: 100,
+                    step: 1,
+                    onChanged: (value) =>
+                        setState(() => _currentIntValue = value),
+                  ),
+                  Text('Current value:' + _currentIntValue.toString()),
+                  SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      sendDataProfileWorkRate(_currentIntValue, context);
+                    },
+                    child: Wrap(
+                      children: const <Widget>[
+                        Icon(
+                          Icons.save,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("บันทึก",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      primary: Colors.purple,
+                    ),
+                  )
                 ],
               ),
             ))

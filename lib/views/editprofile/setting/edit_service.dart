@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:creative/configs/api.dart';
+import 'package:creative/models/charofname.dart';
 import 'package:flutter/material.dart';
 
 class EditService extends StatefulWidget {
-  EditService({Key? key}) : super(key: key);
+  const EditService({Key? key}) : super(key: key);
 
   @override
   State<EditService> createState() => _EditServiceState();
@@ -12,26 +12,30 @@ class EditService extends StatefulWidget {
 String? dropdownValue;
 List<DropdownMenuItem<String>>? items = [
   const DropdownMenuItem(
-    value: 'เด็ก',
+    value: '0',
     child: Text(
-      'เด็ก',
+      'ดูแลเด็ก',
+      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
     ),
   ),
   const DropdownMenuItem(
-    value: 'ผู้ป่วย',
+    value: '1',
     child: Text(
-      'ผู้ป่วย',
+      'ดูแลผู้ป่วย',
+      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
     ),
   ),
   const DropdownMenuItem(
-    value: 'ผู้สูงอายุ',
+    value: '2',
     child: Text(
-      'ผู้สูงอยุ',
+      'ดูแลผู้สูงอายุ',
+      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
     ),
   ),
 ];
 
 class _EditServiceState extends State<EditService> {
+  String revestWork = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +82,11 @@ class _EditServiceState extends State<EditService> {
                 },
               ),
               TextButton(
-              onPressed: () {
-              },
-              child: const Text('ยืนยันการแก้ไข'))
+                  onPressed: () {
+                    revestWork = typeWorkRevers(dropdownValue!);
+                    sendDataProfile7(revestWork, context);
+                  },
+                  child: const Text('ยืนยันการแก้ไข'))
             ],
           ),
         ),

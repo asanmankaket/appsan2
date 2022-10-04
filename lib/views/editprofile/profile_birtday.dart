@@ -45,20 +45,68 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                sendDataProfile6(picdate.text, context);
-                print(picdate.text);
-              },
-              icon: const Icon(Icons.check_outlined))
-        ],
+        title: const Text('วันเดือนปีเกิด'),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Column(
         children: [
-          Text('แก้วันที่'),
-          Text(picdate.text),
-          TextButton(onPressed: picdateTime, child: Text('แก้ไข'))
+          const SizedBox(height: 100),
+          Center(
+            child: SizedBox(
+              width: 300,
+              child: TextField(
+                  readOnly: true,
+                  onTap: picdateTime,
+                  controller: picdate,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.cake),
+                    filled: true,
+                    fillColor: Colors.purple.shade100,
+                    hintStyle: const TextStyle(color: Colors.purple),
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.purple),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.purple, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    //     )),
+                  )),
+            ),
+          ),
+          // Text(picdate.text),
+          // TextButton(onPressed: picdateTime, child: Text('แก้ไข'))
+          SizedBox(height: 30),
+          picdate.text !=
+                  DateFormat("yyyy-MM-dd")
+                      .format(DateTime.parse(widget.data['men_birtday']))
+              ? ElevatedButton(
+                  onPressed: () {
+                    sendDataProfile6(picdate.text, context);
+                  },
+                  child: Wrap(
+                    children: <Widget>[
+                      Icon(
+                        Icons.save,
+                        color: Colors.white,
+                        size: 24.0,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("บันทึก",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    primary: Colors.purple,
+                  ),
+                )
+              : Text(""),
         ],
       ),
     );
