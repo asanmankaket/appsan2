@@ -7,7 +7,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/battom_main.dart';
-import '../views/profile.dart';
 import 'package:path/path.dart';
 
 Future checkLogin(String username, String password, context) async {
@@ -38,31 +37,36 @@ Future checkLogin(String username, String password, context) async {
 }
 
 Future checkRegister(
+    String title,
     String username,
     String password,
     String name,
     String surname,
-    String picdate,
+    String birtday,
     String phone,
     String citizenid,
     String type,
     String rate,
     context) async {
   EasyLoading.show(status: 'loading...');
+
   Uri url = Uri.parse('http://206.189.145.138:3200/api/mentor');
+
   http
       .post(
     url,
     headers: headers,
     body: jsonEncode({
+      "title": title,
       "username": username,
       "password": password,
       "fname": name,
       "lname": surname,
       "phone": phone,
       "idcard": citizenid,
-      "type_id": type,
+      "type": type,
       "rate": rate,
+      "birtday": birtday
     }),
   )
       .then((req) async {

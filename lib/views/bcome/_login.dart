@@ -37,8 +37,33 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('AppMentor'),
-          backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+          title: Column(
+            children: [
+              const Center(
+                child: Text(
+                  'เข้าสู่ระบบ',
+                  style: TextStyle(
+                      color: Colors.purple,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Text(
+                'แอพเพื่อผู้ดูแล',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
+          toolbarHeight: 150,
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
         ),
         backgroundColor: Colors.purple.shade50,
         body: SafeArea(
@@ -49,28 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Column(children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    // Icon(Icons.wheelchair_pickup, size: 50),
-                    const Text(
-                      'Login Account',
-                      style: TextStyle(
-                          color: Colors.purple,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'appication for mentor',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 40),
                     Form(
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -100,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.purple.shade100,
-                                            labelText: 'username',
+                                            labelText: 'ชื่อผู้ใช้',
                                             hintText: 'ชื่อผู้ใช้',
                                             hintStyle: const TextStyle(
                                                 color: Colors.purple),
@@ -137,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.purple.shade100,
-                                              labelText: 'password',
+                                              labelText: 'รหัสผ่าน',
                                               hintText: 'รหัสผ่าน',
                                               hintStyle: const TextStyle(
                                                   color: Colors.purple),
@@ -176,18 +180,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     color: Colors.purple,
                                                   )))),
                                       const SizedBox(height: 5),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: <Widget>[
-                                          const Text(
-                                            'Foeget Password ?',
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
                                     ]),
                               ),
                             ),
@@ -203,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         //     "/Page1", (Route<dynamic> route) => false);
                       },
                       child: const Text(
-                        'Login',
+                        'เข้าสู่ระบบ',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -232,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.pushNamed(context, "/PageOne");
                         // Navigator.pushNamed(context, "/PageOne");
                       },
-                      child: const Text('Register',
+                      child: const Text('สมัครสมาชิก',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,

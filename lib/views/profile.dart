@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:age_calculator/age_calculator.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/profile_birtday.dart';
@@ -9,6 +11,7 @@ import 'package:creative/models/profilemenu.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
+import '../models/charofname.dart';
 import '../models/sidemenu.dart';
 import 'bcome/_login.dart';
 import 'editprofile/profile_phone.dart';
@@ -25,8 +28,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  dynamic data;
-  dynamic age;
+  dynamic data, age, typework;
   late String birtdaytime;
   late String addimage;
   late TextEditingController title;
@@ -53,6 +55,9 @@ class _ProfileState extends State<Profile> {
       data['men_birtday'] != null
           ? calculatorAge(data['men_birtday'])
           : age = null;
+      data['men_type'] != null
+          ? typework = typeWork(int.parse(data['men_type']))
+          : typework = "";
     });
   }
 
@@ -125,6 +130,29 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 227, 230, 241),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          )),
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 20),
+                          Text(
+                            'ประเภทการดูแล : $typework',
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 43, 103, 151),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   ProfileMenu(
                       text:
                           '${data['men_title']} ${data['men_fname']}  ${data['men_lname']}',

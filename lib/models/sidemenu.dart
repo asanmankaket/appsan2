@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:creative/views/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/bcome/_login.dart';
+import 'charofname.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({
@@ -19,7 +20,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  dynamic data;
+  dynamic data, typework;
   late String addimage;
   @override
   void initState() {
@@ -36,6 +37,9 @@ class _SideMenuState extends State<SideMenu> {
           ? addimage = data['men_image'].toString()
           : addimage =
               "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
+      data['men_type'] != null
+          ? typework = typeWork(int.parse(data['men_type']))
+          : typework = "";
     });
   }
 
@@ -65,29 +69,42 @@ class _SideMenuState extends State<SideMenu> {
                 padding: const EdgeInsets.only(left: 15),
                 child: data != null
                     ? GestureDetector(
-                        child: Row(
+                        child: Column(
                           children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(addimage),
-                              backgroundColor: Colors.white,
-                              radius: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '''${data['men_username']}
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(addimage),
+                                  backgroundColor: Colors.white,
+                                  radius: 40,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '''${data['men_username']}
 ${data['men_fname']}  ${data['men_lname']}''',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Text(
+                              'ประเภทการดูแล: $typework',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),

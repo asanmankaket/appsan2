@@ -1,20 +1,21 @@
 import 'dart:io';
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import '../../configs/api.dart';
+import '../../models/charofname.dart';
 
 class NextRegister extends StatefulWidget {
-  NextRegister(
+  const NextRegister(
       {Key? key,
       required this.username,
       required this.password,
       required this.name,
+      required this.title,
       required this.surname,
       required this.picdate})
       : super(key: key);
-  String username, password, name, surname, picdate;
+  final String title, username, password, name, surname, picdate;
   @override
   State<NextRegister> createState() => _Register();
 }
@@ -25,35 +26,12 @@ class _Register extends State<NextRegister> {
   TextEditingController latilongti = TextEditingController();
   TextEditingController skill = TextEditingController();
   TextEditingController rate = TextEditingController();
+  String revestWork = "";
 
   late int _currentIntValue = 32;
   final _formkey = GlobalKey<FormState>();
 
-  File? _image;
   bool isTapped = false;
-  Future getImage(ImageSource wayimage) async {
-    final images = await ImagePicker().pickImage(source: wayimage);
-    if (images == null) return;
-
-    final imageTemporary = File(images.path);
-    setState(() {
-      this._image = imageTemporary;
-    });
-  }
-
-  checkIdCard(citizenId) {
-    String idcard = citizenId;
-    int total = 0;
-    for (int i = 0, sum = 0; i < 12; i++) {
-      sum += int.parse(idcard[i]) * (13 - i);
-      total = sum;
-    }
-    if ((11 - total % 11) % 10 != int.parse(idcard[12])) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   DateTime? datenow = DateTime.now();
 
@@ -99,8 +77,10 @@ class _Register extends State<NextRegister> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(children: [
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 TextFieldRegis(
+                  keytype: true,
                   maxlength: 10,
                   labeltext: 'เบอร์โทรศัพท์',
                   controller: phonenumber,
@@ -108,58 +88,12 @@ class _Register extends State<NextRegister> {
                 ),
                 const SizedBox(height: 10),
                 TextFieldRegis(
+                  keytype: true,
                   maxlength: 13,
+                  checkCiz: true,
                   labeltext: 'หมายเลขบัตรประชาชน',
                   controller: citizenId,
                   textEmpty: 'โปรดกรอกหมายเลขบัตรประชาชน',
-                ),
-                // TextFormField(
-                //   maxLength: 13,
-                //   controller: citizenId,
-                //   validator: (value) {
-                //     if (checkIdCard(value)) {
-                //       return null;
-                //     } else {
-                //       "เลขบัตรประชาชนไม่ถูกต้อง";
-                //     }
-                //   },
-                // ),
-                // const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: const Icon(
-                        Icons.add_a_photo,
-                        size: 36.0,
-                      ),
-                      onPressed: () {
-                        getImage(ImageSource.camera);
-                      },
-                    ),
-                    SizedBox(
-                      width: 150.0,
-                      child: _image != null
-                          ? ClipOval(
-                              child: SizedBox.fromSize(
-                                size: const Size.fromRadius(80), // Image radius
-                                child: Image.file(_image!, fit: BoxFit.cover),
-                              ),
-                            )
-                          : Image.asset(
-                              'assets/images/avatar.png',
-                            ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.add_photo_alternate,
-                        size: 36.0,
-                      ),
-                      onPressed: () {
-                        getImage(ImageSource.gallery);
-                      },
-                    ),
-                  ],
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -175,7 +109,6 @@ class _Register extends State<NextRegister> {
                         },
                         decoration: const InputDecoration(
                           labelText: 'ประเภทการทำงาน',
-                          helperText: 'Tyep you password more 6 Charactor',
                           labelStyle: TextStyle(color: Colors.white),
                           hintStyle: TextStyle(color: Colors.white),
                           enabledBorder: OutlineInputBorder(
@@ -200,62 +133,26 @@ class _Register extends State<NextRegister> {
                     ),
                   ],
                 ),
-                TextFormField(
-                  readOnly: true,
-                  controller: rate,
-                  onTap: (() {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                              title: const Text('ค่าแรงต่อชั่วโมงโดยเฉลี่ย'),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text('32 บาทต่อชั่วโมง'),
-                                  NumberPicker(
-                                    value: _currentIntValue,
-                                    minValue: 0,
-                                    maxValue: 100,
-                                    step: 1,
-                                    haptics: true,
-                                    onChanged: (value) => setState(() {
-                                      _currentIntValue = value;
-                                    }),
-                                  ),
-                                  Text('Current value:' +
-                                      _currentIntValue.toString()),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(
-                                            context,
-                                            rate.text =
-                                                _currentIntValue.toString());
-                                      },
-                                      child: const Text('ยืนยัน'))
-                                ],
-                              ),
-                            ));
+                SizedBox(height: 30),
+                const Text(
+                  'อัตราค่าบริการโดยเฉลี่ยของแอพคือ',
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text('32 บาท/ชั่วโมง', style: TextStyle(fontSize: 20)),
+                NumberPicker(
+                  value: _currentIntValue,
+                  minValue: 0,
+                  maxValue: 300,
+                  step: 1,
+                  haptics: true,
+                  axis: Axis.horizontal,
+                  onChanged: (value) => setState(() {
+                    _currentIntValue = value;
                   }),
-                  decoration: const InputDecoration(
-                    labelText: 'ค่าแรงต่อชั่วโมง',
-                    helperText: 'Tyep you password more 6 Charactor',
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintStyle: TextStyle(color: Colors.white),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                  ),
+                ),
+                Text(
+                  'อัตราค่าบริการที่คุณเลือก :' + _currentIntValue.toString(),
+                  style: TextStyle(fontSize: 20),
                 ),
                 const SizedBox(
                   height: 20,
@@ -264,22 +161,23 @@ class _Register extends State<NextRegister> {
                   onPressed: () async {
                     if (_formkey.currentState!.validate()) {
                       _formkey.currentState?.save();
-                    }
 
-                    checkRegister(
-                        widget.username,
-                        widget.password,
-                        widget.name,
-                        widget.surname,
-                        widget.picdate,
-                        phonenumber.text,
-                        citizenId.text,
-                        "ผู้ป่วย",
-                        rate.text,
-                        context);
+                      checkRegister(
+                          widget.title,
+                          widget.username,
+                          widget.password,
+                          widget.name,
+                          widget.surname,
+                          widget.picdate,
+                          phonenumber.text,
+                          citizenId.text,
+                          dropdownValue!,
+                          _currentIntValue.toString(),
+                          context);
+                    }
                   },
                   child: const Text(
-                    'Confirm',
+                    'สมัครสมาชิก',
                     style: TextStyle(
                         color: Color.fromARGB(255, 45, 134, 156),
                         fontSize: 18,

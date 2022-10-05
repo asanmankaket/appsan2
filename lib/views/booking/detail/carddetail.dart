@@ -20,7 +20,11 @@ class _CarddetailState extends State<Carddetail> {
   @override
   void initState() {
     // TODO: implement initState
-    worktype = typeWork(int.parse(widget.data['book_type']));
+    if (widget.data['book_type'] != null) {
+      worktype = typeWork(int.parse(widget.data['book_type']));
+    } else {
+      worktype = "";
+    }
   }
 
   _makingPhoneCall(phone) async {

@@ -21,14 +21,14 @@ List<DropdownMenuItem<String>>? items = [
   const DropdownMenuItem(
     value: '1',
     child: Text(
-      'ดูแลผู้ป่วย',
+      'ดูแลผู้สูงอายุ',
       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
     ),
   ),
   const DropdownMenuItem(
     value: '2',
     child: Text(
-      'ดูแลผู้สูงอายุ',
+      'ดูแลผู้ป่วย',
       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
     ),
   ),
@@ -78,13 +78,14 @@ class _EditServiceState extends State<EditService> {
                 value: dropdownValue,
                 items: items,
                 onChanged: (value) {
-                  dropdownValue = value;
+                  setState(() {
+                    dropdownValue = value;
+                  });
                 },
               ),
               TextButton(
                   onPressed: () {
-                    revestWork = typeWorkRevers(dropdownValue!);
-                    sendDataProfile7(revestWork, context);
+                    sendDataProfile7(dropdownValue, context);
                   },
                   child: const Text('ยืนยันการแก้ไข'))
             ],

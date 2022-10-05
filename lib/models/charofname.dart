@@ -9,12 +9,16 @@ typeWork(int i) {
   }
 }
 
-typeWorkRevers(String i) {
-  if (i == "เด็ก") {
-    return "0";
-  } else if (i == "ผู้ป่วย") {
-    return "1";
+checkIdCard(citizenId) {
+  String idcard = citizenId;
+  int total = 0;
+  for (int i = 0, sum = 0; i < 12; i++) {
+    sum += int.parse(idcard[i]) * (13 - i);
+    total = sum;
+  }
+  if ((11 - total % 11) % 10 != int.parse(idcard[12])) {
+    return false;
   } else {
-    return "2";
+    return true;
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:creative/models/charofname.dart';
 import 'package:flutter/material.dart';
 
 class TextFormFieldModel extends StatelessWidget {
@@ -44,19 +45,29 @@ class TextFieldRegis extends StatelessWidget {
       @required this.labeltext,
       @required this.controller,
       @required this.textEmpty,
+      this.keytype,
+      this.checkCiz,
       this.maxlength})
       : super(key: key);
   final String? textEmpty;
   final String? labeltext;
+  final bool? keytype;
   final TextEditingController? controller;
   final int? maxlength;
+  final bool? checkCiz;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keytype != true ? null : TextInputType.number,
       maxLength: maxlength,
       controller: controller,
       validator: (value) {
+        if (checkCiz == true) {
+          if (checkIdCard(value) == false) {
+            return "รหัสบัตรประชาชนไม่ถูกต้อง";
+          }
+        }
         if (value!.isEmpty) {
           return textEmpty;
         } else {
@@ -65,14 +76,10 @@ class TextFieldRegis extends StatelessWidget {
       },
       style: const TextStyle(
           color: Color.fromARGB(255, 255, 255, 255), fontSize: 17),
-      keyboardType: TextInputType.text,
-      onChanged: (value) {
-        
-      },
+      onChanged: (value) {},
       decoration: InputDecoration(
         labelText: labeltext,
         labelStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-        helperText: textEmpty,
         hintText: labeltext,
         hintStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         enabledBorder: const OutlineInputBorder(
