@@ -28,10 +28,11 @@ class _ProfilePhoneState extends State<ProfilePhone> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SizedBox(
               child: TextFormField(
-                decoration: InputDecoration(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'เบอร์โทรศัพท์'),
                 controller: phone,
                 maxLength: 10,
@@ -58,9 +59,9 @@ class _ProfilePhoneState extends State<ProfilePhone> {
                 ],
               ),
               style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 primary: Colors.purple,
               ),
             )
