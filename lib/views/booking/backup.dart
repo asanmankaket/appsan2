@@ -13,11 +13,12 @@ class BackUp extends StatelessWidget {
         title: const Text('ประวัติย้อนหลัง'),
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(8),
+      body: Row(
         children: <Widget>[
           Container(
-            height: 50,
+            padding: const EdgeInsets.all(8),
+            height: 150,
+            width: 200,
             child: TextButton(
               onPressed: (() {
                 Navigator.push(
@@ -34,7 +35,9 @@ class BackUp extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Container(
-            height: 50,
+            padding: const EdgeInsets.all(8),
+            height: 150,
+            width: 200,
             child: TextButton(
               onPressed: (() {
                 Navigator.push(

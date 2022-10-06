@@ -289,7 +289,7 @@ class _ProfileState extends State<Profile> {
                               context,
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) =>
-                                      EditService()));
+                                      EditService(data: data['men_type'])));
                         }),
                   ],
                 ),

@@ -29,7 +29,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
         actions: [
           _image != null
               ? TextButton(

@@ -65,18 +65,18 @@ class _ProfileNameState extends State<ProfileName> {
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blue),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(50),
+                  Radius.circular(10),
                 ),
               ),
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.pink),
-                borderRadius: BorderRadius.all(Radius.circular(50)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(50),
+                  Radius.circular(10),
                 ),
               ),
             ),

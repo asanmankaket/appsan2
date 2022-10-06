@@ -1,10 +1,9 @@
 import 'package:creative/configs/api.dart';
-import 'package:creative/models/charofname.dart';
 import 'package:flutter/material.dart';
 
 class EditService extends StatefulWidget {
-  const EditService({Key? key}) : super(key: key);
-
+  const EditService({Key? key, this.data}) : super(key: key);
+  final dynamic data;
   @override
   State<EditService> createState() => _EditServiceState();
 }
@@ -35,7 +34,15 @@ List<DropdownMenuItem<String>>? items = [
 ];
 
 class _EditServiceState extends State<EditService> {
-  String revestWork = "";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.data != null) {
+      dropdownValue = widget.data;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +56,8 @@ class _EditServiceState extends State<EditService> {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 40,
               ),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
@@ -60,18 +67,18 @@ class _EditServiceState extends State<EditService> {
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(50),
+                      Radius.circular(10),
                     ),
                   ),
                   errorBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   focusedBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(50),
+                      Radius.circular(10),
                     ),
                   ),
                 ),
@@ -83,11 +90,33 @@ class _EditServiceState extends State<EditService> {
                   });
                 },
               ),
-              TextButton(
-                  onPressed: () {
-                    sendDataProfile7(dropdownValue, context);
-                  },
-                  child: const Text('ยืนยันการแก้ไข'))
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  sendDataProfile7(dropdownValue, context);
+                },
+                child: Wrap(
+                  children: const <Widget>[
+                    Icon(
+                      Icons.save,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("บันทึก",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  primary: Colors.purple,
+                ),
+              )
             ],
           ),
         ),

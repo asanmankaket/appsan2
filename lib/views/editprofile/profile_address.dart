@@ -139,14 +139,34 @@ class _ProfileAddressState extends State<ProfileAddress> {
                   }
                 },
               ),
-              TextButton(
-                  onPressed: () {
-                    sendDataProfile5(
-                        nameTambons, nameAmphures, nameProvinces, context);
-                  },
-                  child: const SizedBox(
-                    child: Text('บันทึก'),
-                  ))
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  sendDataProfile5(
+                      nameTambons, nameAmphures, nameProvinces, context);
+                },
+                child: Wrap(
+                  children: <Widget>[
+                    Icon(
+                      Icons.save,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("บันทึก",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  primary: Colors.purple,
+                ),
+              )
             ],
           ),
         ));
