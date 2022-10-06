@@ -280,8 +280,7 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
     url,
     headers: headers,
     body: jsonEncode({
-      ""
-          "tambons": tambons,
+      "tambons": tambons,
       "amphures": amphures,
       "provinces": provinces,
     }),
@@ -289,7 +288,9 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.pop(context);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }

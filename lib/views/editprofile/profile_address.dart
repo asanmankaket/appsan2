@@ -1,9 +1,8 @@
 import 'dart:convert';
+import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../configs/api.dart';
 import '../../configs/jsonprovinces.dart';
-import '../../models/textformfieldmodel.dart';
 
 class ProfileAddress extends StatefulWidget {
   const ProfileAddress({Key? key, required this.data}) : super(key: key);
@@ -16,9 +15,14 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController tambons = TextEditingController();
   TextEditingController amphures = TextEditingController();
   TextEditingController provinces = TextEditingController();
-  dynamic idaddress;
-  dynamic idProvinces = 0;
-  dynamic idAmphures = 0;
+  dynamic idaddress,
+      nameProvinces,
+      idProvinces,
+      nameAmphures,
+      idAmphures,
+      idTambons,
+      nameTambons;
+
   @override
   void initState() {
     super.initState();
@@ -41,62 +45,110 @@ class _ProfileAddressState extends State<ProfileAddress> {
           title: const Text('แก้ไขสถานที่'),
           backgroundColor: const Color.fromARGB(255, 160, 42, 207),
         ),
-        body: Column(
-          children: [
-            FutureBuilder(
-              future: readJsonDataProvinces(),
-              builder: (context, data) {
-                if (data.hasError) {
-                  return Center(child: Text("${data.error}"));
-                } else if (data.hasData) {
-                  var items = data.data as List<Provinces>;
-                  // return DropdownButton(items: , onChanged: onChanged)
-                  return DropdownButton(
-                      value: idProvinces,
-                      items: items.map((value) {
-                        return DropdownMenuItem(
-                            child: Text(items[value.id - 1].nameTh.toString()),
-                            value: value.id - 1);
-                      }).toList(),
-                      onChanged: (index) {
-                        setState(() {
-                          idProvinces = index;
+        body: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              FutureBuilder(
+                future: readJsonDataProvinces(),
+                builder: (context, data) {
+                  if (data.hasError) {
+                    return Center(child: Text("${data.error}"));
+                  } else if (data.hasData) {
+                    var items = data.data as List<Provinces>;
+                    // return DropdownButton(items: , onChanged: onChanged)
+                    return DropdownButton(
+                        items: items.map((value) {
+                          return DropdownMenuItem(
+                              child: Text(value.nameTh.toString()),
+                              value: [value.nameTh, value.id]);
+                        }).toList(),
+                        onChanged: (index) {
+                          setState(() {
+                            List itemindex = index as List;
+                            nameProvinces = itemindex[0];
+                            idProvinces = itemindex[1];
+                            print(nameProvinces);
+                          });
                         });
-                      });
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-            FutureBuilder(
-              future: readJsonDataAmphures(),
-              builder: (context, data) {
-                if (data.hasError) {
-                  return Center(child: Text("${data.error}"));
-                } else if (data.hasData) {
-                  var items = data.data as List<Amphures>;
-                  // return DropdownButton(items: , onChanged: onChanged)
-                  return DropdownButton(
-                      items: items.map((value) {
-                        return DropdownMenuItem(
-                            child: Text(items[1].nameTh.toString()),
-                            value: value.id);
-                      }).toList(),
-                      onChanged: (index) {
-                        setState(() {
-                          idAmphures = index;
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+              FutureBuilder(
+                future: readJsonDataAmphures(),
+                builder: (context, data) {
+                  if (data.hasError) {
+                    return Center(child: Text("${data.error}"));
+                  } else if (data.hasData) {
+                    var itemsdata = data.data as List<Amphures>;
+                    var items = itemsdata
+                        .where((element) => element.provinceId == idProvinces);
+
+                    return DropdownButton(
+                        items: items.map((value) {
+                          return DropdownMenuItem(
+                              child: Text(value.nameTh),
+                              value: [value.nameTh, value.id]);
+                        }).toList(),
+                        onChanged: (index) {
+                          setState(() {
+                            List itemindex = index as List;
+                            nameAmphures = itemindex[0];
+                            idAmphures = itemindex[1];
+                            print(nameAmphures);
+                          });
                         });
-                      });
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ],
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+              FutureBuilder(
+                future: readJsonDataTambons(),
+                builder: (context, data) {
+                  if (data.hasError) {
+                    return Center(child: Text("${data.error}"));
+                  } else if (data.hasData) {
+                    var itemsdata = data.data as List<Tambons>;
+                    var items = itemsdata
+                        .where((element) => element.amphureId == idAmphures);
+                    return DropdownButton(
+                        items: items.map((value) {
+                          return DropdownMenuItem(
+                              child: Text(value.nameTh),
+                              value: [value.nameTh, value.id]);
+                        }).toList(),
+                        onChanged: (index) {
+                          setState(() {
+                            List itemindex = index as List;
+                            nameTambons = itemindex[0];
+                            idTambons = itemindex[1];
+                            print(nameTambons);
+                          });
+                        });
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+              TextButton(
+                  onPressed: () {
+                    sendDataProfile5(
+                        nameTambons, nameAmphures, nameProvinces, context);
+                  },
+                  child: const SizedBox(
+                    child: Text('บันทึก'),
+                  ))
+            ],
+          ),
         ));
   }
 }
@@ -119,7 +171,7 @@ Future<List<Amphures>> readJsonDataAmphures() async {
 
 Future<List<Tambons>> readJsonDataTambons() async {
   final jsondatatambons =
-      await rootBundle.loadString('assets/json/thai_amphures.json');
+      await rootBundle.loadString('assets/json/thai_tambons.json');
   final listtambons = json.decode(jsondatatambons) as List<dynamic>;
   return listtambons.map((e) => Tambons.fromJson(e)).toList();
 }
