@@ -247,8 +247,12 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
 
   startScan() async {
     String? scanResult = await scanner.scan();
+    print(widget.data['book_id']);
+    print(scanResult);
     scanResult == widget.data['book_id']
-        ? confirmBook(widget.data['book_id'], 2, context)
+        ? {
+            confirmBook(widget.data['book_id'], 2, context),
+          }
         : const AlertDialog(
             content: Text('QRCode ไม่ถูกต้อง'),
           );

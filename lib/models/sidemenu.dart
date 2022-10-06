@@ -172,7 +172,7 @@ ${data['men_fname']}  ${data['men_lname']}''',
                 ),
                 backgroundColor: Colors.purple,
                 primary: const Color.fromARGB(255, 255, 255, 255),
-                textStyle: const TextStyle(fontSize: 20),
+                textStyle: const TextStyle(fontSize: 18),
               ),
               onPressed: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
