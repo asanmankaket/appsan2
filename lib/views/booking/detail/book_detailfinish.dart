@@ -1,5 +1,6 @@
 import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:url_launcher/url_launcher.dart';
@@ -246,15 +247,15 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
   }
 
   startScan() async {
+    print("-------------------------------------------------id   :" +
+        widget.data['book_id'].toString());
     String? scanResult = await scanner.scan();
-    print(widget.data['book_id']);
+
     print(scanResult);
-    scanResult == widget.data['book_id']
+    scanResult == widget.data['book_id'].toString()
         ? {
             confirmBook(widget.data['book_id'], 2, context),
           }
-        : const AlertDialog(
-            content: Text('QRCode ไม่ถูกต้อง'),
-          );
+        : EasyLoading.showError('Qrcode ไม่ถูกต้อง');
   }
 }

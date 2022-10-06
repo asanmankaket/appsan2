@@ -53,24 +53,64 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
             _image != null
                 ? ClipOval(
                     child: SizedBox.fromSize(
-                      size: Size.fromRadius(80), // Image radius
+                      size: Size.fromRadius(120), // Image radius
                       child: Image.file(_image!, fit: BoxFit.cover),
                     ),
                   )
                 : CircleAvatar(
-                    radius: 80,
+                    radius: 120,
                     backgroundImage: NetworkImage(widget.dataavatar),
                   ),
-            TextButton(
-                onPressed: () {
-                  getImage(ImageSource.camera);
-                },
-                child: Text('ถ่ายรูป')),
-            TextButton(
-                onPressed: () {
-                  getImage(ImageSource.gallery);
-                },
-                child: Text('อัปโหลดรูปภาพ'))
+            const SizedBox(height: 60),
+            SizedBox(
+              width: 330,
+              height: 80,
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    backgroundColor: Color.fromARGB(255, 156, 156, 156),
+                    primary: const Color.fromARGB(255, 255, 255, 255),
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    getImage(ImageSource.camera);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.camera),
+                      SizedBox(width: 20),
+                      Text('ถ่ายรูป'),
+                    ],
+                  )),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: 330,
+              height: 80,
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.fromLTRB(70, 15, 70, 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    backgroundColor: Color.fromARGB(255, 96, 192, 224),
+                    primary: const Color.fromARGB(255, 255, 255, 255),
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    getImage(ImageSource.gallery);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.photo_album),
+                      SizedBox(width: 20),
+                      Text('อัปโหลดรูปภาพ'),
+                    ],
+                  )),
+            )
           ],
         ),
       ),

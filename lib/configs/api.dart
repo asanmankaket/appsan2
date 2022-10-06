@@ -141,6 +141,9 @@ Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          (Route<dynamic> route) => false);
     } else {
       return null;
     }
