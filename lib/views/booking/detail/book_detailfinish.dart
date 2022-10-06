@@ -218,7 +218,7 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                   padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                   primary: Colors.green,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   )),
               onPressed: () {
                 startScan();
@@ -247,11 +247,7 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
   }
 
   startScan() async {
-    print("-------------------------------------------------id   :" +
-        widget.data['book_id'].toString());
     String? scanResult = await scanner.scan();
-
-    print(scanResult);
     scanResult == widget.data['book_id'].toString()
         ? {
             confirmBook(widget.data['book_id'], 2, context),
