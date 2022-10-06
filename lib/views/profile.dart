@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:age_calculator/age_calculator.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/profile_birtday.dart';
@@ -8,7 +6,6 @@ import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/charofname.dart';
