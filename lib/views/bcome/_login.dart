@@ -213,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 5,
                     ),
                     const Text(
-                      'or',
+                      'หรือ',
                       style: TextStyle(color: Colors.purple),
                     ),
                     const SizedBox(

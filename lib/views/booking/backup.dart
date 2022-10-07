@@ -14,11 +14,12 @@ class BackUp extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 160, 42, 207),
       ),
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             padding: const EdgeInsets.all(8),
             height: 150,
-            width: 200,
+            width: 150,
             child: TextButton(
               onPressed: (() {
                 Navigator.push(
@@ -37,7 +38,7 @@ class BackUp extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             height: 150,
-            width: 200,
+            width: 150,
             child: TextButton(
               onPressed: (() {
                 Navigator.push(
