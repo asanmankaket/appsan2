@@ -167,6 +167,8 @@ class _Register extends State<PageOne> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'โปรดกรอกรหัสผ่าน';
+                    } else if (value != password.text) {
+                      return 'รหัสผ่านไม่ตรงกัน';
                     } else {
                       return null;
                     }
