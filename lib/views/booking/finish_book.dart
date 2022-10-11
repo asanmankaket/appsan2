@@ -97,14 +97,14 @@ class _FinishBookingState extends State<FinishBooking> {
                                     ),
                                     const SizedBox(height: 5),
                                     Text('เริ่ม : ' +
-                                        DateFormat('dd-mm-yy' 'HH:mm').format(
+                                        DateFormat('dd-mm-yy').format(
                                             DateTime.parse(
-                                                '${data[i]['book_starttime']}'))),
+                                                '${data[i]['book_startdate']}'))),
                                     const SizedBox(height: 5),
                                     Text('สิ้นสุด : ' +
-                                        DateFormat('dd-mm-yy' 'HH:mm').format(
+                                        DateFormat('dd-mm-yy').format(
                                             DateTime.parse(
-                                                '${data[i]['book_endtime']}'))),
+                                                '${data[i]['book_enddate']}'))),
                                   ],
                                 ),
                               ),

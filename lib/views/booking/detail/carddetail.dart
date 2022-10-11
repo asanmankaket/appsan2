@@ -88,9 +88,8 @@ class _CarddetailState extends State<Carddetail> {
                   children: [
                     Text(
                       ' วันเริ่ม ' +
-                          DateFormat('  dd-mm-yy    KK:MM').format(
-                              DateTime.parse(
-                                  '${widget.data['book_starttime']}')),
+                          DateFormat('  dd-mm-yy ').format(DateTime.parse(
+                              '${widget.data['book_startdate']}')),
                       style: const TextStyle(
                         fontSize: 18,
                       ),
@@ -98,8 +97,8 @@ class _CarddetailState extends State<Carddetail> {
                     const SizedBox(height: 7),
                     Text(
                       'สิ้นสุด' +
-                          DateFormat('  dd-mm-yy    KK:MM').format(
-                              DateTime.parse('${widget.data['book_endtime']}')),
+                          DateFormat('  dd-mm-yy  ').format(
+                              DateTime.parse('${widget.data['book_enddate']}')),
                       style: const TextStyle(
                         fontSize: 18,
                       ),

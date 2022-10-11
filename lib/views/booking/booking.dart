@@ -103,7 +103,7 @@ class _BookingState extends State<Booking> {
                                       'เริ่ม : ' +
                                           DateFormat('dd-mm-yy KK:MM').format(
                                               DateTime.parse(
-                                                  '${data[i]['book_starttime']}')),
+                                                  '${data[i]['book_startdate']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),
@@ -112,7 +112,7 @@ class _BookingState extends State<Booking> {
                                       'ถึง :  ' +
                                           DateFormat('dd-mm-yy KK:MM').format(
                                               DateTime.parse(
-                                                  '${data[i]['book_endtime']}')),
+                                                  '${data[i]['book_enddate']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),

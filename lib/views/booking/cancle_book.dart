@@ -95,18 +95,18 @@ class _CancleBookingState extends State<CancleBooking> {
                                     ),
                                     Text(
                                       'เริ่ม : ' +
-                                          DateFormat('dd-mm-yy HH:mm').format(
+                                          DateFormat('dd-mm-yy').format(
                                               DateTime.parse(
-                                                  '${data[i]['book_starttime']}')),
+                                                  '${data[i]['book_startdate']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),
                                     ),
                                     Text(
                                       'ถึง :  ' +
-                                          DateFormat('dd-mm-yy HH:mm').format(
+                                          DateFormat('dd-mm-yy').format(
                                               DateTime.parse(
-                                                  '${data[i]['book_endtime']}')),
+                                                  '${data[i]['book_enddate']}')),
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),

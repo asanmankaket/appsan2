@@ -92,7 +92,7 @@ class _BookdetailState extends State<Bookdetail> {
                       Text(
                         'วันที่ : ' +
                             DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
-                                '${widget.data['book_starttime']}')),
+                                '${widget.data['book_startdate']}')),
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -102,8 +102,8 @@ class _BookdetailState extends State<Bookdetail> {
                       ),
                       Text(
                         'เวลาตั้งเเต่ :  ' +
-                            DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
-                                '${widget.data['book_endtime']}')),
+                            DateFormat('dd-mm-yy ').format(DateTime.parse(
+                                '${widget.data['book_enddate']}')),
                         style: const TextStyle(
                           fontSize: 16,
                         ),

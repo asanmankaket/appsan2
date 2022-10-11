@@ -15,27 +15,22 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController tambons = TextEditingController();
   TextEditingController amphures = TextEditingController();
   TextEditingController provinces = TextEditingController();
-  dynamic idaddress,
-      nameProvinces,
-      idProvinces,
-      nameAmphures,
-      idAmphures,
-      idTambons,
-      nameTambons;
+  int? idaddress, idProvinces, idAmphures, idTambons;
+  String? nameTambons, nameAmphures, nameProvinces;
+  int? provinceValue, amphureValue, tambonValue;
 
   @override
   void initState() {
     super.initState();
-
     widget.data['men_tambons'] != null
-        ? tambons.text = widget.data['men_tambons']
-        : tambons.text = "";
+        ? nameTambons = widget.data['men_tambons']
+        : nameTambons = "";
     widget.data['men_amphures'] != null
-        ? amphures.text = widget.data['men_amphures']
-        : amphures.text = "";
+        ? nameAmphures = widget.data['men_amphures']
+        : nameAmphures = "";
     widget.data['men_provinces'] != null
-        ? provinces.text = widget.data['men_provinces']
-        : provinces.text = "";
+        ? nameProvinces = widget.data['men_provinces']
+        : nameProvinces = "";
   }
 
   @override
@@ -57,19 +52,23 @@ class _ProfileAddressState extends State<ProfileAddress> {
                   } else if (data.hasData) {
                     var items = data.data as List<Provinces>;
                     // return DropdownButton(items: , onChanged: onChanged)
+                    var item1 = items.singleWhere(
+                        (element) => element.nameTh == nameProvinces);
+                    provinceValue = item1.id;
                     return DropdownButton(
+                        value: provinceValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
                               child: Text(value.nameTh.toString()),
-                              value: [value.nameTh, value.id]);
+                              value: value.id);
                         }).toList(),
                         onChanged: (index) {
                           setState(() {
-                            List itemindex = index as List;
-                            nameProvinces = itemindex[0];
-                            idProvinces = itemindex[1];
-                            print(nameProvinces);
+                            provinceValue = index as int;
                           });
+                          var select = items.singleWhere(
+                              (element) => element.id == index as int);
+                          nameProvinces = select.nameTh;
                         });
                   } else {
                     return const Center(
@@ -85,22 +84,30 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     return Center(child: Text("${data.error}"));
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Amphures>;
-                    var items = itemsdata
-                        .where((element) => element.provinceId == idProvinces);
+                    var items = itemsdata.where(
+                        (element) => element.provinceId == provinceValue);
+                    var itemdatabase = itemsdata.singleWhere(
+                        (element) => element.nameTh == nameAmphures);
+
+                    if (items.contains(itemdatabase)) {
+                      amphureValue = itemdatabase.id;
+                    } else {
+                      amphureValue = items.first.id;
+                    }
 
                     return DropdownButton(
+                        value: amphureValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
-                              child: Text(value.nameTh),
-                              value: [value.nameTh, value.id]);
+                              child: Text(value.nameTh), value: value.id);
                         }).toList(),
                         onChanged: (index) {
                           setState(() {
-                            List itemindex = index as List;
-                            nameAmphures = itemindex[0];
-                            idAmphures = itemindex[1];
-                            print(nameAmphures);
+                            amphureValue = index as int;
                           });
+                          var select = items.singleWhere(
+                              (element) => element.id == index as int);
+                          nameAmphures = select.nameTh;
                         });
                   } else {
                     return const Center(
@@ -117,20 +124,28 @@ class _ProfileAddressState extends State<ProfileAddress> {
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Tambons>;
                     var items = itemsdata
-                        .where((element) => element.amphureId == idAmphures);
+                        .where((element) => element.amphureId == amphureValue);
+                    var itemdatabase = itemsdata.singleWhere(
+                        (element) => element.nameTh == nameTambons);
+                    if (items.contains(itemdatabase)) {
+                      tambonValue = itemdatabase.id;
+                    } else {
+                      tambonValue = items.first.id;
+                    }
+
                     return DropdownButton(
+                        value: tambonValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
-                              child: Text(value.nameTh),
-                              value: [value.nameTh, value.id]);
+                              child: Text(value.nameTh), value: value.id);
                         }).toList(),
                         onChanged: (index) {
                           setState(() {
-                            List itemindex = index as List;
-                            nameTambons = itemindex[0];
-                            idTambons = itemindex[1];
-                            print(nameTambons);
+                            tambonValue = index as int;
                           });
+                          var select = items.singleWhere(
+                              (element) => element.id == index as int);
+                          nameTambons = select.nameTh;
                         });
                   } else {
                     return const Center(

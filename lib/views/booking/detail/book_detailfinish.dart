@@ -99,8 +99,8 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                     const SizedBox(height: 5),
                     Text(
                       'วันที่ : ' +
-                          DateFormat('dd-mm-yy KK:MM').format(DateTime.parse(
-                              '${widget.data['book_starttime']}')),
+                          DateFormat('dd-mm-yy').format(DateTime.parse(
+                              '${widget.data['book_startdate']}')),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -110,8 +110,8 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                     ),
                     Text(
                       'เวลาตั้งเเต่ :  ' +
-                          DateFormat('dd-mm-yy KK:MM').format(
-                              DateTime.parse('${widget.data['book_endtime']}')),
+                          DateFormat('dd-mm-yy').format(
+                              DateTime.parse('${widget.data['book_enddate']}')),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
