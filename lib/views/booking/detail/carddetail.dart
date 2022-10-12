@@ -87,7 +87,7 @@ class _CarddetailState extends State<Carddetail> {
                 child: Column(
                   children: [
                     Text(
-                      ' วันเริ่ม ' +
+                      ' ตั้งแต่วันที่ : ' +
                           DateFormat('  dd-mm-yy ').format(DateTime.parse(
                               '${widget.data['book_startdate']}')),
                       style: const TextStyle(
@@ -96,13 +96,17 @@ class _CarddetailState extends State<Carddetail> {
                     ),
                     const SizedBox(height: 7),
                     Text(
-                      'สิ้นสุด' +
+                      'จนถึงวันที่ :' +
                           DateFormat('  dd-mm-yy  ').format(
                               DateTime.parse('${widget.data['book_enddate']}')),
                       style: const TextStyle(
                         fontSize: 18,
                       ),
                     ),
+                    Text('ตั้งแต่เวลา : ' +
+                        widget.data['book_starttime'] +
+                        "  จนถึงเวลา  " +
+                        widget.data['book_endtime']),
                   ],
                 ),
               ),

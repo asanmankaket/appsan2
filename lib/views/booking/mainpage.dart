@@ -127,6 +127,9 @@ class _MainPageState extends State<MainPage> {
                                         fontSize: 16,
                                       ),
                                     ),
+                                    Text(data[i]['book_starttime'] +
+                                        "จนถึงเวลา" +
+                                        data[i]['book_endtime']),
                                   ],
                                 ),
                               ),

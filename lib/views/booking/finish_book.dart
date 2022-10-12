@@ -105,6 +105,9 @@ class _FinishBookingState extends State<FinishBooking> {
                                         DateFormat('dd-mm-yy').format(
                                             DateTime.parse(
                                                 '${data[i]['book_enddate']}'))),
+                                    Text(data[i]['book_starttime'] +
+                                        "จนถึงเวลา" +
+                                        data[i]['book_endtime']),
                                   ],
                                 ),
                               ),

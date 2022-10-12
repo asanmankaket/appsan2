@@ -111,6 +111,10 @@ class _CancleBookingState extends State<CancleBooking> {
                                         fontSize: 16,
                                       ),
                                     ),
+
+                                    Text(data[i]['book_starttime'] +
+                                        "จนถึงเวลา" +
+                                        data[i]['book_endtime']),
                                     // Text(
                                   ],
                                 ),
@@ -122,7 +126,7 @@ class _CancleBookingState extends State<CancleBooking> {
             ),
           ),
         ),
-      ), //หน้าปุ่มsidemenu
+      ),
     );
   }
 }

@@ -47,16 +47,19 @@ class _Register extends State<PageOne> {
   Widget build(BuildContext context) {
     void newDate() async {
       selectdate = await showDatePicker(
-          context: context,
-          initialDate: DateTime(
-            DateTime.now().year - 11,
-            DateTime.now().month,
-          ),
-          firstDate: DateTime(
-            DateTime.now().year - 80,
-            DateTime.now().month,
-          ),
-          lastDate: DateTime(DateTime.now().year - 10, DateTime.now().month));
+        context: context,
+        initialDate: DateTime(
+          DateTime.now().year - 11,
+          DateTime.now().month,
+        ),
+        firstDate: DateTime(
+          DateTime.now().year - 80,
+          DateTime.now().month,
+        ),
+        lastDate: DateTime(DateTime.now().year - 10, DateTime.now().month),
+        selectableDayPredicate: (DateTime val) =>
+            val.weekday == 5 || val.weekday == 6 ? false : true,
+      );
       if (selectdate != null) {
         setState(() {
           datenow = selectdate;
