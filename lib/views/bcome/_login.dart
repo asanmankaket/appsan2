@@ -191,8 +191,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                       onPressed: () async {
                         await checkLogin(username.text, password.text, context);
-                        // Navigator.pushNamedAndRemoveUntil(context,
-                        //     "/Page1", (Route<dynamic> route) => false);
                       },
                       child: const Text(
                         'เข้าสู่ระบบ',
