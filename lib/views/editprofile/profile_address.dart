@@ -24,13 +24,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
     super.initState();
     widget.data['men_tambons'] != null
         ? nameTambons = widget.data['men_tambons']
-        : nameTambons = "";
+        : nameTambons = "กรุงเทพมหานคร";
     widget.data['men_amphures'] != null
         ? nameAmphures = widget.data['men_amphures']
-        : nameAmphures = "";
+        : nameAmphures = "เขตพระนคร";
     widget.data['men_provinces'] != null
         ? nameProvinces = widget.data['men_provinces']
-        : nameProvinces = "";
+        : nameProvinces = "พระบรมมหาราชวัง";
   }
 
   @override
