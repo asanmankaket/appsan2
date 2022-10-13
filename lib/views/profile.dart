@@ -127,28 +127,15 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 227, 230, 241),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          )),
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 20),
-                          Text(
-                            'ประเภทการดูแล : $typework',
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 43, 103, 151),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  ProfileMenu(
+                    text: "ประเภทการดูแล  :  $typework",
+                    press: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  EditService(data: data['men_type'])));
+                    },
                   ),
                   ProfileMenu(
                       text:
