@@ -1,6 +1,5 @@
 import 'package:creative/views/booking/detail/book_detailfinish.dart';
 import 'package:flutter/material.dart';
-import 'package:creative/views/booking/detail/book_detail.dart';
 import 'package:intl/intl.dart';
 import '../../configs/api.dart';
 import '../../models/sidemenu.dart';

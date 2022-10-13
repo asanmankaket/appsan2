@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMaps extends StatefulWidget {
-  GoogleMaps({Key? key, required this.data}) : super(key: key);
-  dynamic data;
+  const GoogleMaps({Key? key, required this.data}) : super(key: key);
+  final dynamic data;
   @override
   State<GoogleMaps> createState() => _GoogleMapsState();
 }

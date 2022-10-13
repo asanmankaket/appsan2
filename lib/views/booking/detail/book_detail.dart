@@ -19,7 +19,7 @@ class _BookdetailState extends State<Bookdetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     if (widget.data['book_type'] != null) {
       worktype = typeWork(int.parse(widget.data['book_type']));
     } else {
@@ -85,8 +85,8 @@ class _BookdetailState extends State<Bookdetail> {
                   child: Column(
                     children: [
                       Text('ราคาต่อชั่วโมง ${widget.data['book_result']}',
-                          style: TextStyle(fontSize: 17)),
-                      SizedBox(
+                          style: const TextStyle(fontSize: 17)),
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
@@ -140,7 +140,7 @@ class _BookdetailState extends State<Bookdetail> {
                     Text(
                       worktype,
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

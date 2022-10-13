@@ -24,13 +24,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
     super.initState();
     widget.data['men_tambons'] != null
         ? nameTambons = widget.data['men_tambons']
-        : provinceValue = 1;
+        : provinceValue;
     widget.data['men_amphures'] != null
         ? nameAmphures = widget.data['men_amphures']
-        : amphureValue = 1001;
+        : amphureValue;
     widget.data['men_provinces'] != null
         ? nameProvinces = widget.data['men_provinces']
-        : tambonValue = 100101;
+        : tambonValue;
   }
 
   @override
@@ -52,9 +52,11 @@ class _ProfileAddressState extends State<ProfileAddress> {
                   } else if (data.hasData) {
                     var items = data.data as List<Provinces>;
                     // return DropdownButton(items: , onChanged: onChanged)
-                    var item1 = items.singleWhere(
-                        (element) => element.nameTh == nameProvinces);
-                    provinceValue = item1.id;
+                    if (widget.data['men_provinces'] != null) {
+                      var item1 = items.singleWhere(
+                          (element) => element.nameTh == nameProvinces);
+                      provinceValue = item1.id;
+                    }
                     return DropdownButton(
                         value: provinceValue,
                         items: items.map((value) {
@@ -84,17 +86,14 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     return Center(child: Text("${data.error}"));
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Amphures>;
+                    var itemdatabase;
                     var items = itemsdata.where(
                         (element) => element.provinceId == provinceValue);
-                    var itemdatabase = itemsdata.singleWhere(
-                        (element) => element.nameTh == nameAmphures);
-
-                    if (items.contains(itemdatabase)) {
+                    if (widget.data['men_amphures'] != null) {
+                      itemdatabase = itemsdata.singleWhere(
+                          (element) => element.nameTh == nameAmphures);
                       amphureValue = itemdatabase.id;
-                    } else {
-                      amphureValue = items.first.id;
                     }
-
                     return DropdownButton(
                         value: amphureValue,
                         items: items.map((value) {
@@ -123,14 +122,17 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     return Center(child: Text("${data.error}"));
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Tambons>;
+                    var itemdatabase;
                     var items = itemsdata
                         .where((element) => element.amphureId == amphureValue);
-                    var itemdatabase = itemsdata.singleWhere(
-                        (element) => element.nameTh == nameTambons);
-                    if (items.contains(itemdatabase)) {
+                    
+                    if (widget.data['men_tambons'] != null) {
+                      itemdatabase = itemsdata.singleWhere(
+                          (element) => element.nameTh == nameTambons);
                       tambonValue = itemdatabase.id;
-                    } else {
-                      tambonValue = items.first.id;
+                    }
+                    if (items.isEmpty) {
+                      items = itemsdata;
                     }
 
                     return DropdownButton(

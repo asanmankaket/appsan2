@@ -83,8 +83,8 @@ class _Register extends State<PageOne> {
           ],
         ),
         toolbarHeight: 120,
-        leading: BackButton(color: Colors.purple),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        leading: const BackButton(color: Colors.purple),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -283,10 +283,10 @@ class _Register extends State<PageOne> {
                   decoration: InputDecoration(
                     labelText: 'วันเดือนปีเกิด',
                     labelStyle: const TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     hintText: 'วันเดือนปีเกิด',
                     hintStyle: const TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     enabledBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromARGB(255, 255, 255, 255)),

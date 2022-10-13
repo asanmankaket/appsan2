@@ -1,8 +1,6 @@
 import 'package:creative/configs/api.dart';
 import 'package:flutter/material.dart';
-import 'package:creative/views/profile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../views/bcome/_login.dart';
+
 
 class SettingManu extends StatefulWidget {
   const SettingManu({

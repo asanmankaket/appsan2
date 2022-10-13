@@ -27,7 +27,8 @@ Future checkLogin(String username, String password, context) async {
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -77,7 +78,8 @@ Future checkRegister(
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -141,7 +143,8 @@ Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       return null;
@@ -185,7 +188,8 @@ Future sendDataProfile1(oldpassword, password, context) async {
     if (req.statusCode == 200) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -214,7 +218,8 @@ Future<dynamic> sendDataProfile2(
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       return null;
@@ -242,7 +247,7 @@ Future sendDataProfile3(File _image, context) async {
   if (respons.statusCode == 204) {
     EasyLoading.showSuccess('Great Success!');
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+        MaterialPageRoute(builder: (context) => const BottomBarMain(index: 3)),
         (Route<dynamic> route) => false);
   } else {
     EasyLoading.showError('Failed with Error');
@@ -264,7 +269,8 @@ Future sendDataProfile4(phone, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -291,7 +297,8 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -314,7 +321,8 @@ Future sendDataProfile6(birtday, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -337,7 +345,8 @@ Future sendDataProfile7(mentype, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 3)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 3)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
@@ -361,7 +370,8 @@ Future sendDataProfileWorkRate(rate, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');

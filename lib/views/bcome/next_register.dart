@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import '../../configs/api.dart';
-import '../../models/charofname.dart';
 
 class NextRegister extends StatefulWidget {
   const NextRegister(
@@ -133,12 +131,12 @@ class _Register extends State<NextRegister> {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 const Text(
                   'อัตราค่าบริการโดยเฉลี่ยของแอพคือ',
                   style: TextStyle(fontSize: 20),
                 ),
-                Text('32 บาท/ชั่วโมง', style: TextStyle(fontSize: 20)),
+                const Text('32 บาท/ชั่วโมง', style: TextStyle(fontSize: 20)),
                 NumberPicker(
                   value: _currentIntValue,
                   minValue: 0,
@@ -152,7 +150,7 @@ class _Register extends State<NextRegister> {
                 ),
                 Text(
                   'อัตราค่าบริการที่คุณเลือก :' + _currentIntValue.toString(),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 const SizedBox(
                   height: 20,

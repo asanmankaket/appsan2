@@ -2,7 +2,6 @@ import 'package:creative/configs/api.dart';
 import 'package:creative/models/button_sidemenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:creative/views/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/bcome/_login.dart';
 import 'charofname.dart';
@@ -98,7 +97,7 @@ ${data['men_fname']}  ${data['men_lname']}''',
                                 )
                               ],
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               'ประเภทการดูแล: $typework',
                               style: const TextStyle(

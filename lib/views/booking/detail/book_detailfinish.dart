@@ -22,7 +22,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     if (widget.data['book_type'] != null) {
       worktype = typeWork(int.parse(widget.data['book_type']));
     } else {
@@ -147,7 +147,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                   ),
                   Text(
                     worktype,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -157,7 +157,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
             ),
             Row(
               children: [
-                SizedBox(width: 25),
+                const SizedBox(width: 25),
                 TextButton(
                   onPressed: () {
                     _makingPhoneCall(widget.data['cust_phone']);

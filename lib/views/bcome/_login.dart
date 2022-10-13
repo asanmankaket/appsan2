@@ -1,7 +1,6 @@
 import 'package:creative/configs/config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../configs/api.dart';
 import '../battom_main.dart';
 
@@ -28,7 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (prefs.getString('token') != null) {
       headers?['Authorization'] = "bearer ${prefs.getString('token')}";
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => BottomBarMain(index: 0)),
+          MaterialPageRoute(
+              builder: (context) => const BottomBarMain(index: 0)),
           (Route<dynamic> route) => false);
     }
   }
@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Column(
+            // ignore: prefer_const_literals_to_create_immutables
             children: [
               const Center(
                 child: Text(
@@ -220,7 +221,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, "/PageOne");
-                        // Navigator.pushNamed(context, "/PageOne");
                       },
                       child: const Text('สมัครสมาชิก',
                           style: TextStyle(

@@ -59,7 +59,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
                   onTap: picdateTime,
                   controller: picdate,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.cake),
+                    icon: const Icon(Icons.cake),
                     filled: true,
                     fillColor: Colors.purple.shade100,
                     hintStyle: const TextStyle(color: Colors.purple),
@@ -76,7 +76,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
           ),
           // Text(picdate.text),
           // TextButton(onPressed: picdateTime, child: Text('แก้ไข'))
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           picdate.text !=
                   DateFormat("yyyy-MM-dd")
                       .format(DateTime.parse(widget.data['men_birtday']))
@@ -86,27 +86,27 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
                   },
                   child: Wrap(
                     children: <Widget>[
-                      Icon(
+                      const Icon(
                         Icons.save,
                         color: Colors.white,
                         size: 24.0,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Text("บันทึก",
+                      const Text("บันทึก",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:  BorderRadius.all(Radius.circular(20))),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     primary: Colors.purple,
                   ),
                 )
-              : Text(""),
+              : const Text(""),
         ],
       ),
     );

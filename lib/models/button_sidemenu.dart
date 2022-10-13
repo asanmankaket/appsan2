@@ -12,7 +12,7 @@ class ButtonSidemenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        style: TextButton.styleFrom(primary: Color.fromARGB(255, 67, 67, 67)),
+        style: TextButton.styleFrom(primary: const Color.fromARGB(255, 67, 67, 67)),
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(

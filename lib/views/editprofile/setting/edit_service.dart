@@ -36,7 +36,6 @@ List<DropdownMenuItem<String>>? items = [
 class _EditServiceState extends State<EditService> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.data != null) {
       dropdownValue = widget.data;
@@ -60,21 +59,21 @@ class _EditServiceState extends State<EditService> {
                 height: 40,
               ),
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'ประเภทการให้บริการ',
-                  labelStyle: const TextStyle(color: Colors.black),
-                  hintStyle: const TextStyle(color: Colors.black),
-                  enabledBorder: const OutlineInputBorder(
+                  labelStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Colors.black),
+                  enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
-                  errorBorder: const OutlineInputBorder(
+                  errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.pink),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  focusedBorder: const OutlineInputBorder(
+                  focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: Color.fromARGB(255, 100, 100, 100)),
                     borderRadius: BorderRadius.all(

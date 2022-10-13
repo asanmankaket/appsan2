@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../configs/api.dart';
 
 class ProfilePhoto extends StatefulWidget {
-  ProfilePhoto({Key? key, required this.dataavatar}) : super(key: key);
-  String dataavatar;
+  const ProfilePhoto({Key? key, required this.dataavatar}) : super(key: key);
+  final String dataavatar;
   @override
   State<ProfilePhoto> createState() => _ProfilePhotoState();
 }
@@ -39,21 +39,21 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                       sendDataProfile3(_image!, context);
                     }
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.check_rounded,
                     color: Colors.white,
                   ))
-              : Text(''),
+              : const Text(''),
         ],
       ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             _image != null
                 ? ClipOval(
                     child: SizedBox.fromSize(
-                      size: Size.fromRadius(120), // Image radius
+                      size: const Size.fromRadius(120), // Image radius
                       child: Image.file(_image!, fit: BoxFit.cover),
                     ),
                   )
@@ -71,7 +71,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    backgroundColor: Color.fromARGB(255, 156, 156, 156),
+                    backgroundColor: const Color.fromARGB(255, 156, 156, 156),
                     primary: const Color.fromARGB(255, 255, 255, 255),
                     textStyle: const TextStyle(fontSize: 20),
                   ),
@@ -80,13 +80,13 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.camera),
-                      SizedBox(width: 20),
-                      Text('ถ่ายรูป'),
+                      const Icon(Icons.camera),
+                      const SizedBox(width: 20),
+                      const Text('ถ่ายรูป'),
                     ],
                   )),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SizedBox(
               width: 330,
               height: 80,
@@ -96,7 +96,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    backgroundColor: Color.fromARGB(255, 96, 192, 224),
+                    backgroundColor: const Color.fromARGB(255, 96, 192, 224),
                     primary: const Color.fromARGB(255, 255, 255, 255),
                     textStyle: const TextStyle(fontSize: 20),
                   ),
@@ -105,9 +105,9 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.photo_album),
-                      SizedBox(width: 20),
-                      Text('อัปโหลดรูปภาพ'),
+                      const Icon(Icons.photo_album),
+                      const SizedBox(width: 20),
+                      const Text('อัปโหลดรูปภาพ'),
                     ],
                   )),
             )

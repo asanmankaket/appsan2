@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'booking/booking.dart';
 
 class BottomBarMain extends StatefulWidget {
-  BottomBarMain({Key? key, required this.index}) : super(key: key);
-  int index;
+  const BottomBarMain({Key? key, required this.index}) : super(key: key);
+  final int index;
   @override
   State<BottomBarMain> createState() => _BottomBarMainState();
 }
@@ -21,7 +21,8 @@ class _BottomBarMainState extends State<BottomBarMain> {
   ];
   @override
   void initState() {
-    widget.index != null ? _selectedIndex = widget.index : _selectedIndex = 0;
+    super.initState();
+    widget.index != 0 ? _selectedIndex = widget.index : _selectedIndex = 0;
   }
 
   void _onItemTapped(int index) {
@@ -37,9 +38,9 @@ class _BottomBarMainState extends State<BottomBarMain> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 163, 50, 255),
+        backgroundColor: const Color.fromARGB(255, 163, 50, 255),
         // selectedFontSize: 15,
-        unselectedItemColor: Color.fromARGB(255, 80, 79, 79),
+        unselectedItemColor: const Color.fromARGB(255, 80, 79, 79),
         showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -62,7 +63,7 @@ class _BottomBarMainState extends State<BottomBarMain> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor:const Color.fromARGB(255, 160, 42, 207),
+        selectedItemColor: const Color.fromARGB(255, 160, 42, 207),
         onTap: _onItemTapped,
       ),
     );

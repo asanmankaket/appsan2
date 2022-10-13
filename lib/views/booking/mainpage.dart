@@ -26,7 +26,6 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       data = item;
     });
-    print(data);
   }
 
   @override
@@ -37,7 +36,7 @@ class _MainPageState extends State<MainPage> {
           backgroundColor: const Color.fromARGB(255, 160, 42, 207),
           actions: <Widget>[
             IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.monetization_on_outlined,
                   color: Colors.white,
                 ),
@@ -45,7 +44,7 @@ class _MainPageState extends State<MainPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                          builder: (BuildContext context) => Editdata()));
+                          builder: (BuildContext context) => const Editdata()));
                 })
           ]),
       backgroundColor: Colors.purple.shade50,

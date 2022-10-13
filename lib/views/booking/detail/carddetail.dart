@@ -19,7 +19,7 @@ class _CarddetailState extends State<Carddetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     if (widget.data['book_type'] != null) {
       worktype = typeWork(int.parse(widget.data['book_type']));
     } else {
@@ -131,7 +131,7 @@ class _CarddetailState extends State<Carddetail> {
                   ),
                   Text(
                     worktype,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -139,7 +139,7 @@ class _CarddetailState extends State<Carddetail> {
             const SizedBox(height: 30),
             Row(
               children: [
-                SizedBox(width: 25),
+                const SizedBox(width: 25),
                 TextButton(
                   onPressed: () {
                     _makingPhoneCall(widget.data['cust_phone']);
@@ -211,7 +211,7 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                       confirmBook(widget.data['book_id'], 3, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => BottomBarMain(index: 1)),
+                              builder: (context) => const BottomBarMain(index: 1)),
                           (Route<dynamic> route) => false);
                     },
                     child: const Text(
@@ -235,7 +235,7 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                       confirmBook(widget.data['book_id'], 1, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => BottomBarMain(index: 1)),
+                              builder: (context) => const BottomBarMain(index: 1)),
                           (Route<dynamic> route) => false);
                     },
                     child: const Text(
