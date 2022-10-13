@@ -57,8 +57,6 @@ class _Register extends State<PageOne> {
           DateTime.now().month,
         ),
         lastDate: DateTime(DateTime.now().year - 10, DateTime.now().month),
-        selectableDayPredicate: (DateTime val) =>
-            val.weekday == 5 || val.weekday == 6 ? false : true,
       );
       if (selectdate != null) {
         setState(() {
