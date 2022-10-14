@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const Text(
-                'แอพเพื่อผู้ดูแล',
+                'แอปเพื่อผู้ดูแล',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

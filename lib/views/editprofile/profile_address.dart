@@ -24,13 +24,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
     super.initState();
     widget.data['men_tambons'] != null
         ? nameTambons = widget.data['men_tambons']
-        : provinceValue;
+        : provinceValue = 1;
     widget.data['men_amphures'] != null
         ? nameAmphures = widget.data['men_amphures']
-        : amphureValue;
+        : amphureValue = null;
     widget.data['men_provinces'] != null
         ? nameProvinces = widget.data['men_provinces']
-        : tambonValue;
+        : tambonValue = null;
   }
 
   @override
@@ -58,6 +58,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
                       provinceValue = item1.id;
                     }
                     return DropdownButton(
+                        isExpanded: true,
                         value: provinceValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
@@ -67,6 +68,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
                         onChanged: (index) {
                           setState(() {
                             provinceValue = index as int;
+                            amphureValue = null;
                           });
                           var select = items.singleWhere(
                               (element) => element.id == index as int);
@@ -86,15 +88,21 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     return Center(child: Text("${data.error}"));
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Amphures>;
-                    var itemdatabase;
-                    var items = itemsdata.where(
-                        (element) => element.provinceId == provinceValue);
+                    dynamic itemdatabase;
                     if (widget.data['men_amphures'] != null) {
                       itemdatabase = itemsdata.singleWhere(
                           (element) => element.nameTh == nameAmphures);
+                    }
+                    var items = itemsdata.where(
+                        (element) => element.provinceId == provinceValue);
+
+                    if (items.contains(itemdatabase)) {
                       amphureValue = itemdatabase.id;
+                    } else {
+                      amphureValue = items.first.id;
                     }
                     return DropdownButton(
+                        isExpanded: true,
                         value: amphureValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
@@ -103,6 +111,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
                         onChanged: (index) {
                           setState(() {
                             amphureValue = index as int;
+                            tambonValue = null;
                           });
                           var select = items.singleWhere(
                               (element) => element.id == index as int);
@@ -122,20 +131,20 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     return Center(child: Text("${data.error}"));
                   } else if (data.hasData) {
                     var itemsdata = data.data as List<Tambons>;
-                    var itemdatabase;
                     var items = itemsdata
                         .where((element) => element.amphureId == amphureValue);
-                    
+                    dynamic itemdatabase;
                     if (widget.data['men_tambons'] != null) {
                       itemdatabase = itemsdata.singleWhere(
                           (element) => element.nameTh == nameTambons);
+                    }
+                    if (items.contains(itemdatabase)) {
                       tambonValue = itemdatabase.id;
+                    } else {
+                      tambonValue = items.first.id;
                     }
-                    if (items.isEmpty) {
-                      items = itemsdata;
-                    }
-
                     return DropdownButton(
+                        isExpanded: true,
                         value: tambonValue,
                         items: items.map((value) {
                           return DropdownMenuItem(
@@ -156,7 +165,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
                   }
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   sendDataProfile5(
