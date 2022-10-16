@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:creative/route/route.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'views/bcome/_login.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
