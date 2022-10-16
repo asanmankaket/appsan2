@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/charofname.dart';
 import '../models/sidemenu.dart';
-import 'bcome/_login.dart';
+import 'bcome/login.dart';
 import 'editprofile/profile_phone.dart';
 import 'editprofile/profile_photo.dart';
 import 'editprofile/profilename.dart';
