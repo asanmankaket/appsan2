@@ -55,7 +55,6 @@ class _BottomBarMainState extends State<BottomBarMain> {
         backgroundColor: const Color.fromARGB(255, 76, 124, 172),
         // selectedFontSize: 15,
         unselectedItemColor: const Color.fromARGB(255, 80, 79, 79),
-        showUnselectedLabels: true,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

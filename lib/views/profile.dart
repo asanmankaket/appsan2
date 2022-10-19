@@ -72,7 +72,6 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // endDrawer: Drawer(),
       appBar: AppBar(
         title: const Text('ข้อมูลส่วนตัว'),
         backgroundColor: const Color.fromARGB(255, 76, 124, 172),
