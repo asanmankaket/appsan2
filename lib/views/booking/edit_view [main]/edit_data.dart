@@ -36,10 +36,11 @@ class _EditdataState extends State<Editdata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 212, 212, 212),
+      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       appBar: AppBar(
+        elevation: 0,
         title: const Text('อัตราค่าบริการ/เเก้ไขข้อมูล'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: data != null
           ? (Container(
@@ -57,12 +58,13 @@ class _EditdataState extends State<Editdata> {
                                 height: 180.0,
                                 width: 370.0,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 160, 42, 207),
+                                  color: Colors.white,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(25.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black54,
+                                      color: const Color.fromARGB(
+                                          255, 76, 124, 172),
                                       blurRadius: 6,
                                       offset: Offset(4, 5), // Shadow position
                                     ),
@@ -81,10 +83,11 @@ class _EditdataState extends State<Editdata> {
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
+                                        color: Colors.black)),
                                 SizedBox(height: 20),
                                 Divider(
-                                  color: Colors.black,
+                                  color:
+                                      const Color.fromARGB(255, 76, 124, 172),
                                   thickness: 3,
                                 ),
                                 SizedBox(height: 20),
@@ -100,14 +103,12 @@ class _EditdataState extends State<Editdata> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 20),
                   Text('กำหนดค่าบริการ',
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black)),
+                          color: Colors.white)),
                   SizedBox(
                     height: 10,
                   ),
@@ -115,7 +116,7 @@ class _EditdataState extends State<Editdata> {
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
-                    color: Color.fromARGB(255, 241, 196, 253),
+                    color: Colors.white,
                     child: Column(
                       children: [
                         SizedBox(
@@ -126,26 +127,41 @@ class _EditdataState extends State<Editdata> {
                         Text(
                           '${data[0]['RateAvg']} บาท/ชั่วโมง',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 64, 0, 255),
+                              color: const Color.fromARGB(255, 76, 124, 172),
                               fontSize: 20),
                         ),
                         SizedBox(height: 20),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 50,
+                  SizedBox(height: 50),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(25.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 76, 124, 172),
+                          blurRadius: 6,
+                          offset: Offset(4, 5), // Shadow position
+                        ),
+                      ],
+                    ),
+                    child: Column(children: [
+                      NumberPicker(
+                        axis: Axis.horizontal,
+                        value: _currentIntValue,
+                        minValue: 0,
+                        maxValue: 100,
+                        step: 1,
+                        onChanged: (value) =>
+                            setState(() => _currentIntValue = value),
+                      ),
+                      Text('Current value:' + _currentIntValue.toString()),
+                    ]),
                   ),
-                  NumberPicker(
-                    axis: Axis.horizontal,
-                    value: _currentIntValue,
-                    minValue: 0,
-                    maxValue: 100,
-                    step: 1,
-                    onChanged: (value) =>
-                        setState(() => _currentIntValue = value),
-                  ),
-                  Text('Current value:' + _currentIntValue.toString()),
                   SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
@@ -155,23 +171,25 @@ class _EditdataState extends State<Editdata> {
                       children: const <Widget>[
                         Icon(
                           Icons.save,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 76, 124, 172),
                           size: 24.0,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        SizedBox(width: 10),
                         Text("บันทึก",
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 76, 124, 172),
+                            )),
                       ],
                     ),
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      primary: Colors.purple,
-                    ),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 35, vertical: 8),
+                        primary: Colors.white),
                   )
                 ],
               ),
@@ -184,34 +202,3 @@ class _EditdataState extends State<Editdata> {
     );
   }
 }
-// Center(
-//           child: Column(
-//             children: [
-//               SizedBox(
-//                 height: 20,
-//               ),
-//               Text('NULL',
-//                   style: TextStyle(
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.blue)),
-//               SizedBox(
-//                 height: 15,
-//               ),
-//               Text('อัตราค่าบริการตามค่าเฉลี่ย',
-//                   style: TextStyle(
-//                     fontSize: 18,
-//                     fontWeight: FontWeight.bold,
-//                   )),
-//               SizedBox(
-//                 height: 20,
-//               ),
-//               Text('กำหนดค่าบริการ'),
-//               SizedBox(
-//                 height: 20,
-//               ),
-//               Text('กำหนดวันเวลาที่ให้บริการ....'),
-//             ],
-//           ),
-//         ),
-//       ),

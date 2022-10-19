@@ -12,33 +12,47 @@ class BottomBarMain extends StatefulWidget {
 }
 
 class _BottomBarMainState extends State<BottomBarMain> {
-  int _selectedIndex = 0;
+  PageController controller = PageController(initialPage: 0, keepPage: true);
+
   static const List<Widget> _widgetOptions = <Widget>[
     MainPage(),
     Booking(),
     BackUp(),
     Profile()
   ];
-  @override
-  void initState() {
-    super.initState();
-    widget.index != 0 ? _selectedIndex = widget.index : _selectedIndex = 0;
-  }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      controller.jumpToPage(index);
+      controller = PageController(initialPage: index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: PageView(
+        controller: controller,
+        onPageChanged: (index) {
+          _onItemTapped(index);
+        },
+        children: [
+          Center(
+            child: _widgetOptions.elementAt(0),
+          ),
+          Center(
+            child: _widgetOptions.elementAt(1),
+          ),
+          Center(
+            child: _widgetOptions.elementAt(2),
+          ),
+          Center(
+            child: _widgetOptions.elementAt(3),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 163, 50, 255),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
         // selectedFontSize: 15,
         unselectedItemColor: const Color.fromARGB(255, 80, 79, 79),
         showUnselectedLabels: true,
@@ -62,8 +76,8 @@ class _BottomBarMainState extends State<BottomBarMain> {
             label: 'บัญชี',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 160, 42, 207),
+        currentIndex: controller.initialPage,
+        selectedItemColor: const Color.fromARGB(255, 76, 124, 172),
         onTap: _onItemTapped,
       ),
     );

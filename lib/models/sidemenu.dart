@@ -3,7 +3,7 @@ import 'package:creative/models/button_sidemenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../views/bcome/login.dart';
+import '../views/login/login.dart';
 import 'charofname.dart';
 
 class SideMenu extends StatefulWidget {
@@ -53,7 +53,7 @@ class _SideMenuState extends State<SideMenu> {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 160, 42, 207),
+              color: const Color.fromARGB(255, 76, 124, 172),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -85,8 +85,7 @@ class _SideMenuState extends State<SideMenu> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '''${data['men_username']}
-${data['men_fname']}  ${data['men_lname']}''',
+                                        '${data['men_username']}\n${data['men_fname']}  ${data['men_lname']}',
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -129,35 +128,6 @@ ${data['men_fname']}  ${data['men_lname']}''',
                     text: "ดูประวัติ",
                     page: 2),
                 const SizedBox(height: 15),
-
-                // routeItem(
-                //   context,
-                //   const Icon(Icons.house),
-                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
-                //   'หน้าหลัก',
-                //   '/MainPage',
-                // ),
-                // routeItem(
-                //   context,
-                //   const Icon(Icons.event_note),
-                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
-                //   'นัดหมาย',
-                //   '/book',
-                // ),
-                // routeItem(
-                //   context,
-                //   const Icon(Icons.settings_backup_restore),
-                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
-                //   'ดูประวัติ',
-                //   '/Backup',
-                // ),
-                // routeItem(
-                //   context,
-                //   const Icon(Icons.map),
-                //   //แก้ตรงนี้--------------------------------------------------------------------------------------
-                //   'Map',
-                //   '/Map',
-                // ),
               ],
             ),
           ),
@@ -169,7 +139,7 @@ ${data['men_fname']}  ${data['men_lname']}''',
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0),
                 ),
-                backgroundColor: Colors.purple,
+                backgroundColor: Colors.red,
                 primary: const Color.fromARGB(255, 255, 255, 255),
                 textStyle: const TextStyle(fontSize: 18),
               ),

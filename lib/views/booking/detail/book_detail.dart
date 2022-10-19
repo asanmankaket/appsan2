@@ -32,7 +32,7 @@ class _BookdetailState extends State<Bookdetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ข้อมูลลูกค้า'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -139,8 +139,8 @@ class _BookdetailState extends State<Bookdetail> {
                     ),
                     Text(
                       worktype,
-                      style:
-                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

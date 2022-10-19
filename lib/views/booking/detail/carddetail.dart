@@ -41,7 +41,7 @@ class _CarddetailState extends State<Carddetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ข้อมูลลูกค้า'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -131,7 +131,8 @@ class _CarddetailState extends State<Carddetail> {
                   ),
                   Text(
                     worktype,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -211,7 +212,8 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                       confirmBook(widget.data['book_id'], 3, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const BottomBarMain(index: 1)),
+                              builder: (context) =>
+                                  const BottomBarMain(index: 1)),
                           (Route<dynamic> route) => false);
                     },
                     child: const Text(
@@ -235,7 +237,8 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                       confirmBook(widget.data['book_id'], 1, context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const BottomBarMain(index: 1)),
+                              builder: (context) =>
+                                  const BottomBarMain(index: 1)),
                           (Route<dynamic> route) => false);
                     },
                     child: const Text(

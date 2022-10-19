@@ -48,7 +48,7 @@ class _EditServiceState extends State<EditService> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('เเก้ไขประเภทการให้บริการ'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: Container(
         padding: const EdgeInsets.all(12),
@@ -101,19 +101,18 @@ class _EditServiceState extends State<EditService> {
                       color: Colors.white,
                       size: 24.0,
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    SizedBox(width: 10),
                     Text("บันทึก",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  primary: Colors.purple,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
+                  primary: const Color.fromARGB(255, 76, 124, 172),
                 ),
               )
             ],

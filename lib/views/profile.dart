@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/charofname.dart';
 import '../models/sidemenu.dart';
-import 'bcome/login.dart';
+import 'login/login.dart';
 import 'editprofile/profile_phone.dart';
 import 'editprofile/profile_photo.dart';
 import 'editprofile/profilename.dart';
@@ -75,7 +75,7 @@ class _ProfileState extends State<Profile> {
       // endDrawer: Drawer(),
       appBar: AppBar(
         title: const Text('ข้อมูลส่วนตัว'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
         actions: <Widget>[
           IconButton(
               icon: const Icon(
@@ -179,7 +179,7 @@ class _ProfileState extends State<Profile> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Colors.red,
                       primary: const Color.fromARGB(255, 255, 255, 255),
                       textStyle: const TextStyle(fontSize: 20),
                     ),
@@ -226,7 +226,7 @@ class _ProfileState extends State<Profile> {
               // padding: EdgeInsets.all(60),
               padding: const EdgeInsets.fromLTRB(20, 43, 20, 15),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 160, 42, 207),
+                color: const Color.fromARGB(255, 76, 124, 172),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -252,7 +252,7 @@ class _ProfileState extends State<Profile> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         style: TextButton.styleFrom(
-                          primary: Colors.purple,
+                          primary: const Color.fromARGB(255, 76, 124, 172),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -269,7 +269,7 @@ class _ProfileState extends State<Profile> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         style: TextButton.styleFrom(
-                          primary: Colors.purple,
+                          primary: const Color.fromARGB(255, 76, 124, 172),
                         ),
                         onPressed: () {
                           Navigator.push(

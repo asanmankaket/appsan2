@@ -31,8 +31,10 @@ class _CancleBookingState extends State<CancleBooking> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('การนัดหมายที่ยกเลิก'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        elevation: 0,
       ),
+      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
         child: SizedBox(
@@ -55,8 +57,8 @@ class _CancleBookingState extends State<CancleBooking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 186, 198, 201),
-                  shadowColor: const Color.fromARGB(255, 99, 108, 110),
+                  color: Colors.white,
+                  shadowColor: const Color.fromARGB(255, 76, 124, 172),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                   ),
@@ -67,12 +69,10 @@ class _CancleBookingState extends State<CancleBooking> {
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              const SizedBox(
-                                width: 20,
-                              ),
+                              const SizedBox(width: 30),
                               SizedBox(
-                                  width: 55.0,
-                                  height: 55.0,
+                                  width: 100,
+                                  height: 100,
                                   child: data[i]['cust_image'] != null
                                       ? CircleAvatar(
                                           backgroundImage: NetworkImage(
@@ -81,9 +81,7 @@ class _CancleBookingState extends State<CancleBooking> {
                                       : const CircleAvatar(
                                           backgroundColor: Colors.blue,
                                         )),
-                              const SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 5),
                               Container(
                                 padding: const EdgeInsets.all(25),
                                 child: Column(
@@ -98,23 +96,21 @@ class _CancleBookingState extends State<CancleBooking> {
                                           DateFormat('dd-mm-yy').format(
                                               DateTime.parse(
                                                   '${data[i]['book_startdate']}')),
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                      ),
+                                      style: const TextStyle(fontSize: 15),
                                     ),
                                     Text(
                                       'ถึง :  ' +
                                           DateFormat('dd-mm-yy').format(
                                               DateTime.parse(
                                                   '${data[i]['book_enddate']}')),
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                      ),
+                                      style: const TextStyle(fontSize: 15),
                                     ),
 
-                                    Text(data[i]['book_starttime'] +
-                                        "จนถึงเวลา" +
-                                        data[i]['book_endtime']),
+                                    Text(
+                                        data[i]['book_starttime'] +
+                                            "จนถึงเวลา" +
+                                            data[i]['book_endtime'],
+                                        style: const TextStyle(fontSize: 15)),
                                     // Text(
                                   ],
                                 ),

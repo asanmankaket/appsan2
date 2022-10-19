@@ -19,7 +19,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
   get children => null;
   late String result;
   dynamic worktype;
-
+  bool disfinish = true;
   @override
   void initState() {
     super.initState();
@@ -28,6 +28,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
     } else {
       worktype = "";
     }
+    checkdatediscancle();
   }
 
   _makingPhoneCall(phone) async {
@@ -39,12 +40,23 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
     }
   }
 
+  checkdatediscancle() {
+    DateTime datenow = DateTime.now();
+    DateTime? datestart = (DateTime.parse('${widget.data['book_enddate']}'));
+    final difference = datestart.difference(datenow);
+    if (difference.inDays <= 1) {
+      setState(() {
+        disfinish = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ข้อมูลลูกค้า'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -218,33 +230,35 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
               ],
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
-                  primary: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-              onPressed: () {
-                startScan();
-              },
-              child: SizedBox(
-                width: 170,
-                height: 30,
-                // ignore: prefer_const_literals_to_create_immutables
-                child: Wrap(children: [
-                  const Icon(Icons.check),
-                  const SizedBox(width: 20),
-                  const Text(
-                    'ยืนยันจบงาน',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ]),
-              ),
-            ),
+            disfinish != true
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                        primary: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    onPressed: () {
+                      startScan();
+                    },
+                    child: SizedBox(
+                      width: 170,
+                      height: 30,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      child: Wrap(children: [
+                        const Icon(Icons.check),
+                        const SizedBox(width: 20),
+                        const Text(
+                          'ยืนยันจบงาน',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ]),
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),

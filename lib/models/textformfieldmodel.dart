@@ -184,26 +184,22 @@ class TextRepassword extends StatelessWidget {
         obscureText: hidepassword,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.purple.shade100,
+          fillColor: const Color.fromARGB(255, 184, 191, 198),
           labelText: labeltext,
           hintText: hintText,
-          hintStyle: const TextStyle(color: Colors.purple),
+          hintStyle: const TextStyle(
+            color: Color.fromARGB(255, 76, 124, 172),
+          ),
           enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.purple),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 76, 124, 172),
+              ),
               borderRadius: BorderRadius.all(Radius.circular(50))),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple, width: 2.5),
+            borderSide: BorderSide(
+                color: Color.fromARGB(255, 76, 124, 172), width: 2.5),
             borderRadius: BorderRadius.all(Radius.circular(100)),
           ),
-          // suffixIcon: IconButton(
-          //     onPressed: (() {
-          //       hidepassword = !hidepassword;
-          //     }),
-          //     icon: Icon(
-          //       hidepassword ? Icons.visibility : Icons.visibility_off,
-          //       size: 30,
-          //       color: Colors.purple,
-          //     )),
         ));
   }
 }

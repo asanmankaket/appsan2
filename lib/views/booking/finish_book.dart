@@ -30,91 +30,94 @@ class _FinishBookingState extends State<FinishBooking> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('การนัดหมายที่สำเร็จ'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: RefreshIndicator(
-            onRefresh: () async {
-              startApi();
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+      width: MediaQuery.of(context).size.width,
+      child: RefreshIndicator(
+        onRefresh: () async {
+          startApi();
+        },
+        child: ListView.builder(
+          itemCount:
+              data?.length ?? 0, //เอาออกไปก่อนเพราะตัวdata.lengthยังพังอยู่
+          // itemCount: 3, //ใช้ตัวนี้แทนเพราะตัวdataพัง
+          itemBuilder: (context, i) => InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                      builder: (BuildContext context) =>
+                          Bookdetail(data: data[i])));
             },
-            child: ListView.builder(
-              itemCount:
-                  data?.length ?? 0, //เอาออกไปก่อนเพราะตัวdata.lengthยังพังอยู่
-              // itemCount: 3, //ใช้ตัวนี้แทนเพราะตัวdataพัง
-              itemBuilder: (context, i) => InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              Bookdetail(data: data[i])));
-                },
-                child: Card(
-                  elevation: 10,
-                  color: const Color.fromARGB(255, 111, 210, 174),
-                  shadowColor: const Color.fromARGB(255, 148, 148, 148),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(27),
-                  ),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              SizedBox(
-                                  width: 55.0,
-                                  height: 55.0,
-                                  child: data[i]['cust_image'] != null
-                                      ? CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              data[i]['cust_image']),
-                                        )
-                                      : const CircleAvatar(
-                                          backgroundColor: Colors.blue,
-                                        )),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(22),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
-                                      style: const TextStyle(fontSize: 15),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text('เริ่ม : ' +
-                                        DateFormat('dd-mm-yy').format(
-                                            DateTime.parse(
-                                                '${data[i]['book_startdate']}'))),
-                                    const SizedBox(height: 5),
-                                    Text('สิ้นสุด : ' +
-                                        DateFormat('dd-mm-yy').format(
-                                            DateTime.parse(
-                                                '${data[i]['book_enddate']}'))),
-                                    Text(data[i]['book_starttime'] +
-                                        "จนถึงเวลา" +
-                                        data[i]['book_endtime']),
-                                  ],
-                                ),
-                              ),
-                            ])
-                      ]),
-                ),
+            child: Card(
+              elevation: 10,
+              color: const Color.fromARGB(255, 76, 124, 172),
+              shadowColor: const Color.fromARGB(255, 76, 124, 172),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(27),
               ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          const SizedBox(width: 30),
+                          SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: data[i]['cust_image'] != null
+                                  ? CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(data[i]['cust_image']),
+                                    )
+                                  : const CircleAvatar(
+                                      backgroundColor: Colors.blue,
+                                    )),
+                          const SizedBox(width: 5),
+                          Container(
+                            padding: const EdgeInsets.all(22),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                Text(
+                                  'เริ่ม : ' +
+                                      DateFormat('dd-mm-yy').format(
+                                          DateTime.parse(
+                                              '${data[i]['book_startdate']}')),
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                Text(
+                                  'สิ้นสุด : ' +
+                                      DateFormat('dd-mm-yy').format(
+                                          DateTime.parse(
+                                              '${data[i]['book_enddate']}')),
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                Text(
+                                  data[i]['book_starttime'] +
+                                      "จนถึงเวลา" +
+                                      data[i]['book_endtime'],
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ])
+                  ]),
             ),
           ),
         ),

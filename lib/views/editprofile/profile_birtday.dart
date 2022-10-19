@@ -46,7 +46,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('วันเดือนปีเกิด'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: Column(
         children: [
@@ -58,16 +58,21 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
                   readOnly: true,
                   onTap: picdateTime,
                   controller: picdate,
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.cake),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.cake),
                     filled: true,
-                    fillColor: Colors.purple.shade100,
-                    hintStyle: const TextStyle(color: Colors.purple),
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.purple),
+                    fillColor: Color.fromARGB(255, 184, 191, 198),
+                    hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 76, 124, 172),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 76, 124, 172),
+                        ),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.purple, width: 2),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 76, 124, 172), width: 2),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     //     )),
@@ -85,25 +90,24 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
                     sendDataProfile6(picdate.text, context);
                   },
                   child: Wrap(
-                    children: <Widget>[
-                      const Icon(
+                    children: const <Widget>[
+                      Icon(
                         Icons.save,
                         color: Colors.white,
                         size: 24.0,
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text("บันทึก",
+                      SizedBox(width: 10),
+                      Text("บันทึก",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   style: ElevatedButton.styleFrom(
                     shape: const RoundedRectangleBorder(
-                        borderRadius:  BorderRadius.all(Radius.circular(20))),
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    primary: Colors.purple,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
+                    primary: const Color.fromARGB(255, 76, 124, 172),
                   ),
                 )
               : const Text(""),

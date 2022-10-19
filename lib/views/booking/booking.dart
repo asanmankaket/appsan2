@@ -29,10 +29,11 @@ class _BookingState extends State<Booking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       appBar: AppBar(
+        elevation: 0,
         title: const Text('นัดหมาย'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
@@ -56,7 +57,7 @@ class _BookingState extends State<Booking> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: Colors.purple.shade200,
+                  color: Colors.white,
                   shadowColor: const Color.fromARGB(255, 10, 91, 111),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
@@ -72,12 +73,10 @@ class _BookingState extends State<Booking> {
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              const SizedBox(
-                                width: 20,
-                              ),
+                              const SizedBox(width: 30),
                               SizedBox(
-                                  width: 55.0,
-                                  height: 55.0,
+                                  width: 100,
+                                  height: 100,
                                   child: data[i]['cust_image'] != null
                                       ? CircleAvatar(
                                           backgroundImage: NetworkImage(
@@ -86,9 +85,7 @@ class _BookingState extends State<Booking> {
                                       : const CircleAvatar(
                                           backgroundColor: Colors.blue,
                                         )),
-                              const SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 5),
                               Container(
                                 padding: const EdgeInsets.all(30),
                                 child: Column(

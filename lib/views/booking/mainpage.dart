@@ -33,7 +33,8 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
           title: const Text('รอการยืนยัน'),
-          backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(255, 76, 124, 172),
           actions: <Widget>[
             IconButton(
                 icon: const Icon(
@@ -47,7 +48,7 @@ class _MainPageState extends State<MainPage> {
                           builder: (BuildContext context) => const Editdata()));
                 })
           ]),
-      backgroundColor: Colors.purple.shade50,
+      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
         child: SizedBox(
@@ -70,8 +71,8 @@ class _MainPageState extends State<MainPage> {
                 },
                 child: Card(
                   elevation: 10,
-                  color: Colors.purple.shade100,
-                  shadowColor: const Color.fromARGB(255, 10, 91, 111),
+                  color: Colors.white,
+                  shadowColor: const Color.fromARGB(255, 76, 124, 172),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(27),
                   ),
@@ -82,12 +83,10 @@ class _MainPageState extends State<MainPage> {
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              const SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 30),
                               SizedBox(
-                                  width: 55.0,
-                                  height: 55.0,
+                                  width: 100.0,
+                                  height: 100.0,
                                   child: data[i]['cust_image'] != null
                                       ? CircleAvatar(
                                           backgroundImage: NetworkImage(
@@ -97,7 +96,7 @@ class _MainPageState extends State<MainPage> {
                                           backgroundColor: Colors.blue,
                                         )),
                               const SizedBox(
-                                width: 15,
+                                width: 5,
                               ),
                               Container(
                                 padding: const EdgeInsets.all(22),
@@ -114,7 +113,7 @@ class _MainPageState extends State<MainPage> {
                                               DateTime.parse(
                                                   '${data[i]['book_startdate']}')),
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 15,
                                       ),
                                     ),
                                     Text(
@@ -123,12 +122,17 @@ class _MainPageState extends State<MainPage> {
                                               DateTime.parse(
                                                   '${data[i]['book_enddate']}')),
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 15,
                                       ),
                                     ),
-                                    Text(data[i]['book_starttime'] +
-                                        "จนถึงเวลา" +
-                                        data[i]['book_endtime']),
+                                    Text(
+                                      data[i]['book_starttime'] +
+                                          "  จนถึงเวลา  " +
+                                          data[i]['book_endtime'],
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

@@ -33,7 +33,7 @@ class _RepasswordState extends State<Repassword> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('เปลี่ยนรหัสผ่าน'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: Container(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
@@ -56,7 +56,17 @@ class _RepasswordState extends State<Repassword> {
               hintText: 'ยืนยันรหัสผ่านใหม่',
               labeltext: 'ยืนยันรหัสผ่านใหม่',
             ),
+            const SizedBox(height: 30),
             TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.fromLTRB(100, 15, 100, 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  backgroundColor: Colors.red,
+                  primary: const Color.fromARGB(255, 255, 255, 255),
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
                 onPressed: () {
                   if (newpassword.text == confirmpassword.text) {
                     sendDataProfile1(

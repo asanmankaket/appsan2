@@ -22,7 +22,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('แก้ไขเบอร์โทรศัพท์'),
-        backgroundColor: const Color.fromARGB(255, 160, 42, 207),
+        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       ),
       body: Container(
         padding: const EdgeInsets.all(30),
@@ -50,19 +50,18 @@ class _ProfilePhoneState extends State<ProfilePhone> {
                     color: Colors.white,
                     size: 24.0,
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
+                  SizedBox(width: 10),
                   Text("บันทึก",
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ],
               ),
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                primary: Colors.purple,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
+                primary: const Color.fromARGB(255, 76, 124, 172),
               ),
             )
           ],
