@@ -235,6 +235,7 @@ Future<dynamic> sendDataProfile2(
 }
 
 Future sendDataProfile3(File _image, context) async {
+  EasyLoading.show(status: 'loading...');
   final prefs =
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');

@@ -111,7 +111,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                     const SizedBox(height: 5),
                     Text(
                       'ตั้งแต่วันที่ : ' +
-                          DateFormat('dd-mm-yy').format(DateTime.parse(
+                          DateFormat('dd-MM-yyyy').format(DateTime.parse(
                               '${widget.data['book_startdate']}')),
                       style: const TextStyle(
                         fontSize: 16,
@@ -122,7 +122,7 @@ class _BookdetailFinishState extends State<BookdetailFinish> {
                     ),
                     Text(
                       'จนถึงวันที่ :  ' +
-                          DateFormat('dd-mm-yy').format(
+                          DateFormat('dd-MM-yyyy').format(
                               DateTime.parse('${widget.data['book_enddate']}')),
                       style: const TextStyle(
                         fontSize: 16,

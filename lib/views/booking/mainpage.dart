@@ -137,7 +137,7 @@ class _MainPageState extends State<MainPage> {
                                               ),
                                               Text(
                                                 'เริ่ม : ' +
-                                                    DateFormat('dd-mm-yy')
+                                                    DateFormat('dd-MM-yyyy')
                                                         .format(DateTime.parse(
                                                             '${data[i]['book_startdate']}')),
                                                 style: const TextStyle(
@@ -146,7 +146,7 @@ class _MainPageState extends State<MainPage> {
                                               ),
                                               Text(
                                                 'ถึง :  ' +
-                                                    DateFormat('dd-mm-yy')
+                                                    DateFormat('dd-MM-yyyy')
                                                         .format(DateTime.parse(
                                                             '${data[i]['book_enddate']}')),
                                                 style: const TextStyle(
