@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
+import '../models/avatar.dart';
 import '../models/charofname.dart';
 import '../models/sidemenu.dart';
 import 'login/login.dart';
@@ -43,12 +44,9 @@ class _ProfileState extends State<Profile> {
     //เอาตัวidของcustomerมาใช้กับหน้านี้แล้วเอาค่าไปใส่ในidUser
     dynamic item = await getProfile();
     //ส่งค่าไปยัง getdataหรือตัวรับapi
+    print(item);
     setState(() {
       data = item;
-      data['men_image'] != null
-          ? addimage = data['men_image'].toString()
-          : addimage =
-              "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
       data['men_birtday'] != null
           ? calculatorAge(data['men_birtday'])
           : age = null;
@@ -98,9 +96,16 @@ class _ProfileState extends State<Profile> {
                       clipBehavior: Clip.none,
                       fit: StackFit.expand,
                       children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(addimage),
-                        ),
+                        if (data['men_image'] != null)
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(data['men_image']),
+                            radius: 80,
+                          )
+                        else
+                          CircleAvatar(
+                            backgroundImage: avatarUser(),
+                            radius: 80,
+                          ),
                         Positioned(
                             bottom: 0,
                             right: -25,
@@ -109,7 +114,7 @@ class _ProfileState extends State<Profile> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (context) => ProfilePhoto(
-                                            dataavatar: addimage,
+                                            dataavatar: data['men_image'],
                                           )),
                                 );
                               },

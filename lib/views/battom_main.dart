@@ -20,6 +20,13 @@ class _BottomBarMainState extends State<BottomBarMain> {
     BackUp(),
     Profile()
   ];
+  @override
+  void initState() {
+    super.initState();
+    if (widget.index != 10) {
+      controller = PageController(initialPage: widget.index);
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {

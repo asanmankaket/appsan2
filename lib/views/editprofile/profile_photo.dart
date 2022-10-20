@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../configs/api.dart';
+import '../../models/avatar.dart';
 
 class ProfilePhoto extends StatefulWidget {
   const ProfilePhoto({Key? key, required this.dataavatar}) : super(key: key);
@@ -57,10 +58,15 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                       child: Image.file(_image!, fit: BoxFit.cover),
                     ),
                   )
-                : CircleAvatar(
-                    radius: 120,
-                    backgroundImage: NetworkImage(widget.dataavatar),
-                  ),
+                : widget.dataavatar != ""
+                    ? CircleAvatar(
+                        radius: 150,
+                        backgroundImage: NetworkImage(widget.dataavatar),
+                      )
+                    : CircleAvatar(
+                        backgroundImage: avatarUser(),
+                        radius: 150,
+                      ),
             const SizedBox(height: 60),
             SizedBox(
               width: 330,
