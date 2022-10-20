@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/battom_main.dart';
 import 'package:path/path.dart';
@@ -14,29 +15,33 @@ String? apiURL = dotenv.get("API_HOST", fallback: "");
 
 Future checkLogin(String username, String password, context) async {
   EasyLoading.show(status: 'loading...');
-  Uri url = Uri.parse(apiURL! + '/mentor/login');
-  http
-      .post(
-    url,
-    headers: headers,
-    body: jsonEncode({"username": username, "password": password}),
-  )
-      .then((req) async {
-    if (req.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      var data = jsonDecode(req.body);
-      prefs.setString('token', data['token']);
-      prefs.setInt('idm', data['men_id']);
-      headers?['Authorization'] = "bearer ${data['token']}";
-      EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 0)),
-          (Route<dynamic> route) => false);
-    } else {
-      EasyLoading.showError('Failed with Error');
-    }
-  });
+  bool result = false;
+  result = await InternetConnectionChecker().hasConnection;
+  if (result == true) {
+    Uri url = Uri.parse(apiURL! + '/mentor/login');
+    http
+        .post(
+      url,
+      headers: headers,
+      body: jsonEncode({"username": username, "password": password}),
+    )
+        .then((req) async {
+      if (req.statusCode == 200) {
+        final prefs = await SharedPreferences.getInstance();
+        var data = jsonDecode(req.body);
+        prefs.setString('token', data['token']);
+        prefs.setInt('idm', data['men_id']);
+        headers?['Authorization'] = "bearer ${data['token']}";
+        EasyLoading.showSuccess('Great Success!');
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+      } else {
+        EasyLoading.showError('Failed with Error');
+      }
+    });
+  } else {
+    EasyLoading.showError('ไม่มีการเชื่อมต่อกับอินเทอร์เน็ต');
+  }
 }
 
 Future checkRegister(
@@ -52,42 +57,45 @@ Future checkRegister(
     String rate,
     context) async {
   EasyLoading.show(status: 'loading...');
+  bool result = false;
+  result = await InternetConnectionChecker().hasConnection;
+  if (result == true) {
+    Uri url = Uri.parse(apiURL! + '/mentor');
 
-  Uri url = Uri.parse(apiURL! + '/mentor');
-
-  http
-      .post(
-    url,
-    headers: headers,
-    body: jsonEncode({
-      "title": title,
-      "username": username,
-      "password": password,
-      "fname": name,
-      "lname": surname,
-      "phone": phone,
-      "idcard": citizenid,
-      "type": type,
-      "rate": rate,
-      "birtday": birtday
-    }),
-  )
-      .then((req) async {
-    if (req.statusCode == 201) {
-      final prefs = await SharedPreferences.getInstance();
-      var data = jsonDecode(req.body);
-      prefs.setString('token', data['token']);
-      prefs.setInt('idm', data['id']);
-      headers?['Authorization'] = "bearer ${data['token']}";
-      EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 0)),
-          (Route<dynamic> route) => false);
-    } else {
-      EasyLoading.showError('Failed with Error');
-    }
-  });
+    http
+        .post(
+      url,
+      headers: headers,
+      body: jsonEncode({
+        "title": title,
+        "username": username,
+        "password": password,
+        "fname": name,
+        "lname": surname,
+        "phone": phone,
+        "idcard": citizenid,
+        "type": type,
+        "rate": rate,
+        "birtday": birtday
+      }),
+    )
+        .then((req) async {
+      if (req.statusCode == 201) {
+        final prefs = await SharedPreferences.getInstance();
+        var data = jsonDecode(req.body);
+        prefs.setString('token', data['token']);
+        prefs.setInt('idm', data['id']);
+        headers?['Authorization'] = "bearer ${data['token']}";
+        EasyLoading.showSuccess('Great Success!');
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+      } else {
+        EasyLoading.showError('Failed with Error');
+      }
+    });
+  } else {
+    EasyLoading.showError('ไม่มีการเชื่อมต่อกับอินเทอร์เน็ต');
+  }
 }
 
 Future<dynamic> getdata(int idPage) async {
@@ -145,10 +153,8 @@ Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 0)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
     } else {
       return null;
     }
@@ -220,10 +226,8 @@ Future<dynamic> sendDataProfile2(
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 3)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
     } else {
       return null;
     }
@@ -249,9 +253,8 @@ Future sendDataProfile3(File _image, context) async {
   var respons = await http.Response.fromStream(await request.send());
   if (respons.statusCode == 204) {
     EasyLoading.showSuccess('Great Success!');
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const BottomBarMain(index: 3)),
-        (Route<dynamic> route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
   } else {
     EasyLoading.showError('Failed with Error');
   }
@@ -271,10 +274,8 @@ Future sendDataProfile4(phone, context) async {
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 3)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -299,10 +300,8 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
       .then((req) {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 3)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -323,10 +322,8 @@ Future sendDataProfile6(birtday, context) async {
       .then((req) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 3)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -347,10 +344,8 @@ Future sendDataProfile7(mentype, context) async {
       .then((req) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 3)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -371,10 +366,8 @@ Future sendDataProfileWorkRate(rate, context) async {
       .then((req) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const BottomBarMain(index: 0)),
-          (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }

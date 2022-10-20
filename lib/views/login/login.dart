@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 5),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/PageOne");
+                Navigator.pushNamed(context, "/PageRegister");
               },
               child: const Text('สมัครสมาชิก',
                   style: TextStyle(

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'next_register.dart';
 
-class PageOne extends StatefulWidget {
-  const PageOne({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<PageOne> createState() => _Register();
+  State<RegisterPage> createState() => _Register();
 }
 
-class _Register extends State<PageOne> {
+class _Register extends State<RegisterPage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();

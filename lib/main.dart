@@ -1,5 +1,6 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:creative/views/route/route.dart';
 import 'package:flutter/material.dart';
-import 'package:creative/route/route.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'views/login/login.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -14,7 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyHomePage(),
+      home: AnimatedSplashScreen(
+        duration: 1500,
+        splash: 'assets/images/logo.png',
+        splashIconSize: double.infinity,
+        nextScreen: const MyHomePage(),
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+      ),
       routes: routes,
       builder: EasyLoading.init(),
     );
