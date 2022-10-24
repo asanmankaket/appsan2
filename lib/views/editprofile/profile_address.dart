@@ -38,7 +38,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('แก้ไขสถานที่'),
-          backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+          backgroundColor: Colors.deepPurple,
         ),
         body: Center(
           child: Column(
@@ -230,7 +230,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-                  primary: const Color.fromARGB(255, 76, 124, 172),
+                  primary: Colors.deepPurple,
                 ),
               )
             ],

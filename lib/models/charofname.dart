@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 typeWork(int i) {
   switch (i) {
     case 0:
@@ -20,5 +23,28 @@ checkIdCard(citizenId) {
     return false;
   } else {
     return true;
+  }
+}
+
+typeIcon(String i) {
+  switch (i) {
+    case "0":
+      return Icon(
+        Icons.child_friendly_outlined,
+        color: Colors.pink[400],
+        size: 30,
+      );
+    case "1":
+      return const Icon(
+        MdiIcons.humanCane,
+        color: Colors.green,
+        size: 33,
+      );
+    case "2":
+      return const Icon(
+        Icons.accessible,
+        color: Colors.blue,
+        size: 30,
+      );
   }
 }

@@ -39,9 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.blue, Color.fromARGB(255, 222, 155, 177)])),
+              stops: [0.6, 1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.deepPurple, Colors.white])),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(

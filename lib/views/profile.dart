@@ -1,4 +1,5 @@
 import 'package:age_calculator/age_calculator.dart';
+import 'package:creative/views/editprofile/comment_page.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/profile_birtday.dart';
 import 'package:creative/views/editprofile/setting/edit_service.dart';
@@ -6,6 +7,7 @@ import 'package:creative/views/editprofile/setting/re_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creative/models/profilemenu.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../configs/api.dart';
 import '../models/avatar.dart';
@@ -33,7 +35,7 @@ class _ProfileState extends State<Profile> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController picdate = TextEditingController();
   DateTime? datenow = DateTime.now();
-
+  double ratting = 5;
   @override
   void initState() {
     super.initState();
@@ -47,6 +49,9 @@ class _ProfileState extends State<Profile> {
     print(item);
     setState(() {
       data = item;
+      data['averageRatting'] != null
+          ? ratting = data['averageRatting']
+          : ratting = 5;
       data['men_birtday'] != null
           ? calculatorAge(data['men_birtday'])
           : age = null;
@@ -72,7 +77,7 @@ class _ProfileState extends State<Profile> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('ข้อมูลส่วนตัว'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
         actions: <Widget>[
           IconButton(
               icon: const Icon(
@@ -88,7 +93,7 @@ class _ProfileState extends State<Profile> {
           ? SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   SizedBox(
                     height: 140,
                     width: 140,
@@ -114,7 +119,7 @@ class _ProfileState extends State<Profile> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (context) => ProfilePhoto(
-                                            dataavatar: data['men_image'],
+                                            data: data,
                                           )),
                                 );
                               },
@@ -130,7 +135,31 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const CommentPage()));
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RatingBarIndicator(
+                          //ดาวคะแนน---------------------**********************************
+                          rating: ratting,
+                          itemBuilder: (context, _) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                        ),
+                        Text('(${data['countScore']})'),
+                      ],
+                    ),
+                  ),
                   ProfileMenu(
                     text: "ประเภทการดูแล  :  $typework",
                     press: () {
@@ -195,12 +224,12 @@ class _ProfileState extends State<Profile> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const MyHomePage(),
-                            //แก้ตรงนี้--------------------------------------------------------------------------------------
                           ),
                           (route) => false);
                     },
                     child: const Text('ออกจากระบบ'),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             )
@@ -230,7 +259,7 @@ class _ProfileState extends State<Profile> {
               // padding: EdgeInsets.all(60),
               padding: const EdgeInsets.fromLTRB(20, 43, 20, 15),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 76, 124, 172),
+                color: Colors.deepPurple,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -253,10 +282,10 @@ class _ProfileState extends State<Profile> {
                         child: const Text(
                           'เปลี่ยนรหัสผ่าน',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         style: TextButton.styleFrom(
-                          primary: const Color.fromARGB(255, 76, 124, 172),
+                          primary: Colors.purple,
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -270,10 +299,10 @@ class _ProfileState extends State<Profile> {
                         child: const Text(
                           'เเก้ไขประเภทการบริการ',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         style: TextButton.styleFrom(
-                          primary: const Color.fromARGB(255, 76, 124, 172),
+                          primary: Colors.purple,
                         ),
                         onPressed: () {
                           Navigator.push(

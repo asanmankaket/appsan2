@@ -7,8 +7,8 @@ import '../../configs/api.dart';
 import '../../models/avatar.dart';
 
 class ProfilePhoto extends StatefulWidget {
-  const ProfilePhoto({Key? key, required this.dataavatar}) : super(key: key);
-  final String dataavatar;
+  const ProfilePhoto({Key? key, required this.data}) : super(key: key);
+  final dynamic data;
   @override
   State<ProfilePhoto> createState() => _ProfilePhotoState();
 }
@@ -19,10 +19,9 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
   Future getImage(ImageSource wayimage) async {
     final image = await ImagePicker().pickImage(source: wayimage);
     if (image == null) return;
-
     final imageTemporary = File(image.path);
     setState(() {
-      this._image = imageTemporary;
+      _image = imageTemporary;
     });
   }
 
@@ -30,7 +29,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
         actions: [
           _image != null
               ? TextButton(
@@ -58,10 +57,10 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
                       child: Image.file(_image!, fit: BoxFit.cover),
                     ),
                   )
-                : widget.dataavatar != ""
+                : widget.data['men_image'] != null
                     ? CircleAvatar(
                         radius: 150,
-                        backgroundImage: NetworkImage(widget.dataavatar),
+                        backgroundImage: NetworkImage(widget.data['men_image']),
                       )
                     : CircleAvatar(
                         backgroundImage: avatarUser(),

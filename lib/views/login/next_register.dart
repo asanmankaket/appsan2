@@ -1,5 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:io';
+
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import '../../configs/api.dart';
 
@@ -50,7 +55,7 @@ class _Register extends State<NextRegister> {
   bool isTapped = false;
 
   DateTime? datenow = DateTime.now();
-
+  File? _image;
   String? dropdownValue;
   List<DropdownMenuItem<String>>? items = [
     const DropdownMenuItem(
@@ -75,6 +80,15 @@ class _Register extends State<NextRegister> {
       ),
     ),
   ];
+  Future getImage(ImageSource wayimage) async {
+    final image = await ImagePicker().pickImage(source: wayimage);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+    setState(() {
+      _image = imageTemporary;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +99,9 @@ class _Register extends State<NextRegister> {
           decoration: const BoxDecoration(
               gradient: LinearGradient(
                   stops: [0.6, 1],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.blue, Color.fromARGB(255, 222, 155, 177)])),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.deepPurple, Colors.white])),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -164,6 +178,97 @@ class _Register extends State<NextRegister> {
               ),
               const SizedBox(height: 30),
               Container(
+                height: 281,
+                width: 380,
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 25.0,
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(25.0)),
+                child: Column(
+                  children: [
+                    const SizedBox(width: 10),
+                    Text(
+                      'อัพโหลดรูปโปรไฟล์',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const SizedBox(width: 20),
+                        _image != null
+                            ? Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                height: 200,
+                                width: 200,
+                                child: Image.file(_image!, fit: BoxFit.cover),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.deepPurple[200],
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(20))),
+                                height: 200,
+                                width: 200,
+                              ),
+                        const SizedBox(width: 30),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 70,
+                              height: 70,
+                              child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 156, 156, 156),
+                                    primary: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    textStyle: const TextStyle(fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    getImage(ImageSource.camera);
+                                  },
+                                  child: const Icon(Icons.camera)),
+                            ),
+                            const SizedBox(height: 30),
+                            SizedBox(
+                              width: 70,
+                              height: 70,
+                              child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 96, 192, 224),
+                                    primary: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    textStyle: const TextStyle(fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    getImage(ImageSource.gallery);
+                                  },
+                                  child: const Icon(Icons.photo_album)),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
                 height: 250.0,
                 width: 380.0,
                 padding: const EdgeInsets.symmetric(
@@ -203,7 +308,7 @@ class _Register extends State<NextRegister> {
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
                   if (_formkey.currentState!.validate()) {
@@ -220,23 +325,25 @@ class _Register extends State<NextRegister> {
                         citizenId.text,
                         dropdownValue!,
                         _currentIntValue.toString(),
+                        _image,
                         context);
                   }
                 },
                 child: const Text(
                   'สมัครสมาชิก',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 45, 134, 156),
-                      fontSize: 24,
+                      color: Colors.blue,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
+                        horizontal: 40, vertical: 10),
                     primary: Colors.white),
-              )
+              ),
+              const SizedBox(height: 50)
             ]),
           ),
         ),

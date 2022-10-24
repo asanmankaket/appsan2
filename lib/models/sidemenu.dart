@@ -1,4 +1,5 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/avatar.dart';
 import 'package:creative/models/button_sidemenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   dynamic data, typework;
-  late String addimage;
   @override
   void initState() {
     super.initState();
@@ -32,10 +32,6 @@ class _SideMenuState extends State<SideMenu> {
     dynamic item = await getProfile(); //ส่งค่าไปยัง getdataหรือตัวรับapi
     setState(() {
       data = item;
-      data['men_image'] != null
-          ? addimage = data['men_image'].toString()
-          : addimage =
-              "https://lvspvwkgiozgxaoaurky.supabase.co/storage/v1/object/public/avatar/user.png";
       data['men_type'] != null
           ? typework = typeWork(int.parse(data['men_type']))
           : typework = "";
@@ -52,16 +48,8 @@ class _SideMenuState extends State<SideMenu> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 76, 124, 172),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
+            decoration: const BoxDecoration(
+              color: Colors.deepPurple,
             ),
             child: SafeArea(
               child: Padding(
@@ -72,11 +60,18 @@ class _SideMenuState extends State<SideMenu> {
                           children: [
                             Row(
                               children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(addimage),
-                                  backgroundColor: Colors.white,
-                                  radius: 40,
-                                ),
+                                if (data != null)
+                                  if (data['cust_image'] != null)
+                                    CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(data['cust_image']),
+                                      radius: 40,
+                                    )
+                                  else
+                                    CircleAvatar(
+                                      backgroundImage: avatarUser(),
+                                      radius: 40,
+                                    ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: Column(

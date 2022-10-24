@@ -33,7 +33,7 @@ class _RepasswordState extends State<Repassword> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('เปลี่ยนรหัสผ่าน'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Container(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),

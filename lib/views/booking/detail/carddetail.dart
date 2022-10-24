@@ -1,4 +1,6 @@
 import 'package:creative/configs/api.dart';
+import 'package:creative/models/bookwidgetdetail.dart';
+import 'package:creative/models/dialogCancle.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../models/charofname.dart';
@@ -14,7 +16,7 @@ class Carddetail extends StatefulWidget {
 }
 
 class _CarddetailState extends State<Carddetail> {
-  get childrer => null;
+  PageController controller = PageController(initialPage: 0, keepPage: true);
   dynamic worktype;
 
   @override
@@ -41,7 +43,7 @@ class _CarddetailState extends State<Carddetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ข้อมูลลูกค้า'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -66,136 +68,129 @@ class _CarddetailState extends State<Carddetail> {
               '${widget.data['cust_title']} ${widget.data['cust_fname']} ${widget.data['cust_lname']}',
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
-            Text("ยอดรวมทั้งหมดคือ : ${widget.data['book_result']}  บาท"),
-            const Padding(
-              padding: EdgeInsets.only(left: 50),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'เวลานัด',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Container(
-                color: const Color.fromARGB(255, 150, 217, 234),
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  children: [
-                    Text(
-                      ' ตั้งแต่วันที่ : ' +
-                          DateFormat('  dd-MM-yyyy ').format(DateTime.parse(
-                              '${widget.data['book_startdate']}')),
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 7),
-                    Text(
-                      'จนถึงวันที่ :' +
-                          DateFormat('  dd-MM-yyyy  ').format(
-                              DateTime.parse('${widget.data['book_enddate']}')),
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text('ตั้งแต่เวลา : ' +
-                        widget.data['book_starttime'] +
-                        "  จนถึงเวลา  " +
-                        widget.data['book_endtime']),
-                  ],
-                ),
-              ),
-            ),
-            ClipRRect(
-              // borderRadius: BorderRadius.circular(10.0),
-              child: Column(
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 400,
+              child: PageView(
+                controller: controller,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                pageSnapping: true,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 50),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'ประเภทงาน',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                  Column(
+                    children: [
+                      BookPageDetail(
+                          icona: const Icon(
+                            Icons.calendar_month_outlined,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                          title: const Text('วันเริ่ม'),
+                          subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(DateTime.parse(
+                            '${widget.data['book_startdate']}',
+                          )))),
+                      BookPageDetail(
+                          icona: const Icon(
+                            Icons.calendar_month_outlined,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          title: const Text('วันจบ'),
+                          subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(DateTime.parse(
+                            '${widget.data['book_enddate']}',
+                          )))),
+                      BookPageDetail(
+                          icona: const Icon(
+                            Icons.access_time,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                          title: const Text('เวลาเริ่ม'),
+                          subtitle:
+                              Text(widget.data['book_starttime'] + ' น.')),
+                      BookPageDetail(
+                          icona: const Icon(
+                            Icons.access_time,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          title: const Text('เวลาจบงาน'),
+                          subtitle: Text(widget.data['book_endtime'] + ' น.')),
+                      BookPageDetail(
+                          icona: const Icon(
+                            Icons.attach_money,
+                            size: 35,
+                            color: Colors.green,
+                          ),
+                          title: const Text('ค่าบริการทั้งหมด'),
+                          subtitle: Text(
+                              '${widget.data['book_result'].toStringAsFixed(0)}  บาท')),
+                      BookPageDetail(
+                        icona: typeIcon(widget.data['book_type']),
+                        title: const Text('ประเภทการทำงาน'),
+                        subtitle: Text(worktype),
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    worktype,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                  Column(
+                    children: [
+                      CardPageButtonDetail(
+                          press: () {
+                            _makingPhoneCall(widget.data['cust_phone']);
+                          },
+                          icona: const Icon(
+                            Icons.call,
+                            color: Colors.blue,
+                            size: 35,
+                          ),
+                          title: const Text(
+                            'เบอร์โทรศัพท์',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          subtitle: Text(
+                            widget.data['cust_phone'],
+                            style: const TextStyle(color: Colors.blue),
+                          )),
+                      CardPageButtonDetail(
+                          press: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        GoogleMaps(
+                                          data: widget.data,
+                                        )));
+                          },
+                          icona: const Icon(Icons.pin_drop,
+                              color: Colors.red, size: 35),
+                          title: const Text(
+                            'ที่อยู่',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          subtitle: Text(
+                            '${widget.data['book_pinhome']} ตำบล  ${widget.data['book_tambons']} \n อำเภอ ${widget.data['book_amphures']} จังหวัด ${widget.data['book_provinces']}',
+                            style: const TextStyle(color: Colors.blue),
+                          )),
+                      const SizedBox(height: 2),
+                      Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 4, color: Colors.blue),
+                          ),
+                          height: 270,
+                          width: double.maxFinite,
+                          child: widget.data['book_images'] != null
+                              ? Image(
+                                  image:
+                                      NetworkImage(widget.data['book_images']),
+                                  fit: BoxFit.cover,
+                                )
+                              : const Center(child: Text('ไม่มีรูปเพิ่มเติม'))),
+                    ],
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              children: [
-                const SizedBox(width: 25),
-                TextButton(
-                  onPressed: () {
-                    _makingPhoneCall(widget.data['cust_phone']);
-                  },
-                  child: SizedBox(
-                      child: Row(
-                    children: [
-                      // ignore: prefer_const_constructors
-                      Icon(
-                        Icons.call,
-                        color: Colors.blue,
-                        size: 30,
-                      ),
-                      Text(
-                        '   ${widget.data['cust_phone']}',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(width: 120),
-                    ],
-                  )),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                const SizedBox(width: 25),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) => GoogleMaps(
-                                  data: widget.data,
-                                )));
-                  },
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.map,
-                        size: 30,
-                      ),
-                      const SizedBox(width: 15),
-                      Text(
-                        '''${widget.data['book_pinhome']} ${widget.data['book_tambons']} 
-${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
             ),
             const SizedBox(height: 15),
             Row(
@@ -209,12 +204,11 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                         primary: const Color.fromARGB(255, 203, 41, 0)),
                     onPressed: () {
-                      confirmBook(widget.data['book_id'], 3, context);
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const BottomBarMain(index: 1)),
-                          (Route<dynamic> route) => false);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => DialogCancleBook(
+                                bookId: widget.data['book_id'],
+                              ));
                     },
                     child: const Text(
                       'ยกเลิก',
@@ -234,7 +228,7 @@ ${widget.data['book_amphures']} ${widget.data['book_provinces']}''',
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                         primary: Colors.green),
                     onPressed: () {
-                      confirmBook(widget.data['book_id'], 1, context);
+                      confirmBook(widget.data['book_id'], 1, "", context);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) =>

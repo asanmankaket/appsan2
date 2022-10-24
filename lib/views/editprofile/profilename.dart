@@ -50,7 +50,7 @@ class _ProfileNameState extends State<ProfileName> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('เเก้ไขชื่อผู้ใช้'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -119,7 +119,7 @@ class _ProfileNameState extends State<ProfileName> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-              primary: const Color.fromARGB(255, 76, 124, 172),
+              primary: Colors.deepPurple,
             ),
           ),
 

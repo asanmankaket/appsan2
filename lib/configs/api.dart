@@ -44,55 +44,50 @@ Future checkLogin(String username, String password, context) async {
   }
 }
 
-Future checkRegister(
-    String title,
-    String username,
-    String password,
-    String name,
-    String surname,
-    String birtday,
-    String phone,
-    String citizenid,
-    String type,
-    String rate,
-    context) async {
+Future checkRegister(title, username, password, name, surname, birtday, phone,
+    citizenid, type, rate, _image, context) async {
   EasyLoading.show(status: 'loading...');
   bool result = false;
   result = await InternetConnectionChecker().hasConnection;
   if (result == true) {
+    var stream = http.ByteStream(_image.openRead());
+    var length = await _image.length();
     Uri url = Uri.parse(apiURL! + '/mentor');
-
-    http
-        .post(
-      url,
-      headers: headers,
-      body: jsonEncode({
-        "title": title,
-        "username": username,
-        "password": password,
-        "fname": name,
-        "lname": surname,
-        "phone": phone,
-        "idcard": citizenid,
-        "type": type,
-        "rate": rate,
-        "birtday": birtday
-      }),
-    )
-        .then((req) async {
-      if (req.statusCode == 201) {
-        final prefs = await SharedPreferences.getInstance();
-        var data = jsonDecode(req.body);
-        prefs.setString('token', data['token']);
-        prefs.setInt('idm', data['id']);
-        headers?['Authorization'] = "bearer ${data['token']}";
-        EasyLoading.showSuccess('Great Success!');
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
-      } else {
-        EasyLoading.showError('Failed with Error');
-      }
+    http.MultipartRequest request = http.MultipartRequest('POST', url);
+    request.headers.addAll(headers!);
+    request.files.add(
+      // replace file with your field name exampe: image
+      http.MultipartFile('photo', stream, length,
+          contentType: MediaType('image', 'jpeg'),
+          filename: basename(_image.path)),
+    );
+    request.fields.addAll({
+      "title": title,
+      "username": username,
+      "password": password,
+      "fname": name,
+      "lname": surname,
+      "phone": phone,
+      "idcard": citizenid,
+      "type": type,
+      "rate": rate,
+      "birtday": birtday
     });
+
+    var req = await http.Response.fromStream(await request.send());
+    print(req.statusCode);
+    if (req.statusCode == 201) {
+      final prefs = await SharedPreferences.getInstance();
+      var data = jsonDecode(req.body);
+      prefs.setString('token', data['token']);
+      prefs.setInt('idm', data['id']);
+      headers?['Authorization'] = "bearer ${data['token']}";
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
   } else {
     EasyLoading.showError('ไม่มีการเชื่อมต่อกับอินเทอร์เน็ต');
   }
@@ -141,20 +136,42 @@ Future<dynamic> getAvg() async {
   );
 }
 
-Future<dynamic> confirmBook(dynamic idb, int statusbook, context) async {
+Future<dynamic> confirmBook(
+    dynamic idb, int statusbook, textbook, context) async {
+  EasyLoading.showProgress(0.3, status: 'กำลังประมวลผล...');
   Uri url = Uri.parse(apiURL! +
       '/booking/$idb'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
   return await http
       .put(
     url,
     headers: headers,
-    body: jsonEncode({"bstatus": statusbook}),
+    body: jsonEncode({"bstatus": statusbook, "content": textbook}),
   )
       .then((req) {
     if (req.statusCode == 204) {
-      EasyLoading.showSuccess('สำเร็จ');
+      EasyLoading.showSuccess('สำเร็จ!');
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+    } else {
+      return null;
+    }
+  });
+}
+
+Future<dynamic> inputcomment() async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idMentor = prefs.getInt('idm');
+  Uri url = Uri.parse(apiURL! + '/review/$idMentor');
+  //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+  return await http
+      .get(
+    url,
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      var data = jsonDecode(req.body);
+      return data;
     } else {
       return null;
     }

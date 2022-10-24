@@ -22,7 +22,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('แก้ไขเบอร์โทรศัพท์'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Container(
         padding: const EdgeInsets.all(30),
@@ -61,7 +61,7 @@ class _ProfilePhoneState extends State<ProfilePhone> {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-                primary: const Color.fromARGB(255, 76, 124, 172),
+                primary: Colors.deepPurple,
               ),
             )
           ],

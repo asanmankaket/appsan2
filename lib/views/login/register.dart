@@ -74,10 +74,13 @@ class _Register extends State<RegisterPage> {
         child: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  stops: [0.6, 1],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.blue, Color.fromARGB(255, 222, 155, 177)])),
+                  stops: [0.7, 1],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.deepPurple,
+                    Color.fromARGB(255, 215, 215, 215)
+                  ])),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

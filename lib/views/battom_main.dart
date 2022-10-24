@@ -1,4 +1,5 @@
-import 'package:creative/views/booking/backup.dart';
+import 'package:creative/views/booking/cancle_book.dart';
+import 'package:creative/views/booking/finish_book.dart';
 import 'package:creative/views/booking/mainpage.dart';
 import 'package:creative/views/profile.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class _BottomBarMainState extends State<BottomBarMain> {
   static const List<Widget> _widgetOptions = <Widget>[
     MainPage(),
     Booking(),
-    BackUp(),
+    FinishBooking(),
+    CancleBooking(),
     Profile()
   ];
   @override
@@ -56,24 +58,31 @@ class _BottomBarMainState extends State<BottomBarMain> {
           Center(
             child: _widgetOptions.elementAt(3),
           ),
+          Center(
+            child: _widgetOptions.elementAt(4),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.purple,
         // selectedFontSize: 15,
         unselectedItemColor: const Color.fromARGB(255, 80, 79, 79),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'หาพี่เลี้ยง',
+            icon: Icon(Icons.move_to_inbox),
+            label: 'รับการจอง',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            label: 'นัดหมาย',
+            label: 'จอง',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'ประวัติ',
+            label: 'สำเร็จ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timer_off_outlined),
+            label: 'ยกเลิก',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -83,7 +92,7 @@ class _BottomBarMainState extends State<BottomBarMain> {
           ),
         ],
         currentIndex: controller.initialPage,
-        selectedItemColor: const Color.fromARGB(255, 76, 124, 172),
+        selectedItemColor: Colors.purple,
         onTap: _onItemTapped,
       ),
     );

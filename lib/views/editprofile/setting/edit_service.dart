@@ -48,7 +48,7 @@ class _EditServiceState extends State<EditService> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('เเก้ไขประเภทการให้บริการ'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Container(
         padding: const EdgeInsets.all(12),
@@ -112,7 +112,7 @@ class _EditServiceState extends State<EditService> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-                  primary: const Color.fromARGB(255, 76, 124, 172),
+                  primary: Colors.deepPurple,
                 ),
               )
             ],

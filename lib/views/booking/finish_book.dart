@@ -1,3 +1,6 @@
+import 'package:creative/models/avatar.dart';
+import 'package:creative/models/charofname.dart';
+import 'package:creative/models/sidemenu.dart';
 import 'package:flutter/material.dart';
 import '../../configs/api.dart';
 
@@ -30,94 +33,136 @@ class _FinishBookingState extends State<FinishBooking> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
-      width: MediaQuery.of(context).size.width,
-      child: RefreshIndicator(
-        onRefresh: () async {
-          startApi();
-        },
-        child: ListView.builder(
-          itemCount:
-              data?.length ?? 0, //เอาออกไปก่อนเพราะตัวdata.lengthยังพังอยู่
-          // itemCount: 3, //ใช้ตัวนี้แทนเพราะตัวdataพัง
-          itemBuilder: (context, i) => InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>
-                          Bookdetail(data: data[i])));
-            },
-            child: Card(
-              elevation: 10,
-              color: const Color.fromARGB(255, 76, 124, 172),
-              shadowColor: const Color.fromARGB(255, 76, 124, 172),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(27),
-              ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          const SizedBox(width: 30),
-                          SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: data[i]['cust_image'] != null
-                                  ? CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(data[i]['cust_image']),
-                                    )
-                                  : const CircleAvatar(
-                                      backgroundColor: Colors.blue,
-                                    )),
-                          const SizedBox(width: 5),
-                          Container(
-                            padding: const EdgeInsets.all(22),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+    return Scaffold(
+      drawer: const SideMenu(),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        elevation: 0,
+        title: const Text('การจองที่สำเร็จ'),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                stops: [0.4, 1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.deepPurple, Colors.white])),
+        width: MediaQuery.of(context).size.width,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            startApi();
+          },
+          child: ListView.builder(
+            itemCount: data?.length ?? 0,
+            itemBuilder: (context, i) => InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            Bookdetail(data: data[i])));
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                elevation: 5,
+                color: Colors.green[100],
+                shadowColor: Colors.grey,
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(width: 30),
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          fit: StackFit.expand,
+                          children: [
+                            if (data[i]['cust_image'] != null)
+                              CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(data[i]['cust_image']),
+                                radius: 80,
+                              )
+                            else
+                              CircleAvatar(
+                                backgroundImage: avatarUser(),
+                                radius: 80,
+                              ),
+                            Positioned(
+                                bottom: -15,
+                                right: -25,
+                                child: RawMaterialButton(
+                                  onPressed: null,
+                                  elevation: 2.0,
+                                  fillColor: const Color(0xFFF5F6F9),
+                                  child: typeIcon(data[i]['book_type']),
+                                  padding: const EdgeInsets.all(8),
+                                  shape: const CircleBorder(),
+                                )),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                   '${data[i]['cust_title']} ${data[i]['cust_fname']} ${data[i]['cust_lname']}',
-                                  style: const TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                                Text(
-                                  'เริ่ม : ' +
-                                      DateFormat('dd-MM-yyyy').format(
-                                          DateTime.parse(
-                                              '${data[i]['book_startdate']}')),
-                                  style: const TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                                Text(
-                                  'สิ้นสุด : ' +
-                                      DateFormat('dd-MM-yyyy').format(
-                                          DateTime.parse(
-                                              '${data[i]['book_enddate']}')),
-                                  style: const TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                                Text(
-                                  data[i]['book_starttime'] +
-                                      "จนถึงเวลา" +
-                                      data[i]['book_endtime'],
-                                  style: const TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                              ],
-                            ),
+                                  style: const TextStyle(fontSize: 17)),
+                              const SizedBox(height: 7),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.calendar_month_outlined,
+                                    color: Colors.green,
+                                  ),
+                                  Text(
+                                      ' เริ่ม : ' +
+                                          DateFormat('dd/MM/yyyy').format(
+                                              DateTime.parse(
+                                                  '${data[i]['book_startdate']}')),
+                                      style: const TextStyle(fontSize: 16)),
+                                ],
+                              ),
+                              const SizedBox(height: 3),
+                              Row(
+                                children: [
+                                  const Icon(Icons.calendar_month_outlined,
+                                      color: Colors.red),
+                                  Text(
+                                      ' สิ้นสุด : ' +
+                                          DateFormat('dd/MM/yyyy ').format(
+                                              DateTime.parse(
+                                                  '${data[i]['book_enddate']}')),
+                                      style: const TextStyle(fontSize: 16)),
+                                ],
+                              ),
+                              const SizedBox(height: 3),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.attach_money,
+                                    size: 28,
+                                    color: Colors.green,
+                                  ),
+                                  Text(
+                                      'ค่าบริการ : ${data[i]['book_result'].toStringAsFixed(0)}  บาท',
+                                      style: const TextStyle(fontSize: 16)),
+                                ],
+                              )
+                            ],
                           ),
-                        ])
-                  ]),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ]),
+              ),
             ),
           ),
         ),

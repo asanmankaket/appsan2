@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         splashIconSize: double.infinity,
         nextScreen: const MyHomePage(),
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: const Color.fromARGB(255, 45, 134, 156),
+        backgroundColor: Colors.deepPurple,
       ),
       routes: routes,
       builder: EasyLoading.init(),

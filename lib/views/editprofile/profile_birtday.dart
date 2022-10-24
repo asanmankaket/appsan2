@@ -46,7 +46,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('วันเดือนปีเกิด'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Column(
         children: [
@@ -107,7 +107,7 @@ class _ProfileBirtdayState extends State<ProfileBirtday> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-                    primary: const Color.fromARGB(255, 76, 124, 172),
+                    primary: Colors.deepPurple,
                   ),
                 )
               : const Text(""),
