@@ -33,7 +33,7 @@ class _BookingState extends State<Booking> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('การจองที่กำลังดำเนินการ'),
+        title: const Text('การจอง'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Container(

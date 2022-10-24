@@ -34,7 +34,7 @@ class _CancleBookingState extends State<CancleBooking> {
     return Scaffold(
       drawer: const SideMenu(),
       appBar: AppBar(
-        title: const Text('การนัดหมายที่ยกเลิก'),
+        title: const Text('การจองที่ยกเลิก'),
         backgroundColor: Colors.deepPurple,
         elevation: 0,
       ),
