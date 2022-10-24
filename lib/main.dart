@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: AnimatedSplashScreen(
         duration: 1500,
-        splash: 'assets/images/logo.png',
+        splash: 'assets/images/LGapp.png',
         splashIconSize: double.infinity,
         nextScreen: const MyHomePage(),
         splashTransition: SplashTransition.fadeTransition,

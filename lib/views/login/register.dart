@@ -69,36 +69,44 @@ class _Register extends State<RegisterPage> {
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 76, 124, 172),
-      appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.white,
-        ),
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formkey,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+      body: Form(
+        key: _formkey,
+        child: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  stops: [0.6, 1],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue, Color.fromARGB(255, 222, 155, 177)])),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
             child: Column(children: [
+              const SizedBox(height: 40),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
               const Text(
                 'สมัครสมาชิก',
                 style: TextStyle(fontSize: 45, color: Colors.white),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               TextFieldRegis(
                 labeltext: 'ชื่อผู้ใช้',
                 controller: username,
                 textEmpty: 'โปรดกรอกชื่อผู้ใช้',
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               //รหัสผ่าน
               TextFormField(
                 controller: password,
@@ -146,9 +154,7 @@ class _Register extends State<RegisterPage> {
                           color: Colors.white,
                         ))),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               //ยืนยันรหัสผ่าน
               TextFormField(
                 controller: confirmpassword,

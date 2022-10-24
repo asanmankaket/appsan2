@@ -79,21 +79,33 @@ class _Register extends State<NextRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
-      appBar: AppBar(
-        elevation: 0,
-        // title: const Text('สมัครสมาชิก'),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formkey,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+      body: Form(
+        key: _formkey,
+        child: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  stops: [0.6, 1],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue, Color.fromARGB(255, 222, 155, 177)])),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
             child: Column(children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 50),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
               const SizedBox(height: 20),
               TextFieldRegis(
                 keytype: true,
@@ -123,7 +135,7 @@ class _Register extends State<NextRegister> {
                           dropdownValue = value;
                         });
                       },
-                      dropdownColor: const Color.fromARGB(255, 154, 184, 213),
+                      dropdownColor: Colors.blue,
                       decoration: const InputDecoration(
                         labelText: 'ประเภทการทำงาน',
                         labelStyle: TextStyle(color: Colors.white),
