@@ -55,34 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 40,
                       fontWeight: FontWeight.bold),
                 ),
-              ),
-              const Text(
-                'แอปเพื่อผู้ดูแล',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300),
-              ),
-            ],
-          ),
-          toolbarHeight: 150,
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 76, 124, 172),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            const SizedBox(height: 70),
-            Form(
-              child: Center(
-                child: Container(
-                  height: 250.0,
-                  width: 380.0,
-                  padding: const EdgeInsets.symmetric(
+            Center(
+              child: Container(
+                height: 250.0,
+                width: 380.0,
+                padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 25.0,
                   ),
