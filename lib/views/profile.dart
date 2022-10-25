@@ -36,7 +36,7 @@ class _ProfileState extends State<Profile> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController picdate = TextEditingController();
   DateTime? datenow = DateTime.now();
-  double ratting = 5;
+  double ratting = 5.0;
   @override
   void initState() {
     super.initState();
@@ -49,8 +49,9 @@ class _ProfileState extends State<Profile> {
     setState(() {
       data = item;
       data['averageRatting'] != null
-          ? ratting = data['averageRatting']
-          : ratting = 5;
+          ? ratting = double.parse('${data['averageRatting']}')
+          : ratting = 5.0;
+
       data['men_birtday'] != null
           ? calculatorAge(data['men_birtday'])
           : age = null;

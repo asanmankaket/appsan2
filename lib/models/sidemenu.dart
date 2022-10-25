@@ -56,6 +56,10 @@ class _SideMenuState extends State<SideMenu> {
                 padding: const EdgeInsets.only(left: 15),
                 child: data != null
                     ? GestureDetector(
+                        onTap: (() {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/Page4', (Route<dynamic> route) => false);
+                        }),
                         child: Column(
                           children: [
                             Row(
@@ -118,9 +122,13 @@ class _SideMenuState extends State<SideMenu> {
                 const SizedBox(height: 15),
                 const ButtonSidemenu(
                     next: Icons.settings_backup_restore,
-                    text: "ดูประวัติ",
+                    text: "ประวัติที่สำเร็จ",
                     page: 2),
                 const SizedBox(height: 15),
+                const ButtonSidemenu(
+                    next: Icons.timer_off_outlined,
+                    text: "ประวัติที่ยกเลิก",
+                    page: 3),
               ],
             ),
           ),
