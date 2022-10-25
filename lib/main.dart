@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         duration: 1500,
         splash: 'assets/images/LGapp.png',
