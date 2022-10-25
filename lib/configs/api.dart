@@ -45,7 +45,7 @@ Future checkLogin(String username, String password, context) async {
 }
 
 Future checkRegister(title, username, password, name, surname, birtday, phone,
-    citizenid, type, rate, _image, context) async {
+    citizenid, type, rate, _image, datenow, context) async {
   EasyLoading.show(status: 'loading...');
   bool result = false;
   result = await InternetConnectionChecker().hasConnection;
@@ -71,11 +71,10 @@ Future checkRegister(title, username, password, name, surname, birtday, phone,
       "idcard": citizenid,
       "type": type,
       "rate": rate,
-      "birtday": birtday
+      "birtday": birtday,
+      "dateregis": datenow
     });
-
     var req = await http.Response.fromStream(await request.send());
-    print(req.statusCode);
     if (req.statusCode == 201) {
       final prefs = await SharedPreferences.getInstance();
       var data = jsonDecode(req.body);
@@ -84,7 +83,7 @@ Future checkRegister(title, username, password, name, surname, birtday, phone,
       headers?['Authorization'] = "bearer ${data['token']}";
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -117,9 +116,7 @@ Future<dynamic> getdata(int idPage) async {
 }
 
 Future<dynamic> getAvg() async {
-  Uri url = Uri.parse(apiURL! +
-      '/mentor/findAvg'); //รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
-//รับค่ามาจากiduser หรือตัวที่แชร์มาจากหน้าlogin ส่งไปยังurlเพื่อเช็คว่าคนนี้มีนัดหมายใครบ้าง
+  Uri url = Uri.parse(apiURL! + '/mentor/findAvg');
   return await http
       .get(
     url,
@@ -183,7 +180,6 @@ Future<dynamic> getProfile() async {
       await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
   int? idUser = prefs.getInt('idm');
   Uri url = Uri.parse(apiURL! + '/mentor/$idUser');
-  // Uri url = Uri.parse('http://192.168.1.9:3200/api/customer/$idUser');
   return await http
       .get(
     url,
@@ -244,7 +240,7 @@ Future<dynamic> sendDataProfile2(
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('สำเร็จ');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       return null;
     }
@@ -272,7 +268,7 @@ Future sendDataProfile3(File _image, context) async {
   if (respons.statusCode == 204) {
     EasyLoading.showSuccess('Great Success!');
     Navigator.of(context)
-        .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+        .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
   } else {
     EasyLoading.showError('Failed with Error');
   }
@@ -293,7 +289,7 @@ Future sendDataProfile4(phone, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -319,7 +315,7 @@ Future sendDataProfile5(tambons, amphures, provinces, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -341,7 +337,7 @@ Future sendDataProfile6(birtday, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -363,7 +359,7 @@ Future sendDataProfile7(mentype, context) async {
     if (req.statusCode == 204) {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
-          .pushNamedAndRemoveUntil('/Page3', (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil('/Page4', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }
@@ -386,6 +382,29 @@ Future sendDataProfileWorkRate(rate, context) async {
       EasyLoading.showSuccess('Great Success!');
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/Page0', (Route<dynamic> route) => false);
+    } else {
+      EasyLoading.showError('Failed with Error');
+    }
+  });
+}
+
+Future<dynamic> resendRegis(now, context) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idUser = prefs.getInt('idm');
+  Uri url = Uri.parse(apiURL! + '/manager/men/$idUser');
+  http
+      .put(url,
+          headers: headers,
+          body: jsonEncode({
+            "status": "0",
+            "date": now,
+          }))
+      .then((req) {
+    if (req.statusCode == 204) {
+      EasyLoading.showSuccess('Great Success!');
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Page1', (Route<dynamic> route) => false);
     } else {
       EasyLoading.showError('Failed with Error');
     }

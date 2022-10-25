@@ -57,6 +57,23 @@ class _Register extends State<RegisterPage> {
           DateTime.now().month,
         ),
         lastDate: DateTime(DateTime.now().year - 10, DateTime.now().month),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: Colors.deepPurple, // <-- SEE HERE
+                onPrimary: Colors.white, // <-- SEE HERE
+                onSurface: Colors.black, // <-- SEE HERE
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: Colors.red, // button text color
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        },
       );
       if (selectdate != null) {
         setState(() {
@@ -116,6 +133,8 @@ class _Register extends State<RegisterPage> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'โปรดกรอกรหัสผ่าน';
+                  } else if (value.length < 8) {
+                    return 'รหัสผ่านต้องมากกว่า 8 ตัว';
                   } else {
                     return null;
                   }
@@ -136,7 +155,7 @@ class _Register extends State<RegisterPage> {
                     ),
                     errorBorder: const OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color.fromARGB(255, 240, 4, 4)),
+                            BorderSide(color: Color.fromARGB(255, 212, 11, 0)),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
@@ -166,6 +185,8 @@ class _Register extends State<RegisterPage> {
                     return 'โปรดกรอกรหัสผ่าน';
                   } else if (value != password.text) {
                     return 'รหัสผ่านไม่ตรงกัน';
+                  } else if (value.length < 8) {
+                    return 'รหัสผ่านต้องมากกว่า 8 ตัว';
                   } else {
                     return null;
                   }
@@ -213,7 +234,7 @@ class _Register extends State<RegisterPage> {
                 onChanged: (value) {
                   dropdownValue = value;
                 },
-                dropdownColor: const Color.fromARGB(255, 154, 184, 213),
+                dropdownColor: const Color.fromARGB(255, 153, 118, 213),
                 style: const TextStyle(color: Colors.white, fontSize: 16),
                 decoration: const InputDecoration(
                   labelText: 'คำนำหน้า',

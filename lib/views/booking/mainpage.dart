@@ -76,19 +76,30 @@ class _MainPageState extends State<MainPage> {
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: [
-                        const SizedBox(height: 150),
-                        Container(
+                        const SizedBox(height: 100),
+                        Padding(
                           padding: const EdgeInsets.all(20),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(40))),
-                          child: Text(
-                              'ยังไม่ได้รับการอนุมัติจากเจ้าหน้าที่\n     โปรดรอ \nวันที่สมัคร : ' +
-                                  DateFormat('dd/MM/yyyy เวลา HH:MM น').format(
-                                      DateTime.parse(
-                                          '${dataProfile['men_dateregis']}')),
-                              style: const TextStyle(fontSize: 18)),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40))),
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.access_time,
+                                color: Colors.yellow,
+                                size: 80,
+                              ),
+                              title: const Text('โปรดรอ'),
+                              subtitle: Text(
+                                  'ยังไม่ได้รับการอนุมัติจากเจ้าหน้าที่\nโปรดเช็คข้อมูลว่ากรอกครบถ้วนแล้ว\nวันที่สมัคร : ' +
+                                      DateFormat('dd/MM/yyyy').format(
+                                          DateTime.parse(
+                                              '${dataProfile['men_dateregis']}')),
+                                  style: const TextStyle(fontSize: 15)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -99,19 +110,31 @@ class _MainPageState extends State<MainPage> {
                         height: MediaQuery.of(context).size.height,
                         child: Column(
                           children: [
-                            const SizedBox(height: 150),
-                            Container(
+                            const SizedBox(height: 30),
+                            Padding(
                               padding: const EdgeInsets.all(20),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(40))),
-                              child: Text(
-                                  'การสมัครสมาชิกของคุณไม่ได้รับการอนุมัติ\nเหตุผล : ${dataProfile['men_note']} \nวันที่ : ' +
-                                      DateFormat('dd/MM/yyyy เวลา HH:MM น')
-                                          .format(DateTime.parse(
-                                              '${dataProfile['men_dateregis']}')),
-                                  style: const TextStyle(fontSize: 18)),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(40))),
+                                child: ListTile(
+                                  leading: const Icon(
+                                    Icons.priority_high,
+                                    color: Colors.red,
+                                    size: 80,
+                                  ),
+                                  title: const Text('ไม่ได้รับการอนุมัติ'),
+                                  subtitle: Text(
+                                      'วันที่ : ' +
+                                          DateFormat('dd/MM/yyyy').format(
+                                              DateTime.parse(
+                                                  '${dataProfile['men_dateregis']}')) +
+                                          '\nการสมัครสมาชิกของคุณไม่ได้รับการอนุมัติ\nเหตุผล : ${dataProfile['men_note']}',
+                                      style: const TextStyle(fontSize: 15)),
+                                ),
+                              ),
                             ),
                           ],
                         ),

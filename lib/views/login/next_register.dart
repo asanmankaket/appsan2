@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import '../../configs/api.dart';
@@ -27,8 +28,9 @@ class _Register extends State<NextRegister> {
   TextEditingController citizenId = TextEditingController();
   TextEditingController phonenumber = TextEditingController();
   dynamic data;
+  int currentIntValue = 0;
+  double dataDoubleValue = 0;
 
-  int _currentIntValue = 0;
   @override
   void initState() {
     super.initState();
@@ -39,7 +41,9 @@ class _Register extends State<NextRegister> {
     dynamic item = await getAvg();
     setState(() {
       data = item;
-      _currentIntValue = data[0]['RateAvg'].toInt();
+      if (data != null) {
+        dataDoubleValue = data[0]['RateAvg'];
+      }
     });
   }
 
@@ -149,7 +153,7 @@ class _Register extends State<NextRegister> {
                           dropdownValue = value;
                         });
                       },
-                      dropdownColor: Colors.blue,
+                      dropdownColor: Color.fromARGB(255, 177, 153, 217),
                       decoration: const InputDecoration(
                         labelText: 'ประเภทการทำงาน',
                         labelStyle: TextStyle(color: Colors.white),
@@ -285,25 +289,16 @@ class _Register extends State<NextRegister> {
                       'อัตราค่าบริการโดยเฉลี่ยของแอพคือ',
                       style: TextStyle(fontSize: 20),
                     ),
-                    const Text('32 บาท/ชั่วโมง',
+                    Text('$dataDoubleValue บาท/ชั่วโมง',
                         style: TextStyle(fontSize: 20)),
                     const SizedBox(height: 15),
-                    NumberPicker(
-                      value: _currentIntValue,
-                      minValue: 0,
-                      maxValue: 300,
-                      step: 1,
-                      haptics: true,
-                      axis: Axis.horizontal,
-                      onChanged: (value) => setState(() {
-                        _currentIntValue = value;
-                      }),
-                    ),
-                    const SizedBox(height: 15),
-                    Text(
-                      'อัตราค่าบริการที่คุณเลือก  :  ' +
-                          _currentIntValue.toString(),
-                      style: const TextStyle(fontSize: 20),
+                    SpinBox(
+                      max: 300,
+                      min: 1,
+                      value: dataDoubleValue,
+                      onChanged: (value) {
+                        currentIntValue = value.toInt();
+                      },
                     ),
                   ],
                 ),
@@ -324,8 +319,9 @@ class _Register extends State<NextRegister> {
                         phonenumber.text,
                         citizenId.text,
                         dropdownValue!,
-                        _currentIntValue.toString(),
+                        currentIntValue.toString(),
                         _image,
+                        datenow.toString(),
                         context);
                   }
                 },

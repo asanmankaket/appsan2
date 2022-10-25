@@ -60,18 +60,16 @@ class _SideMenuState extends State<SideMenu> {
                           children: [
                             Row(
                               children: [
-                                if (data != null)
-                                  if (data['cust_image'] != null)
-                                    CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(data['cust_image']),
-                                      radius: 40,
-                                    )
-                                  else
-                                    CircleAvatar(
-                                      backgroundImage: avatarUser(),
-                                      radius: 40,
-                                    ),
+                                data['men_image'] != null
+                                    ? CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(data['men_image']),
+                                        radius: 40,
+                                      )
+                                    : CircleAvatar(
+                                        backgroundImage: avatarUser(),
+                                        radius: 40,
+                                      ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: Column(

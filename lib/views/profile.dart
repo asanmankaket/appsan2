@@ -1,4 +1,5 @@
 import 'package:age_calculator/age_calculator.dart';
+import 'package:creative/models/dialog_resendregis.dart';
 import 'package:creative/views/editprofile/comment_page.dart';
 import 'package:creative/views/editprofile/profile_address.dart';
 import 'package:creative/views/editprofile/profile_birtday.dart';
@@ -45,8 +46,6 @@ class _ProfileState extends State<Profile> {
   startApi() async {
     //เอาตัวidของcustomerมาใช้กับหน้านี้แล้วเอาค่าไปใส่ในidUser
     dynamic item = await getProfile();
-    //ส่งค่าไปยัง getdataหรือตัวรับapi
-    print(item);
     setState(() {
       data = item;
       data['averageRatting'] != null
@@ -205,7 +204,29 @@ class _ProfileState extends State<Profile> {
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
+                  data['men_status'] == '2'
+                      ? Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            const DialogReturnRegis());
+                                  },
+                                  child:
+                                      const Text('ส่งคำขออนุมัติใหม่อีกครั้ง!'),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        )
+                      : Container(),
                   TextButton(
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(100, 15, 100, 15),
