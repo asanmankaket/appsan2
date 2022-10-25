@@ -1,8 +1,7 @@
 import 'package:creative/models/avatar.dart';
 import 'package:creative/models/charofname.dart';
-import 'package:creative/views/booking/edit_view%20%5Bmain%5D/edit_data.dart';
+import 'package:creative/views/booking/edit_view/edit_data.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:creative/views/booking/detail/carddetail.dart';
 import 'package:intl/intl.dart';
@@ -64,8 +63,6 @@ class _MainPageState extends State<MainPage> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  // Color.fromARGB(255, 76, 124, 172),
-                  // Color.fromARGB(255, 240, 240, 240)
                   Colors.deepPurple,
                   Colors.white
                 ])),

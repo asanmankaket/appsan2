@@ -15,9 +15,9 @@ class _ProfileAddressState extends State<ProfileAddress> {
   TextEditingController tambons = TextEditingController();
   TextEditingController amphures = TextEditingController();
   TextEditingController provinces = TextEditingController();
-  int? idaddress, idProvinces, idAmphures, idTambons;
   String? nameTambons, nameAmphures, nameProvinces;
   int? provinceValue, amphureValue, tambonValue;
+  bool searchProvince = false, searchAmphures = false;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _ProfileAddressState extends State<ProfileAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แก้ไขสถานที่'),
+          title: const Text('แก้ไขที่อยู่'),
           backgroundColor: Colors.deepPurple,
         ),
         body: Center(
@@ -80,11 +80,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
                           onChanged: (index) {
                             setState(() {
                               provinceValue = index as int;
-                              amphureValue = null;
+                              searchProvince = true;
                             });
                             var select = items.singleWhere(
                                 (element) => element.id == index as int);
                             nameProvinces = select.nameTh;
+                            amphureValue = null;
+                            nameAmphures = "";
                           });
                     } else {
                       return const Center(
@@ -113,17 +115,16 @@ class _ProfileAddressState extends State<ProfileAddress> {
                     } else if (data.hasData) {
                       var itemsdata = data.data as List<Amphures>;
                       dynamic itemdatabase;
-                      if (widget.data['men_amphures'] != null) {
-                        itemdatabase = itemsdata.singleWhere(
-                            (element) => element.nameTh == nameAmphures);
-                      }
+
                       var items = itemsdata.where(
                           (element) => element.provinceId == provinceValue);
-
-                      if (items.contains(itemdatabase)) {
-                        amphureValue = itemdatabase.id;
-                      } else {
-                        amphureValue = items.first.id;
+                      if (widget.data['men_amphures'] != null &&
+                          searchProvince == false) {
+                        itemdatabase = itemsdata.singleWhere(
+                            (element) => element.nameTh == nameAmphures);
+                        if (items.contains(itemdatabase)) {
+                          amphureValue = itemdatabase.id;
+                        }
                       }
                       return DropdownButton(
                           underline:
@@ -137,11 +138,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
                           onChanged: (index) {
                             setState(() {
                               amphureValue = index as int;
-                              tambonValue = null;
+                              searchAmphures = true;
                             });
                             var select = items.singleWhere(
                                 (element) => element.id == index as int);
                             nameAmphures = select.nameTh;
+                            tambonValue = null;
+                            nameTambons = "";
                           });
                     } else {
                       return const Center(
@@ -172,14 +175,13 @@ class _ProfileAddressState extends State<ProfileAddress> {
                       var items = itemsdata.where(
                           (element) => element.amphureId == amphureValue);
                       dynamic itemdatabase;
-                      if (widget.data['men_tambons'] != null) {
+                      if (widget.data['men_tambons'] != null &&
+                          searchAmphures == false) {
                         itemdatabase = itemsdata.singleWhere(
                             (element) => element.nameTh == nameTambons);
                       }
                       if (items.contains(itemdatabase)) {
                         tambonValue = itemdatabase.id;
-                      } else {
-                        tambonValue = items.first.id;
                       }
                       return DropdownButton(
                           underline:
