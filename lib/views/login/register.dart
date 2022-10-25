@@ -68,7 +68,6 @@ class _Register extends State<RegisterPage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 76, 124, 172),
       body: Form(
         key: _formkey,
         child: Container(
