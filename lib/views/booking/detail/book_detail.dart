@@ -54,11 +54,22 @@ class _BookdetailState extends State<Bookdetail> {
                   backgroundImage: NetworkImage(widget.data['cust_image']),
                   radius: 80)
               : CircleAvatar(backgroundImage: avatarUser(), radius: 80),
+          const SizedBox(height: 10),
           Text(
             '${widget.data['cust_title']} ${widget.data['cust_fname']} ${widget.data['cust_lname']}',
             style: const TextStyle(fontSize: 25),
           ),
           const SizedBox(height: 20),
+           widget.data['book_status'] == '3'
+              ? ListTile(
+                  leading: const Icon(
+                    Icons.priority_high,
+                    color: Colors.red,
+                    size: 30,
+                  ),
+                  title: const Text('หมายเหตุ'),
+                  subtitle: Text(widget.data['book_cancle']))
+              : Container(),
           SizedBox(
             height: 400,
             child: PageView(
