@@ -115,7 +115,7 @@ class _SideMenuState extends State<SideMenu> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 const ButtonSidemenu(
-                    next: Icons.house, text: "หน้าหลัก", page: 0),
+                    next: Icons.move_to_inbox, text: "รับการจอง", page: 0),
                 const SizedBox(height: 15),
                 const ButtonSidemenu(
                     next: Icons.event_note, text: "นัดหมาย", page: 1),

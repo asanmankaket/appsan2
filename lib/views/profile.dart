@@ -36,7 +36,7 @@ class _ProfileState extends State<Profile> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController picdate = TextEditingController();
   DateTime? datenow = DateTime.now();
-  double ratting = 5.0;
+  double ratting = 0;
   @override
   void initState() {
     super.initState();
@@ -50,7 +50,7 @@ class _ProfileState extends State<Profile> {
       data = item;
       data['averageRatting'] != null
           ? ratting = double.parse('${data['averageRatting']}')
-          : ratting = 5.0;
+          : ratting = 0;
 
       data['men_birtday'] != null
           ? calculatorAge(data['men_birtday'])
@@ -149,7 +149,6 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RatingBarIndicator(
-                          //ดาวคะแนน---------------------**********************************
                           rating: ratting,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
