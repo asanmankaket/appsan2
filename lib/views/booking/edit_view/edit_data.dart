@@ -112,7 +112,7 @@ class _EditdataState extends State<Editdata> {
                           ],
                         ),
                         child: Column(children: [
-                          Text('อัตราค่าบริการเฉลี่ยของทั้งแอพประมาณ :'),
+                          Text('อัตราค่าบริการเฉลี่ยของทั้งแอปประมาณ :'),
                           Text(
                             '${data[0]['RateAvg']} บาท/ชั่วโมง',
                             style: TextStyle(

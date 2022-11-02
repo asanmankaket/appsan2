@@ -286,7 +286,7 @@ class _Register extends State<NextRegister> {
                 child: Column(
                   children: [
                     const Text(
-                      'อัตราค่าบริการโดยเฉลี่ยของแอพคือ',
+                      'อัตราค่าบริการโดยเฉลี่ยของแอปคือ',
                       style: TextStyle(fontSize: 20),
                     ),
                     Text('$dataDoubleValue บาท/ชั่วโมง',
