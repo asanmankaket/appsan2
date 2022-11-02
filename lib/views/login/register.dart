@@ -1,5 +1,7 @@
+import 'package:creative/configs/api.dart';
 import 'package:creative/models/textformfieldmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'next_register.dart';
 
@@ -329,16 +331,21 @@ class _Register extends State<RegisterPage> {
                 onPressed: () async {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState?.save();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) => NextRegister(
-                                title: dropdownValue!,
-                                username: username.text,
-                                password: password.text,
-                                name: name.text,
-                                surname: surname.text,
-                                picdate: picdate.text)));
+                    dynamic checkUser = await sendusername(username.text);
+                    if (checkUser['hasuser'] > 0) {
+                      EasyLoading.showError('ชื่อผู้ใช้นี้มีอยู่แล้ว');
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) => NextRegister(
+                                  title: dropdownValue!,
+                                  username: username.text,
+                                  password: password.text,
+                                  name: name.text,
+                                  surname: surname.text,
+                                  picdate: picdate.text)));
+                    }
                   }
                 },
                 child: const Text(

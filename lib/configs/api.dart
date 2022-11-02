@@ -13,6 +13,23 @@ import 'package:path/path.dart';
 
 String? apiURL = dotenv.get("API_HOST", fallback: "");
 
+Future sendusername(String username) async {
+  Uri url = Uri.parse(apiURL! + '/mentor/checkuser/$username');
+  return await http
+      .get(
+    url,
+    headers: headers,
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      var data = jsonDecode(req.body);
+      return data;
+    } else {
+      return null;
+    }
+  });
+}
+
 Future checkLogin(String username, String password, context) async {
   EasyLoading.show(status: 'loading...');
   bool result = false;
