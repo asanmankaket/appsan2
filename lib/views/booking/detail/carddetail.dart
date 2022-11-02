@@ -2,6 +2,7 @@ import 'package:creative/configs/api.dart';
 import 'package:creative/models/bookwidgetdetail.dart';
 import 'package:creative/models/dialog_cancle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import '../../../models/charofname.dart';
 import '../../mapbook.dart';
@@ -227,13 +228,21 @@ class _CarddetailState extends State<Carddetail> {
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                         primary: Colors.green),
-                    onPressed: () {
-                      confirmBook(widget.data['book_id'], 1, "", context);
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const BottomBarMain(index: 1)),
-                          (Route<dynamic> route) => false);
+                    onPressed: () async {
+                      dynamic items = await getdateWork(
+                          widget.data['book_startdate'],
+                          widget.data['book_enddate']);
+                      if (items[0]['hasbook'] > 0) {
+                        EasyLoading.showError(
+                            'ไม่สามารถทำการยืนยันได้\nเนื่องจากคุณมีการจองอยู่แล้ว');
+                      } else {
+                        confirmBook(widget.data['book_id'], 1, "", context);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const BottomBarMain(index: 1)),
+                            (Route<dynamic> route) => false);
+                      }
                     },
                     child: const Text(
                       'ยืนยัน',

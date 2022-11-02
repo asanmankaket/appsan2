@@ -150,6 +150,26 @@ Future<dynamic> getAvg() async {
   );
 }
 
+Future getdateWork(startdate, enddate) async {
+  final prefs =
+      await SharedPreferences.getInstance(); //เพิ่มตัวแชร์จากหน้าlogin
+  int? idMentor = prefs.getInt('idm');
+  Uri url = Uri.parse(apiURL! + '/booking/fd/$startdate/$enddate/$idMentor');
+  return await http
+      .get(
+    url,
+    headers: headers,
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      var data = jsonDecode(req.body);
+      return data;
+    } else {
+      return null;
+    }
+  });
+}
+
 Future<dynamic> confirmBook(
     dynamic idb, int statusbook, textbook, context) async {
   EasyLoading.showProgress(0.3, status: 'กำลังประมวลผล...');
